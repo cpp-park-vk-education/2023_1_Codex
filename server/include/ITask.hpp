@@ -11,12 +11,19 @@ class ITask {
 
     virtual std::string Solve() = 0;
 
-    std::string GetExpression() {
-        return expression;
+    std::string GetExpression() const {
+        return Expression;
+    }
+
+    std::string GetTaskType() const {
+        return TaskType;
     }
 
    private:
-    std::string expression;
+    virtual void ParseData() = 0;
+
+    std::string Expression;
+    std::string TaskType;
 };
 
 using ITaskUPtr = std::unique_ptr<ITask>;

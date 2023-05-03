@@ -1,6 +1,8 @@
+#include <boost/beast/core.hpp>
 #include <iostream>
 #include <memory>
 
+#include "exceptions.hpp"
 #include "server.hpp"
 
 namespace net = boost::asio;  // from <boost/asio.hpp>
@@ -17,8 +19,10 @@ int main(int argc, char *argv[]) {
     auto docRoot = std::make_shared<std::string>(argv[3]);
     auto threads = std::max<int>(1, std::atoi(argv[4]));
 
-    // try-catch
-    Server::Server server(address, port, docRoot, threads);
-
+    try {
+        Server::Server server(address, port, docRoot, threads);
+    } catch (Server::ServerException &ex) {
+        std::cerr << ex.what() << std::endl;
+    }
     return 0;
 }

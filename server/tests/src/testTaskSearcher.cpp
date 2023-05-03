@@ -1,17 +1,24 @@
 #include <gtest/gtest.h>
 
 #include <boost/beast/http.hpp>
+#include <fstream>
 #include <memory>
 #include <string>
 
-#include "ArithmeticTask.hpp"
 #include "ITask.hpp"
+#include "arithmeticTask.hpp"
 #include "exceptions.hpp"
+#include "taskInfo.hpp"
 #include "taskSearcher.hpp"
+
+namespace Tests {
 
 const int HTTP_VERSION = 10;
 
-const std::string DOC_ROOT = "/path/to/network";
+auto const DOC_ROOT = std::make_shared<std::string>("/path/to/network");
+
+namespace beast = boost::beast;       // from <boost/beast.hpp>
+namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 
 TEST(TaskSearcherTest, BasicStrCase) {
     // create req
@@ -25,11 +32,12 @@ TEST(TaskSearcherTest, BasicStrCase) {
     req.set(http::field::content_length, std::to_string(req.body().size()));
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
-    Tasks::ITaskUPtr actual = taskSearcher.Run(req);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
+    ::Tasks::ITaskUPtr actual = taskSearcher.Run(req);
 
-    ArithmeticTask expected("5 + 10 / 2 - 4 * 7");
-    EXPECT_STREQ(expected.GetExpression(), actual.GetExpression());
+    ::Tasks::ArithmeticTask expected("5 + 10 / 2 - 4 * 7", ::Tasks::TaskTypes::Arithmetic);
+    EXPECT_STREQ(expected.GetExpression(), actual.get()->GetExpression());
+    EXPECT_EQ(expected.GetTaskType(), actual.get()->GetTaskType());
 }
 
 TEST(TaskSearcherTest, EmptyStrCase) {
@@ -44,9 +52,9 @@ TEST(TaskSearcherTest, EmptyStrCase) {
     req.set(http::field::content_length, std::to_string(req.body().size()));
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
 
-    EXPECT_THROW(taskSearcher.Run(req), Handlers::HandlerEmptyRequestBody);
+    EXPECT_THROW(taskSearcher.Run(req), ::Handlers::HandlerEmptyRequestBody);
 }
 
 TEST(TaskSearcherTest, BasicJpgCase) {
@@ -64,11 +72,12 @@ TEST(TaskSearcherTest, BasicJpgCase) {
     req.set(http::field::content_length, std::to_string(req.body().size()));
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
-    Tasks::ITaskUPtr actual = taskSearcher.Run(req);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
+    ::Tasks::ITaskUPtr actual = taskSearcher.Run(req);
 
-    ArithmeticTask expected("5 + 10 / 2 - 4 * 7");
-    EXPECT_STREQ(expected.GetExpression(), actual.GetExpression());
+    ::Tasks::ArithmeticTask expected("5 + 10 / 2 - 4 * 7", ::Tasks::TaskTypes::Arithmetic);
+    EXPECT_STREQ(expected.GetExpression(), actual.get()->GetExpression());
+    EXPECT_EQ(expected.GetTaskType(), actual.get()->GetTaskType());
 }
 
 TEST(TaskSearcherTest, EmptyJpgCase) {
@@ -83,23 +92,23 @@ TEST(TaskSearcherTest, EmptyJpgCase) {
     req.set(http::field::content_length, std::to_string(req.body().size()));
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
 
-    EXPECT_THROW(taskSearcher.Run(req), Handlers::HandlerEmptyRequestBody);
+    EXPECT_THROW(taskSearcher.Run(req), ::Handlers::HandlerEmptyRequestBody);
 }
 
 TEST(TaskSearcherTest, GetReqCase) {
     // create req
-    http::request<http::empty_body> req;
+    http::request<http::dynamic_body> req;
     req.method(http::verb::get);
     req.target("/");
     req.version(HTTP_VERSION);
     req.set(http::field::host, "127.0.0.1");
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
 
-    EXPECT_THROW(taskSearcher.Run(req), Handlers::HandlerWrongRequest);
+    EXPECT_THROW(taskSearcher.Run(req), ::Handlers::HandlerInvalidRequest);
 }
 
 TEST(TaskSearcherTest, WrongContentTypeCase) {
@@ -114,7 +123,9 @@ TEST(TaskSearcherTest, WrongContentTypeCase) {
     req.set(http::field::content_length, std::to_string(req.body().size()));
 
     // test TaskSearcher with current req
-    TaskSearcher taskSearcher(DOC_ROOT);
+    ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
 
-    EXPECT_THROW(taskSearcher.Run(req), Handlers::HandlerWrongRequest);
+    EXPECT_THROW(taskSearcher.Run(req), ::Handlers::HandlerInvalidRequest);
 }
+
+}  // namespace Tests

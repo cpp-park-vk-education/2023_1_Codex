@@ -25,25 +25,25 @@ class ServerException : public std::exception {
 class InvalidAcceptorOpen : public ServerException {
    public:
     explicit InvalidAcceptorOpen(beast::error_code ec)
-        : ServerException("don't open the acceptor " + ec.message()) {}
+        : ServerException("Don't open the acceptor " + ec.message()) {}
 };
 
 class InvalidAcceptorSetOption : public ServerException {
    public:
     explicit InvalidAcceptorSetOption(beast::error_code ec)
-        : ServerException("don't set acceptor's reuse option " + ec.message()) {}
+        : ServerException("Don't set acceptor's reuse option " + ec.message()) {}
 };
 
 class InvalidAcceptorBind : public ServerException {
    public:
     explicit InvalidAcceptorBind(beast::error_code ec)
-        : ServerException("don't bind to the server address " + ec.message()) {}
+        : ServerException("Don't bind to the server address " + ec.message()) {}
 };
 
 class InvalidAcceptorListen : public ServerException {
    public:
     explicit InvalidAcceptorListen(beast::error_code ec)
-        : ServerException("acceptor don't start listening for connections " + ec.message()) {}
+        : ServerException("Acceptor don't start listening for connections " + ec.message()) {}
 };
 
 }  // namespace Server
@@ -64,12 +64,13 @@ class HandlerException : public std::exception {
 
 class HandlerEmptyRequestBody : public HandlerException {
    public:
-    explicit HandlerEmptyRequestBody() : HandlerException("") {}
+    explicit HandlerEmptyRequestBody() : HandlerException("Empty body of request") {}
 };
 
-class HandlerWrongRequest : public HandlerException {
+class HandlerInvalidRequest : public HandlerException {
    public:
-    explicit HandlerWrongRequest() : HandlerException("") {}
+    explicit HandlerInvalidRequest(std::string &msg)
+        : HandlerException("Wrong request because of invalid" + msg) {}
 };
 
 }  // namespace Handlers
@@ -86,6 +87,11 @@ class TaskException : public std::exception {
 
    private:
     std::string Msg;
+};
+
+class TaskInvalidData : public TaskException {
+   public:
+    explicit TaskInvalidData(std::string &msg) : TaskException(msg) {}
 };
 
 }  // namespace Tasks

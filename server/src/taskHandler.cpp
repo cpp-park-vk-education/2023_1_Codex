@@ -12,28 +12,29 @@ namespace Handlers {
 
 namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 
-TaskHandler::TaskHandler(ITaskSearcherUPtr&& taskSearcher, std::shared_ptr<std::string const> docRoot)
+TaskHandler::TaskHandler(ITaskSearcherUPtr &&taskSearcher, std::shared_ptr<std::string const> docRoot)
     : TaskSearcher(std::move(taskSearcher)), DocRoot(std::move(docRoot)) {}
 
-http::message_generator TaskHandler::Run(http::request<http::dynamic_body>& request) {
+http::message_generator TaskHandler::Run(http::request<http::dynamic_body> &request) {
     ::Tasks::ITaskUPtr task;
 
     // TO DO
     try {
         task = TaskSearcher.get()->Run(request);
-    } catch (HandlerEmptyRequestBody& ex) {
+    } catch (HandlerEmptyRequestBody &ex) {
         // Create errorResponse
-    } catch (HandlerWrongRequest& ex) {
+    } catch (HandlerInvalidRequest &ex) {
         // Create errorResponse
     }
 
     return CreateResponse(task);
 }
 
-http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr& task) const {
+http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task) const {
+    std::string answer;
     try {
-        std::string answer = task.get()->Solve();
-    } catch (::Tasks::TaskException& ex) {
+        answer = task.get()->Solve();
+    } catch (::Tasks::TaskException &ex) {
         // Create errorResponse
     }
 
