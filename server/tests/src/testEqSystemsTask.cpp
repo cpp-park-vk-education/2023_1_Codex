@@ -18,8 +18,20 @@ TEST(EqSystemTest, BasicGaussEqSystemsCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(EqSystemTest, InvalidDataGaussEqSystemsCase) {
+TEST(EqSystemTest, InvalidDataGaussEqSystemsCase1) {
     ::Tasks::EqSystemsTask task("4 2sd 1 / 3 * e 3 3 / 1 1 2 , 12 9 3", ::Tasks::TaskTypes::EqSGauss);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EqSystemTest, InvalidDataGaussEqSystemsCase2) {
+    ::Tasks::EqSystemsTask task("4 2 1  3 3 3  1 1 2 , 12 9 3", ::Tasks::TaskTypes::EqSGauss);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EqSystemTest, InvalidDataGaussEqSystemsCase3) {
+    ::Tasks::EqSystemsTask task("4 2 1 / 3 3 3 / 1 1 2", ::Tasks::TaskTypes::EqSGauss);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -43,8 +55,20 @@ TEST(EqSystemTest, BasicGaussMEqSystemsCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(EqSystemTest, InvalidDataGaussMEqSystemsCase) {
+TEST(EqSystemTest, InvalidDataGaussMEqSystemsCase1) {
     ::Tasks::EqSystemsTask task("4 2sd 1 / 3 * e 3 3 / 1 1 2 , 12 9 3", ::Tasks::TaskTypes::EqSGaussM);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EqSystemTest, InvalidDataGaussMEqSystemsCase2) {
+    ::Tasks::EqSystemsTask task("4 2 1  3 3 3  1 1 2 , 12 9 3", ::Tasks::TaskTypes::EqSGaussM);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EqSystemTest, InvalidDataGaussMEqSystemsCase3) {
+    ::Tasks::EqSystemsTask task("4 2 1  3 3 3  1 1 2", ::Tasks::TaskTypes::EqSGaussM);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }

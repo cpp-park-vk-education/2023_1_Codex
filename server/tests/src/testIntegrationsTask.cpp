@@ -18,11 +18,18 @@ TEST(IntegrationTest, BasicIntegralNewtonCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(IntegrationTest, InvalidDataIntegralNewtonCase) {
+TEST(IntegrationTest, InvalidDataIntegralNewtonCase1) {
     ::Tasks::IntegrationsTask task("x3^2 f, 0 1s , 33",
                                    ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(IntegrationTest, InvalidDataIntegralNewtonCase2) {
+::Tasks::IntegrationsTask task("x ^ 2 , 0 1",
+                               ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {

@@ -45,8 +45,20 @@ TEST(CombinatoricsTest, LargeValuesCombCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataCombCase) {
-    ::Tasks::CombinatoricsTask task("40sd sw3", ::Tasks::TaskTypes::CombComb);
+TEST(CombinatoricsTest, InvalidDataCombCase1) {
+    ::Tasks::CombinatoricsTask task("40sd 3", ::Tasks::TaskTypes::CombComb);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataCombCase2) {
+    ::Tasks::CombinatoricsTask task("4 а", ::Tasks::TaskTypes::CombComb);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataCombCase3) {
+    ::Tasks::CombinatoricsTask task("4 5 6", ::Tasks::TaskTypes::CombComb);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -85,8 +97,14 @@ TEST(CombinatoricsTest, LargeValuesReCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataReCase) {
+TEST(CombinatoricsTest, InvalidDataReCase1) {
     ::Tasks::CombinatoricsTask task("40sd", ::Tasks::TaskTypes::CombRe);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataReCase2) {
+    ::Tasks::CombinatoricsTask task("4 5", ::Tasks::TaskTypes::CombRe);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -115,8 +133,14 @@ TEST(CombinatoricsTest, NegativeValuesPlaceCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, DecimalValuesPlaceCase) {
+TEST(CombinatoricsTest, DecimalValuesPlaceCase1) {
     ::Tasks::CombinatoricsTask task("5.71 6", ::Tasks::TaskTypes::CombPlace);  // целые числа
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, DecimalValuesPlaceCase2) {
+    ::Tasks::CombinatoricsTask task("5 6.6", ::Tasks::TaskTypes::CombPlace);  // целые числа
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -130,8 +154,20 @@ TEST(CombinatoricsTest, LargeValuesPlaceCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPlaceCase) {
+TEST(CombinatoricsTest, InvalidDataPlaceCase1) {
     ::Tasks::CombinatoricsTask task("40sd 4", ::Tasks::TaskTypes::CombPlace);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataPlaceCase2) {
+    ::Tasks::CombinatoricsTask task("4 4d", ::Tasks::TaskTypes::CombPlace);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataPlaceCase3) {
+    ::Tasks::CombinatoricsTask task("4 6 8", ::Tasks::TaskTypes::CombPlace);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -167,8 +203,14 @@ TEST(CombinatoricsTest, LargeValuesPartCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPartCase) {
+TEST(CombinatoricsTest, InvalidDataPartCase1) {
     ::Tasks::CombinatoricsTask task("40sd", ::Tasks::TaskTypes::CombPart);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataPartCase2) {
+    ::Tasks::CombinatoricsTask task("4 5", ::Tasks::TaskTypes::CombPart);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }

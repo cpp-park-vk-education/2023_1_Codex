@@ -17,8 +17,26 @@ TEST(EquationsTest, BasicLinearEquationsCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(EquationsTest, InvalidDataEquationsCase) {
+TEST(EquationsTest, InvalidDataEquationsCase1) {
     ::Tasks::EquationsTask task("3v x = 3", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataEquationsCase2) {
+    ::Tasks::EquationsTask task("3 * x", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataEquationsCase3) {
+    ::Tasks::EquationsTask task("3* x", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataEquationsCase4) {
+    ::Tasks::EquationsTask task("3 * x 2", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -47,10 +65,28 @@ TEST(EquationsTest, BasicSquareOneRootEquationsCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(EquationsTest, InvalidDataSqEquationsCase) {
+TEST(EquationsTest, InvalidDataSqEquationsCase1) {
     ::Tasks::EquationsTask task("d4 * sdx ^ 2 - 6 * dx = 0", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataSqEquationsCase2) {
+::Tasks::EquationsTask task("4 *x - 6 * x = 0", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataSqEquationsCase3) {
+::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x ", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataSqEquationsCase4) {
+::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x - 4 = 4 * x", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, DivideByZeroSqEquationsCase) {
@@ -82,9 +118,23 @@ TEST(EquationsTest, EmptyPolyEquationsCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(EquationsTest, InvalidDataPolyEquationsCase) {
+TEST(EquationsTest, InvalidDataPolyEquationsCase1) {
     ::Tasks::EquationsTask task("d4 * sdx ^ 2 - 6 * dx = 0",
                                 ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCase2) {
+::Tasks::EquationsTask task("4 * x ^ 6 - 6 * x =0",
+                            ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCase3) {
+::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x",
+                            ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
