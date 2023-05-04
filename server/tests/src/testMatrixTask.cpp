@@ -61,14 +61,26 @@ TEST(MatrixTest, BasicCaseNorma) {
 
 
 // ---------InvalidData------------------------------------------------------
-TEST(MatrixTest, NotSquareMarixEigenValuesAndVectors) {
+TEST(MatrixTest, InvalidData1) {
     ::Tasks::MatrixTask task("1 2 3 / 2 5 / 2 2 5 ", ::Tasks::TaskTypes::MatrixDet);
     
-    EXPECT_THROW(task.Solve(), ::Tasks::InvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(MatrixTest, NotSquareMarixEigenValuesAndVectors) {
-    ::Tasks::MatrixTask task("avd df cd / 2 5 / 2 2 5 ", ::Tasks::TaskTypes::MatrixDet);
+TEST(MatrixTest, InvalidData2) {
+    ::Tasks::MatrixTask task("avd df cd / 2 4 5 / 2 2 5 ", ::Tasks::TaskTypes::MatrixDet);
     
-    EXPECT_THROW(task.Solve(), ::Tasks::InvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(MatrixTest, InvalidData3) {
+    ::Tasks::MatrixTask task("2 1 1a / 2 4 5 / 2 2 5 ", ::Tasks::TaskTypes::MatrixDet);
+    
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(MatrixTest, InvalidData4) {
+    ::Tasks::MatrixTask task("2 1 a1 / b2 4 5 / 2 2 5 ", ::Tasks::TaskTypes::MatrixDet);
+    
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
