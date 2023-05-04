@@ -4,8 +4,6 @@
 #include <memory>
 #include <string>
 
-
-
 namespace Tasks {
 
 class TaskException : public std::exception {

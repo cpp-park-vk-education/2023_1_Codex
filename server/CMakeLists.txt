@@ -9,9 +9,6 @@ include_directories(/
         include /
         )
 
-add_executable(
-        )
-
 if (BUILD_TESTS)
     add_subdirectory(tests)
 endif ()
