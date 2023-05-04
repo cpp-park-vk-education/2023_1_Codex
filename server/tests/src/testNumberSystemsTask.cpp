@@ -14,6 +14,14 @@ TEST(NumberSystemsTest, BasicCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
+TEST(NumberSystemsTest, LeadingZerosCase){
+    ::Tasks::NumberSystemsTask task("00011101 2 10", ::Tasks::TaskTypes::NumberSystems);
+    std::string actual = task.Solve();
+
+    std::string expected = "29";
+    EXPECT_STREQ(expected.c_str(), actual.c_str());
+}
+
 TEST(NumberSystemsTest, InvalidDataCase){
     // недопустимые символы
     ::Tasks::NumberSystemsTask task("11101o1 2 8", ::Tasks::TaskTypes::NumberSystems);
