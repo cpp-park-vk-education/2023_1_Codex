@@ -22,9 +22,25 @@ TEST(NumberSystemsTest, LeadingZerosCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
+// --------------------------------------------------------------------------------
+
 TEST(NumberSystemsTest, InvalidDataCase){
     // недопустимые символы
     ::Tasks::NumberSystemsTask task("11101o1 2 8", ::Tasks::TaskTypes::NumberSystems);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(NumberSystemsTest, InvalidDataBeginningCase){
+    // недопустимые символы
+    ::Tasks::NumberSystemsTask task("t11101 2 8", ::Tasks::TaskTypes::NumberSystems);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(NumberSystemsTest, InvalidDataEndCase){
+    // недопустимые символы
+    ::Tasks::NumberSystemsTask task("11101o 2 8", ::Tasks::TaskTypes::NumberSystems);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -39,6 +55,13 @@ TEST(NumberSystemsTest, InvalidBaseSystemCase){
 TEST(NumberSystemsTest, NotEnoughArgsCase){
     // недостаточно аргументов
     ::Tasks::NumberSystemsTask task("11101 2", ::Tasks::TaskTypes::NumberSystems);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(NumberSystemsTest, NotEnoughArgsAndDataCase){
+    // недостаточно аргументов
+    ::Tasks::NumberSystemsTask task("1110e1 2", ::Tasks::TaskTypes::NumberSystems);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
