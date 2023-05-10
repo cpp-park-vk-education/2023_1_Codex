@@ -18,7 +18,7 @@ namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 namespace net = boost::asio;          // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;     // from <boost/asio/ip/tcp.hpp>
 
-const int MS_FOR_REPEAT = 1000;
+constexpr int MS_FOR_REPEAT = 1000;
 
 Session::Session(tcp::socket &&socket, std::shared_ptr<std::string const> docRoot)
     : Stream(std::move(socket)), Handler({docRoot}), DocRoot(std::move(docRoot)) {}

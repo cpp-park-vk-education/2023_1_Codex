@@ -18,8 +18,8 @@ namespace http = beast::http;      // from <boost/beast/http.hpp>
 namespace net = boost::asio;       // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;  // from <boost/asio/ip/tcp.hpp>
 
-const int HTTP_VERSION = 10;
-const int MS_FOR_REPEAT = 1000;
+constexpr int HTTP_VERSION = 10;
+constexpr int MS_FOR_REPEAT = 1000;
 
 Client::Client(char const *host, char const *port)
     : Host(host),
