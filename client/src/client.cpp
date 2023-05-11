@@ -1,13 +1,15 @@
 #include "client.hpp"
 
+#include <boost/asio.hpp>
+#include <boost/asio/strand.hpp>
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
 #include <chrono>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <thread>
 
-#include "boost/asio/strand.hpp"
-#include "boost/beast/core.hpp"
-#include "boost/beast/http.hpp"
 #include "exceptions.hpp"
 #include "taskInfo.hpp"
 
@@ -31,6 +33,7 @@ Client::Client(char const *host, char const *port)
 TaskInfo Client::Run(const std::string &expression, TaskTypes taskType) {
     DoConnect();
 
+    // mb change if-condition
     if (*expression.begin() == '\\') {
         DoSendImage(expression, taskType);
     } else {
@@ -171,8 +174,29 @@ void Client::DoRead() {
 }
 
 TaskInfo Client::HandleResponse() {
-    // From Response create taskInfo
-    // TO DO
+    // Create TaskInfo from Response
+    TaskInfo info;
+
+    std::istringstream data(Response.body());
+    while (!data.eof()) {
+        std::string var;
+        getline(data, var, '=');
+
+        if (var == "Type") {
+            std::string type;
+            getline(data, type);
+            info.TaskType = static_cast<TaskTypes>(std::stoi(type));
+        } else if (var == "Expression") {
+            getline(data, info.TaskData);
+        } else if (var == "Answer") {
+            getline(data, info.TaskAnswer);
+        } else if (var == "Error") {
+            getline(data, info.TaskError);
+            info.ErrorCode = true;
+        }
+    }
+
+    return info;
 }
 
 }  // namespace Client

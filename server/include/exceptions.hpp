@@ -73,6 +73,11 @@ class HandlerInvalidRequest final : public HandlerException {
         : HandlerException("Wrong request because of invalid " + msg) {}
 };
 
+class HandlerInvalidFile final : public HandlerException {
+   public:
+    explicit HandlerInvalidFile(const std::string &msg) : HandlerException("Don't open file for " + msg) {}
+};
+
 }  // namespace Handlers
 
 namespace Tasks {

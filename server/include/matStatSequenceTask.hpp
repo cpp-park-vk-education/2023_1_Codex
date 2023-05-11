@@ -9,11 +9,11 @@ namespace Tasks {
 
 class MatStatSequenceTask final : public IMatStatTask {
    public:
-    MatStatSequenceTask(std::string expression, TaskTypes taskType, unsigned double degree = 0);
+    MatStatSequenceTask(std::string expression, TaskTypes taskType);
 
     std::string Solve() override;
 
-   private:
+private:
     void ParseData() override;
     double InitialMoment() override;
     double CentralMoment() override;

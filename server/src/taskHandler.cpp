@@ -3,6 +3,7 @@
 #include <boost/beast/http.hpp>
 #include <memory>
 #include <string>
+#include <utility>
 
 #include "ITask.hpp"
 #include "ITaskSearcher.hpp"
@@ -10,6 +11,7 @@
 
 namespace Handlers {
 
+namespace beast = boost::beast;       // from <boost/beast.hpp>
 namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 
 TaskHandler::TaskHandler(ITaskSearcherUPtr &&taskSearcher, std::shared_ptr<std::string const> docRoot)
@@ -18,30 +20,57 @@ TaskHandler::TaskHandler(ITaskSearcherUPtr &&taskSearcher, std::shared_ptr<std::
 http::message_generator TaskHandler::Run(http::request<http::dynamic_body> &request) {
     ::Tasks::ITaskUPtr task;
 
-    // TO DO
+    // Search task from request
     try {
         task = TaskSearcher.get()->Run(request);
     } catch (HandlerEmptyRequestBody &ex) {
-        // Create errorResponse
+        using namespace std::string_literals;
+        return CreateErrorResponse(request, "Error="s + ex.what());
     } catch (HandlerInvalidRequest &ex) {
-        // Create errorResponse
+        using namespace std::string_literals;
+        return CreateErrorResponse(request, "Error="s + ex.what());
+    } catch (HandlerInvalidFile &ex) {
+        return CreateErrorResponse(request, "Error=Don't handle your request because of server error");
     }
+    // mb catch system exceptions
 
-    return CreateResponse(task);
+    // Send response with solved task
+    return CreateResponse(task, request);
 }
 
-http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task) const {
+http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task,
+                                                    http::request<http::dynamic_body> &request) const {
+    // Solve task. If error, call CreateErrorResponse
     std::string answer;
     try {
         answer = task.get()->Solve();
     } catch (::Tasks::TaskException &ex) {
-        // Create errorResponse
+        using namespace std::string_literals;
+        std::string msg = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s + task->GetExpression() +
+                          "\n"s + "Error="s + ex.what();
+
+        return CreateErrorResponse(request, msg);
     }
 
-    http::response<http::string_body> response;
     // Using task fill response
-    // TO DO
+    http::response<http::string_body> response{http::status::ok, request.version()};
+    response.set(http::field::content_type, "text/plain");
 
+    using namespace std::string_literals;
+    response.body() = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s + task->GetExpression() + "\n"s +
+                      "Answer="s + answer;
+
+    response.prepare_payload();
+    return response;
+}
+
+http::message_generator TaskHandler::CreateErrorResponse(http::request<http::dynamic_body> &request,
+                                                         const std::string &msg) const {
+    // Create response with bad_request status
+    http::response<http::string_body> response{http::status::bad_request, request.version()};
+    response.set(http::field::content_type, "text/html");
+    response.body() = msg;
+    response.prepare_payload();
     return response;
 }
 

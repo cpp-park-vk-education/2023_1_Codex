@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 
+#include "taskInfo.hpp"
+
 namespace Tasks {
 
 class ITask {
@@ -15,15 +17,15 @@ class ITask {
         return Expression;
     }
 
-    std::string GetTaskType() const {
+    unsigned GetTaskType() const {
         return TaskType;
     }
 
-   private:
+protected:
     virtual void ParseData() = 0;
 
     std::string Expression;
-    std::string TaskType;
+    TaskTypes TaskType;
 };
 
 using ITaskUPtr = std::unique_ptr<ITask>;
