@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "IMatStatTask.hpp"
 #include "taskInfo.hpp"
@@ -13,14 +14,17 @@ class MatStatSequenceTask final : public IMatStatTask {
 
     std::string Solve() override;
 
-private:
+   private:
     void ParseData() override;
-    double InitialMoment() override;
-    double CentralMoment() override;
+    double InitialMoment(double degree) override;
+    double CentralMoment(double degree) override;
     double Asymmetry() override;
     double Excess() override;
 
     double Quantile();
+
+    std::vector<double> Numbers;
+    double Degree;
 };
 
 }  // namespace Tasks

@@ -21,7 +21,7 @@ class ITask {
         return TaskType;
     }
 
-protected:
+   protected:
     virtual void ParseData() = 0;
 
     std::string Expression;

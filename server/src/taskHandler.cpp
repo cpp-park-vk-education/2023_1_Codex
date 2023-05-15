@@ -3,7 +3,6 @@
 #include <boost/beast/http.hpp>
 #include <memory>
 #include <string>
-#include <utility>
 
 #include "ITask.hpp"
 #include "ITaskSearcher.hpp"
@@ -46,8 +45,8 @@ http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task,
         answer = task.get()->Solve();
     } catch (::Tasks::TaskException &ex) {
         using namespace std::string_literals;
-        std::string msg = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s + task->GetExpression() +
-                          "\n"s + "Error="s + ex.what();
+        std::string msg = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s +
+                          task->GetExpression() + "\n"s + "Error="s + ex.what();
 
         return CreateErrorResponse(request, msg);
     }
@@ -57,8 +56,8 @@ http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task,
     response.set(http::field::content_type, "text/plain");
 
     using namespace std::string_literals;
-    response.body() = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s + task->GetExpression() + "\n"s +
-                      "Answer="s + answer;
+    response.body() = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s +
+                      task->GetExpression() + "\n"s + "Answer="s + answer;
 
     response.prepare_payload();
     return response;

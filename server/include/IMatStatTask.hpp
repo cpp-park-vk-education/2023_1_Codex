@@ -10,9 +10,9 @@ class IMatStatTask : public ITask {
    public:
     virtual ~IMatStatTask() {}
 
-protected:
-    virtual double InitialMoment() = 0;
-    virtual double CentralMoment() = 0;
+   protected:
+    virtual double InitialMoment(double degree) = 0;
+    virtual double CentralMoment(double degree) = 0;
     virtual double Asymmetry() = 0;
     virtual double Excess() = 0;
 };

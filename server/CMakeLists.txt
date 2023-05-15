@@ -11,6 +11,7 @@ include_directories(/
         )
 
 add_executable(server /
+        src/matStatSequenceTask.cpp /
         src/taskSearcher.cpp /
         src/taskHandler.cpp /
         src/requestHandler.cpp /
