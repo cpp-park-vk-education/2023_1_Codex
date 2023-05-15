@@ -28,8 +28,6 @@ enum TaskTypes {
     MatrixEigen,
     MatrixRank,
     MatrixNorm,
-    LogicalPDNF,
-    LogicalPCNF,
     MatStatInitMoment,
     MatStatCentralMoment,
     MatStatAsymmetry,

@@ -1,9 +1,6 @@
 #pragma once
 
-#include <memory>
 #include <string>
-
-namespace Tasks {
 
 enum TaskTypes {
     NotFound,
@@ -28,8 +25,6 @@ enum TaskTypes {
     MatrixEigen,
     MatrixRank,
     MatrixNorm,
-    LogicalPDNF,
-    LogicalPCNF,
     MatStatInitMoment,
     MatStatCentralMoment,
     MatStatAsymmetry,
@@ -38,12 +33,12 @@ enum TaskTypes {
 };
 
 struct TaskInfo {
-    TaskInfo(std::string taskData, TaskTypes taskType) : TaskData(std::move(taskData)), TaskType(taskType) {}
+    TaskInfo(std::string taskData, TaskTypes taskType, std::string taskAnswer)
+        : TaskData(std::move(taskData)), TaskType(taskType), TaskAnswer(std::move(taskAnswer)) {}
 
     TaskInfo() : TaskType(TaskTypes::NotFound) {}
 
     std::string TaskData;
     TaskTypes TaskType;
+    std::string TaskAnswer;
 };
-
-}  // namespace Tasks

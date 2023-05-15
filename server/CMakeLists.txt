@@ -7,6 +7,17 @@ set(CMAKE_CXX_FLAGS "-Wall -pthread")
 
 include_directories(/
         include /
+        ${BOOST_LIB} /
+        )
+
+add_executable(server /
+        src/taskSearcher.cpp /
+        src/taskHandler.cpp /
+        src/requestHandler.cpp /
+        src/session.cpp /
+        src/listener.cpp /
+        src/server.cpp /
+        src/main.cpp /
         )
 
 if (BUILD_TESTS)
