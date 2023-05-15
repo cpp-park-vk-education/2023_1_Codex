@@ -69,7 +69,7 @@ class HandlerEmptyRequestBody final : public HandlerException {
 
 class HandlerInvalidRequest final : public HandlerException {
    public:
-    explicit HandlerInvalidRequest(const std::string &msg)
+    explicit HandlerInvalidRequest(std::string msg)
         : HandlerException("Wrong request because of invalid " + msg) {}
 };
 
@@ -91,7 +91,7 @@ class TaskException : public std::exception {
 
 class TaskInvalidData final : public TaskException {
    public:
-    explicit TaskInvalidData(const std::string &msg) : TaskException(msg) {}
+    explicit TaskInvalidData(std::string msg) : TaskException(msg) {}
 };
 
 }  // namespace Tasks
