@@ -11,6 +11,10 @@ include_directories(/
         )
 
 add_executable(server /
+        src/CombinatoricsTask.cpp /
+        src/EqSystemsTask.cpp /
+        src/EquationsTask.cpp /
+        src/IntegrationTask.cpp /
         src/taskSearcher.cpp /
         src/taskHandler.cpp /
         src/requestHandler.cpp /
