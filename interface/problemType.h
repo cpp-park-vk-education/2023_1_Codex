@@ -7,41 +7,6 @@
 //int categoriesNum = 9;
 //int taskTypesNum = 28;
 #include "taskInfo.hpp"
-/*
-enum TaskTypes {
-    NotFound,
-    IntegNewton, //Вычисление интеграла с помощью метода Ньютона
-        IntegSimpson,// Интеграл методом Симпсона
-        IntegTrapez,// –//– метода трапеций
-    CombComb, //Количество сочетаний “2 8”
-    CombRe,// Количество перестановок “2 8”
-        CombPlace, //размещений “2”
-        CombPart, //разбиений “2”
-    EqLin, //линейное уравнение
-    EqSq, //квадратное уравнение
-        EqPoly, //полиномиальное уравнение
-        EqSGauss, //слау методом гаусса
-        EqSGaussM, //слау методом гаусса с выбором главного элемента
-    EqSLU,// LU разложением
-
-    Arithmetic,// арифметика
-        DiffSymb,// символьное дифференцирование
-    DiffNum, //численное дифференцирование
-        LogicalPDNF,//        СДНФ
-        LogicalPCNF, //       СКНФ
-        MatrixDet,// определитель матрицы
-        MatrixT,// транспонирование матрицы
-        MatrixEigen,// собственные числа
-    MatrixRank, //Ранг
-        MatrixNorm, //Норма матрицы
-
-            MatStatInitMoment,
-    MatStatCentralMoment,
-    MatStatAsymmetry,
-    MatStatExcess,
-    MatStatQuantile,
-    ProblemTypeNum
-};*/
 
 QVector<Client::TaskTypes> taskTypes = {
     Client::NotFound,
