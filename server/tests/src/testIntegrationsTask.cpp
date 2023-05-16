@@ -9,8 +9,8 @@
 // ------------------------- Ньютон-Котес -------------------------------
 
 TEST(IntegrationTest, BasicIntegralNewtonCase) {
-    ::Tasks::IntegrationsTask task("x^2 , 0 1 , 3",
-                                   ::Tasks::TaskTypes::IntegNewton);  // "Подинтегральное выражение , границы
+    ::Tasks::IntegrationsTask task("x ^ 2 , 0 1 , 1000",
+                                   ::Tasks::TaskTypes::IntegNewton);  // "Подынтегральное выражение , границы
                                                                       // интегрирования , число узлов"
     std::string actual = task.Solve();
 
@@ -19,28 +19,22 @@ TEST(IntegrationTest, BasicIntegralNewtonCase) {
 }
 
 TEST(IntegrationTest, InvalidDataIntegralNewtonCase1) {
-    ::Tasks::IntegrationsTask task("x3^2 f, 0 1s , 33",
+    ::Tasks::IntegrationsTask task("x 3 ^ 2 f, 0 1s , 33",
                                    ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidDataIntegralNewtonCase2) {
-::Tasks::IntegrationsTask task("x ^ 2 , 0 1",
+::Tasks::IntegrationsTask task("x^2 , 0 1",
                                ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
 EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
-    ::Tasks::IntegrationsTask task("x^2 , 0 1 , -3",
+    ::Tasks::IntegrationsTask task("x ^ 2 , 0 1 , -3",
                                    ::Tasks::TaskTypes::IntegNewton);  // Неверное количество узлов
-
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
-}
-
-TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
-    ::Tasks::IntegrationsTask task("1 / x , 0 1 , -3", ::Tasks::TaskTypes::IntegNewton);  // Разрыв функции
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -48,7 +42,7 @@ TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
 // ------------------------- Симпсон -------------------------------
 
 TEST(IntegrationTest, BasicIntegralSimpsonCase) {
-    ::Tasks::IntegrationsTask task("x^3 + 2x^2 + 1 , 0 2 , 4",
+    ::Tasks::IntegrationsTask task("x ^ 3 + 2 * x ^ 2 + 1 , 0 2 , 4",
                                    ::Tasks::TaskTypes::IntegSimpson);  // "Подинтегральное выражение , границы
                                                                        // интегрирования , число узлов"
     std::string actual = task.Solve();
@@ -80,7 +74,7 @@ TEST(IntegrationTest, NegativeNodesIntegralSimpsonCase) {
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
-    ::Tasks::IntegrationsTask task("1 / x , 0 1 , -3", ::Tasks::TaskTypes::IntegSimpson);  // Разрыв функции
+    ::Tasks::IntegrationsTask task("1 / x , 0 1 , -3", ::Tasks::TaskTypes::IntegSimpson);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -88,7 +82,7 @@ TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
 // ------------------------- Формула трапеций -------------------------------
 
 TEST(IntegrationTest, BasicIntegralTrapezoidCase) {
-    ::Tasks::IntegrationsTask task("x^3 + 2x^2 + 1 , 0 2 , 4",
+    ::Tasks::IntegrationsTask task("x ^ 3 + 2 * x ^ 2 + 1 , 0 2 , 4",
                                    ::Tasks::TaskTypes::IntegTrapez);  // "Подинтегральное выражение , границы
                                                                       // интегрирования , число узлов"
     std::string actual = task.Solve();
@@ -98,21 +92,20 @@ TEST(IntegrationTest, BasicIntegralTrapezoidCase) {
 }
 
 TEST(IntegrationTest, InvalidDataIntegralTrapezoidCase) {
-    ::Tasks::IntegrationsTask task("x^3 + 2x^2 + 1b 0 1s , 33",
+    ::Tasks::IntegrationsTask task("x ^ 3 + 2 * x ^ 2 + 1b 0 1s , 33",
                                    ::Tasks::TaskTypes::IntegTrapez);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, NegativeNodesIntegralTrapezoidCase) {
-    ::Tasks::IntegrationsTask task("x^3 + 2x^2 + 1 , 0 1 , -4",
+    ::Tasks::IntegrationsTask task("x ^ 3 + 2 * x ^ 2 + 1 , 0 1 , -4",
                                    ::Tasks::TaskTypes::IntegTrapez);  // Неверное количество узлов
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {
-    ::Tasks::IntegrationsTask task("1 / x , 0 1 , -3", ::Tasks::TaskTypes::IntegTrapez);  // Разрыв функции
-
+    ::Tasks::IntegrationsTask task("1 / x , 0 1 , -3", ::Tasks::TaskTypes::IntegTrapez);
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }

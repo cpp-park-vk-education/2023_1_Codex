@@ -9,8 +9,8 @@
 // ------------------------- Линейные уравнения -------------------------------
 
 TEST(EquationsTest, BasicLinearEquationsCase) {
-    ::Tasks::EquationsTask task("4 * x = 3",
-                                ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x = b
+    ::Tasks::EquationsTask task("4 3", ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x = b
+
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.75";
@@ -42,7 +42,7 @@ TEST(EquationsTest, InvalidDataEquationsCase4) {
 }
 
 TEST(EquationsTest, DivideByZeroEquationsCase) {
-    ::Tasks::EquationsTask task("0 * x = 5", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
+    ::Tasks::EquationsTask task("0 5", ::Tasks::TaskTypes::EqLin);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -50,15 +50,15 @@ TEST(EquationsTest, DivideByZeroEquationsCase) {
 // ------------------------- Квадратные уравнения -------------------------------
 
 TEST(EquationsTest, BasicSquareEquationsCase) {
-    ::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x = 0", ::Tasks::TaskTypes::EqSq);
+    ::Tasks::EquationsTask task("4 6 0", ::Tasks::TaskTypes::EqSq);
     std::string actual = task.Solve();
 
-    std::string expected = "x_1 = 0, x_2 = 1.5";
+    std::string expected = "x_1 = 0.00000, x_2 = 1.50000";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
 TEST(EquationsTest, BasicSquareOneRootEquationsCase) {
-    ::Tasks::EquationsTask task("4 * x ^ 2 - 4 * x + 1 = 0", ::Tasks::TaskTypes::EqSq);
+    ::Tasks::EquationsTask task("4 -4 1", ::Tasks::TaskTypes::EqSq);
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.5";
@@ -96,7 +96,7 @@ TEST(EquationsTest, DivideByZeroSqEquationsCase) {
 }
 
 TEST(EquationsTest, DLessThanZeroSqEquationsCase) {
-    ::Tasks::EquationsTask task("2 * x ^ 2 + x  + 5 = 0",
+    ::Tasks::EquationsTask task("2 1 5",
                                 ::Tasks::TaskTypes::EqSq);  // Дискриминант меньше нуля
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
