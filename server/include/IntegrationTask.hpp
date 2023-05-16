@@ -3,6 +3,7 @@
 #include <string>
 
 #include "ITask.hpp"
+#include "taskInfo.hpp"
 
 namespace Tasks {
 
@@ -13,8 +14,13 @@ class IntegrationTask final : public ITask {
     std::string Solve() override;
 
    private:
-    void ParseData() override;
+    double f(std::string expr, double x);
 
+    std::string expr;
+    int n;
+    double a, b;
+
+    void ParseData() override;
     double NewtonCotes();
     double Simpson();
     double Trapezoid();

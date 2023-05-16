@@ -5,11 +5,11 @@
 #include <memory>
 #include <string>
 
+#include "Exceptions.hpp"
 #include "ITask.hpp"
+#include "TaskInfo.hpp"
+#include "TaskSearcher.hpp"
 #include "arithmeticTask.hpp"
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
-#include "taskSearcher.hpp"
 
 namespace Tests {
 

@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "IMatStatTask.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 namespace Tasks {
 

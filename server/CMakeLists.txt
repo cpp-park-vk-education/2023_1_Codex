@@ -17,16 +17,16 @@ add_executable(server /
         src/EqSystemsTask.cpp /
         src/EquationsTask.cpp /
         src/IntegrationTask.cpp /
-        src/matStatSequenceTask.cpp /
+        src/MatStatSequenceTask.cpp /
         src/MatrixTask.cpp /
-        
-        src/taskSearcher.cpp /
-        src/taskHandler.cpp /
-        src/requestHandler.cpp /
-        
-        src/session.cpp /
-        src/listener.cpp /
-        src/server.cpp /
+
+        src/TaskSearcher.cpp /
+        src/TaskHandler.cpp /
+        src/RequestHandler.cpp /
+
+        src/Session.cpp /
+        src/Listener.cpp /
+        src/Server.cpp /
         src/main.cpp /
         )
 

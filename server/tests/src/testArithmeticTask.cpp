@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "exceptions.hpp"
 #include "ArithmeticTask.hpp"
-#include "taskInfo.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 TEST(ArithmeticTest, SimpleNumberCase) {
     ::Tasks::ArithmeticTask task("12", ::Tasks::TaskTypes::Arithmetic);
@@ -28,7 +28,6 @@ TEST(ArithmeticTest, BasicDoubleCase) {
 
     std::string expected = "2.626";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
-
 }
 
 TEST(ArithmeticTest, DivisionByZeroCase) {

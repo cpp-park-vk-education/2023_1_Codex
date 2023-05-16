@@ -1,11 +1,11 @@
 #include "CombinatoricsTask.hpp"
 
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 
-#include "taskInfo.hpp"
-#include "exceptions.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -157,4 +157,4 @@ void CombinatoricsTask::ParseData() {
     }
 }
 
-}
+}  // namespace Tasks

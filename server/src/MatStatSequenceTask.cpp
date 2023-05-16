@@ -1,12 +1,12 @@
-#include "matStatSequenceTask.hpp"
+#include "MatStatSequenceTask.hpp"
 
 #include <cmath>
 #include <sstream>
 #include <string>
 #include <vector>
 
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 namespace Tasks {
 

@@ -2,9 +2,9 @@
 
 #include <string>
 
+#include "Exceptions.hpp"
 #include "IntegrationsTask.hpp"
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 // ------------------------- Ньютон-Котес -------------------------------
 
@@ -26,10 +26,10 @@ TEST(IntegrationTest, InvalidDataIntegralNewtonCase1) {
 }
 
 TEST(IntegrationTest, InvalidDataIntegralNewtonCase2) {
-::Tasks::IntegrationsTask task("x^2 , 0 1",
-                               ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
+    ::Tasks::IntegrationsTask task("x^2 , 0 1",
+                                   ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCase) {

@@ -3,21 +3,21 @@
 #include <string>
 
 #include "ITask.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
-namespace Tasks{
+namespace Tasks {
 
-    class LogicalExpressionTask final : public ITask{
-    public:
-        LogicalExpressionTask(std::string expression, TaskTypes taskType);
+class LogicalExpressionTask final : public ITask {
+   public:
+    LogicalExpressionTask(std::string expression, TaskTypes taskType);
 
-        std::string Solve() override;
+    std::string Solve() override;
 
-    private:
-        std::string expression;
-        void ParseData() override;
-        std::string PDNF();
-        std::string PCNF();
-    };
+   private:
+    std::string expression;
+    void ParseData() override;
+    std::string PDNF();
+    std::string PCNF();
+};
 
 }  // namespace Tasks

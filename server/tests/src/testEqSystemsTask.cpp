@@ -2,9 +2,9 @@
 
 #include <string>
 
+#include "Exceptions.hpp"
 #include "IntegrationsTask.hpp"
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 // ------------------------- Метод Гаусса -------------------------------
 

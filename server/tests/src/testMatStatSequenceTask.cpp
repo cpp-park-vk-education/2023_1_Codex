@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "exceptions.hpp"
-#include "matStatSequenceTask.hpp"
-#include "taskInfo.hpp"
+#include "Exceptions.hpp"
+#include "MatStatSequenceTask.hpp"
+#include "TaskInfo.hpp"
 
 TEST(MatStatSequenceTest, BasicInitialMomentCase) {
     ::Tasks::MatStatSequenceTask task("1 2 3 4 5 6 7 8 / 1", ::Tasks::TaskTypes::MatStatInitMoment);

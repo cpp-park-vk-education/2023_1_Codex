@@ -1,28 +1,23 @@
 #include "DifferentiationTask.hpp"
-#include "ArithmeticTask.hpp"
-#include "ArithmeticTask.cpp"
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include <cmath>
+#include <iostream>
+#include <string>
+#include <vector>
 
+#include "ArithmeticTask.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
-
-
-std::string replace_x_num(std::string func,const std::string& point) {
+std::string replace_x_num(std::string func, const std::string& point) {
     size_t pos = func.find("x");
-    while (pos != std::string::npos)
-    {
+    while (pos != std::string::npos) {
         func.replace(pos, 1, point);
         pos = func.find("x");
     }
 
     return func;
 }
-
 
 namespace Tasks {
 
@@ -32,26 +27,25 @@ DifferentiationTask::DifferentiationTask(std::string expression, TaskTypes taskT
 }
 
 void DifferentiationTask::ParseData() {
-    ; 
-    //для символьного и численного дифференцирования будут различные парсеры, 
-    //пока что один реализован внутри функции Numerical 
+    ;
+    //для символьного и численного дифференцирования будут различные парсеры,
+    //пока что один реализован внутри функции Numerical
 }
 
 std::string DifferentiationTask::Solve() {
-    //ParseData();
+    // ParseData();
 
     switch (TaskType) {
         case TaskTypes::DiffNum: {
             return DoubleToString(Numerical());
         }
         case TaskTypes::DiffSymb: {
-            throw TaskInvalidData("Sorry, we are not able to solve this problem yet. Task type will be available soon...");
-            //return DoubleToString(Symbolic());
+            throw TaskInvalidData(
+                "Sorry, we are not able to solve this problem yet. Task type will be available soon...");
+            // return DoubleToString(Symbolic());
         }
     }
 }
-
-
 
 double DifferentiationTask::Numerical() {
     double step = 0.01;
@@ -68,10 +62,10 @@ double DifferentiationTask::Numerical() {
 
     std::string point_0 = DoubleToString(x_0);
     std::string f0 = replace_x_num(function, point_0);
-    
+
     std::string point_2 = DoubleToString(x_2);
     std::string f2 = replace_x_num(function, point_2);
-    
+
     ArithmeticTask value0(f0, TaskTypes::Arithmetic);
     ArithmeticTask value2(f2, TaskTypes::Arithmetic);
 
@@ -79,4 +73,4 @@ double DifferentiationTask::Numerical() {
     return result;
 }
 
-}
+}  // namespace Tasks

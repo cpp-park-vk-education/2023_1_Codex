@@ -1,4 +1,4 @@
-#include "taskSearcher.hpp"
+#include "TaskSearcher.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/beast/http.hpp>
@@ -6,10 +6,17 @@
 #include <memory>
 #include <string>
 
+#include "ArithmeticTask.hpp"
+#include "CombinatoricsTask.hpp"
+#include "DifferentiationTask.hpp"
+#include "EqSystemsTask.hpp"
+#include "EquationsTask.hpp"
+#include "Exceptions.hpp"
 #include "ITask.hpp"
-#include "exceptions.hpp"
-#include "matStatSequenceTask.hpp"
-#include "taskInfo.hpp"
+#include "IntegrationTask.hpp"
+#include "MatStatSequenceTask.hpp"
+#include "MatrixTask.hpp"
+#include "TaskInfo.hpp"
 
 namespace Handlers {
 
@@ -26,28 +33,34 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
         throw ::Handlers::HandlerInvalidRequest("taskType");
     }
     if (info.TaskType <= ::Tasks::TaskTypes::IntegTrapez) {
-        // return std::make_unique<::Tasks::IntegrationTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::IntegrationTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::CombPart) {
-        // return std::make_unique<::Tasks::CombinatoricsTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::CombinatoricsTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::EqPoly) {
-        // return std::make_unique<::Tasks::EquationsTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::EquationsTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::EqSLU) {
-        // return std::make_unique<::Tasks::EqSystemsTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::EqSystemTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType == ::Tasks::TaskTypes::Arithmetic) {
-        // return std::make_unique<::Tasks::ArithmeticTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::ArithmeticTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::DiffNum) {
-        // return std::make_unique<::Tasks::DifferentiationTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::DifferentiationTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::MatrixNorm) {
-        // return std::make_unique<::Tasks::MatrixTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::MatrixTask>(info.TaskData, info.TaskType);
+    }
+
+    // add NumberSystem
+
+    if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
+        // return std::make_unique<::Tasks::LogicalTask>(info.TaskData, info.TaskType);
     }
     if (info.TaskType <= ::Tasks::TaskTypes::MatStatSeqQuantile) {
-        // return std::make_unique<::Tasks::MatStatSequenceTask>(info.TaskData, info.TaskType);
+        return std::make_unique<::Tasks::MatStatSequenceTask>(info.TaskData, info.TaskType);
     } else {
         throw ::Handlers::HandlerInvalidRequest("taskType");
     }

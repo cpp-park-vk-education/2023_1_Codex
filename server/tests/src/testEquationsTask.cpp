@@ -2,9 +2,9 @@
 
 #include <string>
 
+#include "Exceptions.hpp"
 #include "IntegrationsTask.hpp"
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 // ------------------------- Линейные уравнения -------------------------------
 
@@ -72,21 +72,22 @@ TEST(EquationsTest, InvalidDataSqEquationsCase1) {
 }
 
 TEST(EquationsTest, InvalidDataSqEquationsCase2) {
-::Tasks::EquationsTask task("4 *x - 6 * x = 0", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+    ::Tasks::EquationsTask task("4 *x - 6 * x = 0", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataSqEquationsCase3) {
-::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x ", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+    ::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x ", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataSqEquationsCase4) {
-::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x - 4 = 4 * x", ::Tasks::TaskTypes::EqSq);  // Неверное выражение
+    ::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x - 4 = 4 * x",
+                                ::Tasks::TaskTypes::EqSq);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, DivideByZeroSqEquationsCase) {
@@ -126,15 +127,15 @@ TEST(EquationsTest, InvalidDataPolyEquationsCase1) {
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCase2) {
-::Tasks::EquationsTask task("4 * x ^ 6 - 6 * x =0",
-                            ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+    ::Tasks::EquationsTask task("4 * x ^ 6 - 6 * x =0",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCase3) {
-::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x",
-                            ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+    ::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
-EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }

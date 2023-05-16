@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "requestHandler.hpp"
+#include "RequestHandler.hpp"
 
 namespace Server {
 

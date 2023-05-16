@@ -1,11 +1,11 @@
 #include "EqSystemsTask.hpp"
 
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 
-#include "taskInfo.hpp"
-#include "exceptions.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -161,7 +161,7 @@ std::vector<double> EqSystemTask::LU() {
 
 std::vector<double> EqSystemTask::GaussianMainEl() {
     // Создаем копии исходных векторов
-    std::vector <std::vector<double>> augmentedMatrix = A;
+    std::vector<std::vector<double>> augmentedMatrix = A;
     std::vector<double> augmentedVector = B;
 
     const int n = augmentedVector.size();
@@ -248,6 +248,5 @@ std::vector<double> EqSystemTask::Gaussian() {
     }
 
     return solution;
-
 }
-}
+}  // namespace Tasks

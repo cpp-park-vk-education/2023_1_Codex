@@ -2,11 +2,11 @@
 
 #include <string>
 
-#include "exceptions.hpp"
+#include "Exceptions.hpp"
 #include "LogicalExpressionTask.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
-TEST(LogicalExpressionTest, BasicPDNFCase){
+TEST(LogicalExpressionTest, BasicPDNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a & !b)", ::Tasks::TaskTypes::LogicalPDNF);
     std::string actual = task.Solve();
 
@@ -14,7 +14,7 @@ TEST(LogicalExpressionTest, BasicPDNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, BasicPDNFCase){
+TEST(LogicalExpressionTest, BasicPDNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a&!b)", ::Tasks::TaskTypes::LogicalPDNF);
     std::string actual = task.Solve();
 
@@ -22,7 +22,7 @@ TEST(LogicalExpressionTest, BasicPDNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, SimplePDNFCase){
+TEST(LogicalExpressionTest, SimplePDNFCase) {
     ::Tasks::LogicalExpressionTask task("!a & !b", ::Tasks::TaskTypes::LogicalPDNF);
     std::string actual = task.Solve();
 
@@ -30,13 +30,13 @@ TEST(LogicalExpressionTest, SimplePDNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, InvalidDataPDNFCase){
+TEST(LogicalExpressionTest, InvalidDataPDNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a & !b", ::Tasks::TaskTypes::LogicalPDNF);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(LogicalExpressionTest, NoOperatorPDNFCase){
+TEST(LogicalExpressionTest, NoOperatorPDNFCase) {
     ::Tasks::LogicalExpressionTask task("!a !b", ::Tasks::TaskTypes::LogicalPDNF);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
@@ -44,7 +44,7 @@ TEST(LogicalExpressionTest, NoOperatorPDNFCase){
 
 // --------------------------------------------------------------------------------
 
-TEST(LogicalExpressionTest, BasicPCNFCase){
+TEST(LogicalExpressionTest, BasicPCNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a & !b)", ::Tasks::TaskTypes::LogicalPCNF);
     std::string actual = task.Solve();
 
@@ -52,7 +52,7 @@ TEST(LogicalExpressionTest, BasicPCNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, BasicPCNFCase){
+TEST(LogicalExpressionTest, BasicPCNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a&!b)", ::Tasks::TaskTypes::LogicalPCNF);
     std::string actual = task.Solve();
 
@@ -60,7 +60,7 @@ TEST(LogicalExpressionTest, BasicPCNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, SimplePCNFCase){
+TEST(LogicalExpressionTest, SimplePCNFCase) {
     ::Tasks::LogicalExpressionTask task("!a & !b", ::Tasks::TaskTypes::LogicalPCNF);
     std::string actual = task.Solve();
 
@@ -68,13 +68,13 @@ TEST(LogicalExpressionTest, SimplePCNFCase){
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(LogicalExpressionTest, InvalidDataPCNFCase){
+TEST(LogicalExpressionTest, InvalidDataPCNFCase) {
     ::Tasks::LogicalExpressionTask task("!(a & !b", ::Tasks::TaskTypes::LogicalPCNF);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(LogicalExpressionTest, NoOperatorPCNFCase){
+TEST(LogicalExpressionTest, NoOperatorPCNFCase) {
     ::Tasks::LogicalExpressionTask task("a !b", ::Tasks::TaskTypes::LogicalPCNF);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);

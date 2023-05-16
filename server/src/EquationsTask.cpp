@@ -1,14 +1,16 @@
 #include "EquationsTask.hpp"
 
-#include <string>
-#include <memory>
-#include <vector>
-#include <sstream>
 #include <cmath>
 #include <iomanip>
+#include <memory>
+#include <sstream>
+#include <string>
+#include <vector>
 
-#include "taskInfo.hpp"
-#include "exceptions.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
+
+namespace Tasks {
 
 EquationsTask::EquationsTask(const std::string expression, TaskTypes taskType) {
     Expression = std::move(expression);
@@ -29,8 +31,7 @@ std::string EquationsTask::Solve() {
                 std::stringstream ss;
                 ss << "x_1 = " << DoubleToString(nums[0]) << ", x_2 = " << DoubleToString(nums[1]);
                 return ss.str();
-            }
-            else {
+            } else {
                 std::stringstream ss;
                 ss << "x = " << DoubleToString(nums[0]);
                 return ss.str();
@@ -56,7 +57,7 @@ double EquationsTask::SimpleLinear() {
             throw TaskInvalidData("The equation has no solutions");
         }
     } else {
-        return - b / a;
+        return -b / a;
     }
 }
 
@@ -107,8 +108,7 @@ void EquationsTask::ParseData() {
         if (Numbers.size() != 3) {
             throw TaskInvalidData("Expected three doubles separated by a space");
         }
-    }
-    else if (TaskType == TaskTypes::EqLin) {
+    } else if (TaskType == TaskTypes::EqLin) {
         std::istringstream ss(Expression);
         double num;
 
@@ -122,11 +122,10 @@ void EquationsTask::ParseData() {
         if (Numbers.size() != 2) {
             throw TaskInvalidData("Expected three doubles separated by a space");
         }
-    }
-    else if (TaskType == TaskTypes::EqPoly) {
-
-    }
-    else {
+    } else if (TaskType == TaskTypes::EqPoly) {
+    } else {
         throw TaskInvalidData("Invalid task type");
     }
 }
+
+}  // namespace Tasks
