@@ -1,8 +1,20 @@
 #pragma once
 
 #include <string>
+#include <string>
+#include <stack>
+#include <memory>
+#include <unordered_set>
+#include <vector>
 
 #include "ITask.hpp"
+#include "Calculations.hpp"
+#include "taskInfo.hpp"
+
+const std::unordered_set<std::string> operators_set{ "+", "-", "*", "/",
+            "sin","asin", "cos", "acos", "tg",  "atg", "ctg", "actg",
+            "exp", "abs", "^", "sqrt"};
+
 
 namespace Tasks {
 
@@ -12,8 +24,15 @@ class ArithmeticTask final : public ITask {
 
     std::string Solve() override;
 
+    double Solve_d();
+
    private:
     void ParseData() override;
+    std::vector<std::string> get_lexems();
+    void analyze_operator(std::string op);
+    
+    std::stack<std::unique_ptr<ICalculatable>> output;
+    std::unique_ptr<ICalculatable> root;
 };
 
 }  // namespace Tasks
