@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <iomanip>
 
 #include "taskInfo.hpp"
 
@@ -23,6 +24,13 @@ class ITask {
 
    protected:
     virtual void ParseData() = 0;
+
+    std::string DoubleToString(double x) {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(5) << x;
+
+        return stream.str();
+    }
 
     std::string Expression;
     TaskTypes TaskType;
