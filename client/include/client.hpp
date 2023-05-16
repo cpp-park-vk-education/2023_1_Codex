@@ -1,10 +1,10 @@
 #pragma once
 
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
 #include <memory>
 #include <string>
 
-#include "boost/beast/core.hpp"
-#include "boost/beast/http.hpp"
 #include "taskInfo.hpp"
 
 namespace Client {
@@ -34,7 +34,7 @@ class Client {
     net::io_context Ioc;
     tcp::resolver Resolver;
     beast::tcp_stream Stream;
-    beast::flat_buffer Buffer;  // (Must persist between reads)
+    beast::flat_buffer Buffer;
     http::response<http::string_body> Response;
 };
 

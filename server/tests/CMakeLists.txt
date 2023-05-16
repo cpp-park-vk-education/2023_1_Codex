@@ -1,7 +1,14 @@
 add_executable(server_test /
+        src/testArithmeticTask.cpp /
+        src/testCombinatoricsTask.cpp /
+        src/testDifferentiationTask.cpp /
+        src/testEqSystemsTask.cpp /
+        src/testEquationsTask.cpp /
+        src/testIntegrationsTask.cpp /
         src/testLogicalExpressionTask.cpp /
         src/testNumberSystemsTask.cpp /
         src/testTaskSearcher.cpp /
+        src/testMatrixTask.cpp /
         src/testMatStatSequenceTask.cpp /
         src/testCombinatoricsTask.cpp /
         src/testEqSystemsTask.cpp /

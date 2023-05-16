@@ -10,6 +10,7 @@
 
 TEST(EquationsTest, BasicLinearEquationsCase) {
     ::Tasks::EquationsTask task("4 3", ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x = b
+
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.75";

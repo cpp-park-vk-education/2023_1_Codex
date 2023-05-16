@@ -11,13 +11,19 @@ include_directories(/
         )
 
 add_executable(server /
+        src/ArithmeticTask.cpp /
         src/CombinatoricsTask.cpp /
+        src/DifferentiationTask.cpp /
         src/EqSystemsTask.cpp /
         src/EquationsTask.cpp /
         src/IntegrationTask.cpp /
+        src/matStatSequenceTask.cpp /
+        src/MatrixTask.cpp /
+        
         src/taskSearcher.cpp /
         src/taskHandler.cpp /
         src/requestHandler.cpp /
+        
         src/session.cpp /
         src/listener.cpp /
         src/server.cpp /
