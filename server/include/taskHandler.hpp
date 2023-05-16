@@ -18,7 +18,11 @@ class TaskHandler final : public IHandler {
     http::message_generator Run(http::request<http::dynamic_body> &request) override;
 
    private:
-    http::message_generator CreateResponse(::Tasks::ITaskUPtr &task) const;
+    http::message_generator CreateResponse(::Tasks::ITaskUPtr &task,
+                                           http::request<http::dynamic_body> &request) const;
+
+    http::message_generator CreateErrorResponse(http::request<http::dynamic_body> &request,
+                                                const std::string &msg) const;
 
     ITaskSearcherUPtr TaskSearcher;
     std::shared_ptr<std::string const> DocRoot;

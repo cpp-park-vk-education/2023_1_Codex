@@ -15,6 +15,7 @@ const std::unordered_set<std::string> operators_set{ "+", "-", "*", "/",
             "sin","asin", "cos", "acos", "tg",  "atg", "ctg", "actg",
             "exp", "abs", "^", "sqrt"};
 
+
 namespace Tasks {
 
 class ArithmeticTask final : public ITask {
@@ -32,7 +33,6 @@ class ArithmeticTask final : public ITask {
     
     std::stack<std::unique_ptr<ICalculatable>> output;
     std::unique_ptr<ICalculatable> root;
-
 };
 
 }  // namespace Tasks

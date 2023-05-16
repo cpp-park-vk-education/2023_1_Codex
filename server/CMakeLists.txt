@@ -14,6 +14,7 @@ add_executable(server /
         src/ArithmeticTask.cpp /
         src/DifferentiationTask.cpp /
         src/MatrixTask.cpp /
+        src/matStatSequenceTask.cpp /
         src/taskSearcher.cpp /
         src/taskHandler.cpp /
         src/requestHandler.cpp /
