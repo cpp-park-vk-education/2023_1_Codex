@@ -4,6 +4,7 @@
 
 #include "ITask.hpp"
 #include "taskInfo.hpp"
+
 namespace Tasks {
 
 class EqSystemTask final : public ITask {
@@ -15,9 +16,14 @@ class EqSystemTask final : public ITask {
    private:
     void ParseData() override;
 
-    int Gaussian();
-    int GaussianMainEl();
-    int LU();
+    std::vector<std::vector<double>> A;
+    std::vector<double> B;
+
+    std::string VectorToString(const std::vector<double>& nums);
+
+    std::vector<double> Gaussian();
+    std::vector<double> GaussianMainEl();
+    std::vector<double> LU();
 };
 
 }  // namespace Tasks

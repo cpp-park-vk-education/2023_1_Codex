@@ -1,9 +1,11 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "ITask.hpp"
 #include "taskInfo.hpp"
+
 namespace Tasks {
 
 class EquationsTask final : public ITask {
@@ -15,9 +17,11 @@ class EquationsTask final : public ITask {
    private:
     void ParseData() override;
 
-    int SimpleLinear();
-    int Square();
-    int Polynomial();
+    std::vector<double> Numbers;
+
+    double SimpleLinear();
+    std::vector<double> Square();
+    void Polynomial();
 };
 
 }  // namespace Tasks
