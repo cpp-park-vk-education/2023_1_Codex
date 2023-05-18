@@ -2,18 +2,18 @@
 
 #include <QMainWindow>
 
-namespace Ui{
-    class UsageWindow;
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class UsageWindow;
 }
+QT_END_NAMESPACE
 
-class UsageWindow : public QMainWindow{
+class UsageWindow : public QMainWindow {
     Q_OBJECT
-
-public:
-    explicit UsageWindow(QWidget* parent = nullptr);
+   public:
+    UsageWindow(QWidget* parent = nullptr);
     ~UsageWindow();
 
-private:
+   private:
     Ui::UsageWindow* ui;
 };
-

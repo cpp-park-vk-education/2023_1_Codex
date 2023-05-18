@@ -1,30 +1,29 @@
 #pragma once
 
-#include <QMainWindow>
-#include <solutionwindow.h>
 #include <problemtypewindow.h>
+#include <solutionwindow.h>
 
-namespace Ui{
-    class UploadWindow;
+#include <QMainWindow>
+
+namespace Ui {
+class UploadWindow;
 }
 
-class UploadWindow : public QMainWindow{
+class UploadWindow : public QMainWindow {
     Q_OBJECT
 
-private slots:
+   private slots:
     void on_submit_button_clicked();
     void on_back_clicked();
     void on_upload_button_clicked();
 
-public:
+   public:
     explicit UploadWindow(QWidget* parent = nullptr);
     ~UploadWindow();
 
-private:
+   private:
     Ui::UploadWindow* ui;
     SolutionWindow* solutionWindow;
     ProblemTypeWindow* problemTypeWindow;
     std::string expression;
-
 };
-
