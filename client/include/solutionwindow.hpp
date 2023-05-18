@@ -1,36 +1,37 @@
 #pragma once
 
-#include <QWidget>
 #include <QApplication>
-#include <QMainWindow>
-
 #include <QComboBox>
-#include <QVBoxLayout>
-#include <QStyleFactory>
+#include <QLabel>
+#include <QLineEdit>
 #include <QMainWindow>
-#include<QWidget>
 #include <QPushButton>
-#include<QLineEdit>
+#include <QStyleFactory>
 #include <QTextEdit>
-#include<QLabel>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QWidget>
+
 #include "client.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui{ class SolutionWindow; }
+namespace Ui {
+class SolutionWindow;
+}
 QT_END_NAMESPACE
 
-class SolutionWindow : public QMainWindow{
+class SolutionWindow : public QMainWindow {
     Q_OBJECT
-public:
+   public:
     SolutionWindow(const Client::ClientSPtr& client, QString value = "", QWidget* parent = NULL);
-    //SolutionWindow(QString value = "", QWidget* parent = nullptr);
+    // SolutionWindow(QString value = "", QWidget* parent = nullptr);
     ~SolutionWindow();
 
     void insertTypeName(QString value, Client::TaskTypes taskType);
     Client::TaskInfo Run(const std::string& expression, Client::TaskTypes taskType);
     void setExpressionSolution();
 
-private:
+   private:
     QString typeName;
     Client::TaskTypes taskType;
     Ui::SolutionWindow* ui;
@@ -44,13 +45,13 @@ private:
     std::shared_ptr<QLineEdit> inputField;
     std::shared_ptr<QPushButton> okButton;
 
-signals:
+   signals:
     void openProblemTypeWindow();
-private slots:
+   private slots:
     void onBackButtonClicked();
     void onTypeNameSelected(QString typeName);
     void getAnswer(QString expression);
 
-public slots:
+   public slots:
     void setClient(const Client::ClientSPtr& client);
 };

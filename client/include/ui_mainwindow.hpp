@@ -9,8 +9,8 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
-#include <QtCore/QVariant>
 #include <QAction>
+#include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
@@ -25,9 +25,8 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
-{
-public:
+class Ui_MainWindow {
+   public:
     QWidget *centralwidget;
     QGroupBox *groupBox;
     QPushButton *usageButton;
@@ -41,10 +40,8 @@ public:
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *MainWindow)
-    {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+    void setupUi(QMainWindow *MainWindow) {
+        if (MainWindow->objectName().isEmpty()) MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(812, 600);
         MainWindow->setStyleSheet(QStringLiteral("background-color:rgb(31, 34, 41);"));
         centralwidget = new QWidget(MainWindow);
@@ -52,25 +49,28 @@ public:
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(90, 280, 631, 171));
-        groupBox->setStyleSheet(QLatin1String("border-width:2px;\n"
-"border-color:white;\n"
-"border-radius:10px;"));
+        groupBox->setStyleSheet(
+            QLatin1String("border-width:2px;\n"
+                          "border-color:white;\n"
+                          "border-radius:10px;"));
         usageButton = new QPushButton(groupBox);
         usageButton->setObjectName(QStringLiteral("usageButton"));
         usageButton->setGeometry(QRect(40, 90, 200, 60));
-        usageButton->setStyleSheet(QLatin1String("background-color: rgb(70, 224, 130);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 900 12pt \"Arial Black\";\n"
-"border-radius:9px;\n"
-""));
+        usageButton->setStyleSheet(
+            QLatin1String("background-color: rgb(70, 224, 130);\n"
+                          "color: rgb(255, 255, 255);\n"
+                          "font: 900 12pt \"Arial Black\";\n"
+                          "border-radius:9px;\n"
+                          ""));
         startButton = new QPushButton(groupBox);
         startButton->setObjectName(QStringLiteral("startButton"));
         startButton->setGeometry(QRect(400, 90, 200, 60));
-        startButton->setStyleSheet(QLatin1String("background-color: rgb(70, 224, 130);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 900 12pt \"Arial Black\";\n"
-"border-radius:9px;\n"
-""));
+        startButton->setStyleSheet(
+            QLatin1String("background-color: rgb(70, 224, 130);\n"
+                          "color: rgb(255, 255, 255);\n"
+                          "font: 900 12pt \"Arial Black\";\n"
+                          "border-radius:9px;\n"
+                          ""));
         label = new QLabel(groupBox);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(160, 10, 321, 41));
@@ -80,7 +80,8 @@ public:
         font.setBold(true);
         font.setItalic(false);
         label->setFont(font);
-        label->setStyleSheet(QStringLiteral("color:white;font-family:'Arial Black'; font-size:20pt; font-weight:700; font-style:normal;"));
+        label->setStyleSheet(QStringLiteral(
+            "color:white;font-family:'Arial Black'; font-size:20pt; font-weight:700; font-style:normal;"));
         line = new QFrame(centralwidget);
         line->setObjectName(QStringLiteral("line"));
         line->setGeometry(QRect(90, 270, 630, 3));
@@ -96,8 +97,9 @@ public:
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(610, 480, 191, 51));
-        label_2->setStyleSheet(QLatin1String("color:rgb(106, 108, 114);\n"
-"font: 12pt \"Arial Narrow\";"));
+        label_2->setStyleSheet(
+            QLatin1String("color:rgb(106, 108, 114);\n"
+                          "font: 12pt \"Arial Narrow\";"));
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(240, 60, 331, 61));
@@ -107,7 +109,8 @@ public:
         font1.setBold(true);
         font1.setItalic(false);
         label_3->setFont(font1);
-        label_3->setStyleSheet(QStringLiteral("color:white;font-family:'Arial Black'; font-size:32pt; font-weight:700; font-style:normal;"));
+        label_3->setStyleSheet(QStringLiteral(
+            "color:white;font-family:'Arial Black'; font-size:32pt; font-weight:700; font-style:normal;"));
         label_3->setTextFormat(Qt::AutoText);
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName(QStringLiteral("label_4"));
@@ -118,9 +121,10 @@ public:
         font2.setBold(false);
         font2.setItalic(false);
         label_4->setFont(font2);
-        label_4->setStyleSheet(QLatin1String("color:rgb(106, 108, 114);\n"
-"\n"
-"font: 16pt \"Arial Narrow\";"));
+        label_4->setStyleSheet(
+            QLatin1String("color:rgb(106, 108, 114);\n"
+                          "\n"
+                          "font: 16pt \"Arial Narrow\";"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -133,10 +137,9 @@ public:
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
-    } // setupUi
+    }  // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
-    {
+    void retranslateUi(QMainWindow *MainWindow) {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         groupBox->setTitle(QString());
         usageButton->setText(QApplication::translate("MainWindow", "How to use", Q_NULLPTR));
@@ -144,15 +147,20 @@ public:
         label->setText(QApplication::translate("MainWindow", "Let's get started!", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "By: Codex team", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "MathVision", Q_NULLPTR));
-        label_4->setText(QApplication::translate("MainWindow", "\320\243\320\274\320\275\321\213\320\271 \320\274\320\260\321\202\320\265\320\274\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\270\320\271 \320\272\320\260\320\273\321\214\320\272\321\203\320\273\321\217\321\202\320\276\321\200", Q_NULLPTR));
-    } // retranslateUi
-
+        label_4->setText(QApplication::translate(
+            "MainWindow",
+            "\320\243\320\274\320\275\321\213\320\271 "
+            "\320\274\320\260\321\202\320\265\320\274\320\260\321\202\320\270\321\207\320\265\321\201\320\272"
+            "\320\270\320\271 "
+            "\320\272\320\260\320\273\321\214\320\272\321\203\320\273\321\217\321\202\320\276\321\200",
+            Q_NULLPTR));
+    }  // retranslateUi
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
-} // namespace Ui
+class MainWindow : public Ui_MainWindow {};
+}  // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINWINDOW_H
+#endif  // UI_MAINWINDOW_H

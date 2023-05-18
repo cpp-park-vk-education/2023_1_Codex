@@ -3,28 +3,28 @@
 #include <boost/beast/core.hpp>
 #include <memory>
 #include <string>
-#include <thread>
-#include <vector>
 
-#include "listener.hpp"
+#include "Session.hpp"
 
 namespace Server {
 
 namespace net = boost::asio;       // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;  // from <boost/asio/ip/tcp.hpp>
 
-class Server {
+class Listener : public std::enable_shared_from_this<Listener> {
    public:
-    Server(const net::ip::address &address, unsigned short port, std::shared_ptr<std::string const> docRoot,
-           int threads);
+    Listener(net::io_context &ioc, tcp::endpoint endpoint, std::shared_ptr<std::string const> docRoot);
 
     void Run();
 
    private:
-    net::io_context Ioc;
-    ListenerUPtr Listener;
+    void DoAccept();
+
+    net::io_context &Ioc;
+    tcp::acceptor Acceptor;
     std::shared_ptr<std::string const> DocRoot;
-    std::vector<std::thread> Threads;
 };
+
+using ListenerSPtr = std::shared_ptr<Listener>;
 
 }  // namespace Server

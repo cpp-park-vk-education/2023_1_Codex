@@ -1,10 +1,9 @@
 #pragma once
 
+#include <boost/beast/core.hpp>
 #include <exception>
 #include <memory>
 #include <string>
-
-#include "boost/beast/core.hpp"
 
 namespace Server {
 
@@ -71,6 +70,11 @@ class HandlerInvalidRequest final : public HandlerException {
    public:
     explicit HandlerInvalidRequest(std::string msg)
         : HandlerException("Wrong request because of invalid " + msg) {}
+};
+
+class HandlerInvalidFile final : public HandlerException {
+   public:
+    explicit HandlerInvalidFile(const std::string &msg) : HandlerException("Don't open file for " + msg) {}
 };
 
 }  // namespace Handlers

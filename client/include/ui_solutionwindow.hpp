@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <QtCore/QVariant>
 #include <QAction>
+#include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
@@ -20,15 +20,14 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_SolutionWindow{
-public:
+class Ui_SolutionWindow {
+   public:
     QMenuBar* menubar;
     QWidget* centralwidget;
     QStatusBar* statusbar;
 
-    void setupUi(QMainWindow* MainWindow){
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+    void setupUi(QMainWindow* MainWindow) {
+        if (MainWindow->objectName().isEmpty()) MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(800, 600);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -43,16 +42,15 @@ public:
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
-    } // setupUi
+    }  // setupUi
 
-    void retranslateUi(QMainWindow* MainWindow){
+    void retranslateUi(QMainWindow* MainWindow) {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-    } // retranslateUi
-
+    }  // retranslateUi
 };
 
-namespace Ui{
-    class SolutionWindow : public Ui_SolutionWindow{};
-} // namespace Ui
+namespace Ui {
+class SolutionWindow : public Ui_SolutionWindow {};
+}  // namespace Ui
 
 QT_END_NAMESPACE

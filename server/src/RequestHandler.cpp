@@ -1,11 +1,11 @@
-#include "requestHandler.hpp"
+#include "RequestHandler.hpp"
 
 #include <boost/beast/http.hpp>
 #include <memory>
 #include <string>
 
-#include "taskHandler.hpp"
-#include "taskSearcher.hpp"
+#include "TaskHandler.hpp"
+#include "TaskSearcher.hpp"
 
 namespace Server {
 

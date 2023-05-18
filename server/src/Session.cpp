@@ -1,4 +1,4 @@
-#include "session.hpp"
+#include "Session.hpp"
 
 #include <boost/asio/dispatch.hpp>
 #include <boost/beast/core.hpp>
@@ -8,8 +8,8 @@
 #include <string>
 #include <thread>
 
-#include "exceptions.hpp"
-#include "requestHandler.hpp"
+#include "Exceptions.hpp"
+#include "RequestHandler.hpp"
 
 namespace Server {
 

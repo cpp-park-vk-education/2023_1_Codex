@@ -1,7 +1,10 @@
 #pragma once
 
+#include <iomanip>
 #include <memory>
 #include <string>
+
+#include "taskInfo.hpp"
 
 namespace Tasks {
 
@@ -15,15 +18,22 @@ class ITask {
         return Expression;
     }
 
-    std::string GetTaskType() const {
+    unsigned GetTaskType() const {
         return TaskType;
     }
 
-   private:
+   protected:
     virtual void ParseData() = 0;
 
+    std::string DoubleToString(double x) {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(5) << x;
+
+        return stream.str();
+    }
+
     std::string Expression;
-    std::string TaskType;
+    TaskTypes TaskType;
 };
 
 using ITaskUPtr = std::unique_ptr<ITask>;

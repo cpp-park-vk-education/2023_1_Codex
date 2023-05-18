@@ -3,6 +3,7 @@
 #include <string>
 
 #include "ITask.hpp"
+#include "TaskInfo.hpp"
 
 namespace Tasks {
 

@@ -6,7 +6,7 @@
 
 #include "ITask.hpp"
 #include "ITaskSearcher.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 namespace Handlers {
 

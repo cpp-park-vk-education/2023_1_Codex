@@ -3,19 +3,19 @@
 #include <string>
 
 #include "ITask.hpp"
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
-namespace Tasks{
+namespace Tasks {
 
-    class NumberSystemsTask final : public ITask{
-    public:
-        NumberSystemsTask(std::string expression, TaskTypes taskType);
+class NumberSystemsTask final : public ITask {
+   public:
+    NumberSystemsTask(std::string expression, TaskTypes taskType);
 
-        std::string Solve() override;
+    std::string Solve() override;
 
-    private:
-        std::string expression;
-        void ParseData() override;
-    };
+   private:
+    std::string expression;
+    void ParseData() override;
+};
 
 }  // namespace Tasks

@@ -1,12 +1,12 @@
-#include "listener.hpp"
+#include "Listener.hpp"
 
 #include <boost/asio/strand.hpp>
 #include <boost/beast/core.hpp>
 #include <memory>
 #include <string>
 
-#include "exceptions.hpp"
-#include "session.hpp"
+#include "Exceptions.hpp"
+#include "Session.hpp"
 
 namespace Server {
 
@@ -48,7 +48,7 @@ void Listener::DoAccept() {
     Acceptor.async_accept(net::make_strand(Ioc), [this, self](beast::error_code ec, tcp::socket socket) {
         // If error in accept, we accept other connection and skip this failure
         if (!ec) {
-            std::make_unique<Session>(std::move(socket), DocRoot)->Run();
+            std::make_shared<Session>(std::move(socket), DocRoot)->Run();
         }
         DoAccept();
     });

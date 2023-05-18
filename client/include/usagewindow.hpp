@@ -3,14 +3,17 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui{ class UsageWindow; }
+namespace Ui {
+class UsageWindow;
+}
 QT_END_NAMESPACE
 
-class UsageWindow : public QMainWindow{
+class UsageWindow : public QMainWindow {
     Q_OBJECT
-public:
+   public:
     UsageWindow(QWidget* parent = nullptr);
     ~UsageWindow();
-private:
+
+   private:
     Ui::UsageWindow* ui;
 };

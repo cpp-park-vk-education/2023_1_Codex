@@ -1,49 +1,46 @@
 #pragma once
 
-#include <QString>
 #include <QMap>
+#include <QString>
 #include <QVector>
 
 #include "taskInfo.hpp"
 
-QVector<Client::TaskTypes> taskTypes = {
-    Client::NotFound,
-    Client::IntegNewton,
-    Client::IntegSimpson,
-    Client::IntegTrapez,
-    Client::CombComb,
-    Client::CombRe,
-    Client::CombPlace,
-    Client::CombPart,
-    Client::EqLin,
-    Client::EqSq,
-    Client::EqPoly,
-    Client::EqSGauss,
-    Client::EqSGaussM,
-    Client::EqSLU,
-    Client::Arithmetic,
-    Client::DiffSymb,
-    Client::DiffNum,
-    Client::MatrixDet,
-    Client::MatrixT,
-    Client::MatrixEigen,
-    Client::MatrixRank,
-    Client::MatrixNorm,
-    Client::MatStatInitMoment,
-    Client::MatStatCentralMoment,
-    Client::MatStatAsymmetry,
-    Client::MatStatExcess,
-    Client::MatStatQuantile
-};
+QVector<Client::TaskTypes> taskTypes = {Client::NotFound,
+                                        Client::IntegNewton,
+                                        Client::IntegSimpson,
+                                        Client::IntegTrapez,
+                                        Client::CombComb,
+                                        Client::CombRe,
+                                        Client::CombPlace,
+                                        Client::CombPart,
+                                        Client::EqLin,
+                                        Client::EqSq,
+                                        Client::EqPoly,
+                                        Client::EqSGauss,
+                                        Client::EqSGaussM,
+                                        Client::EqSLU,
+                                        Client::Arithmetic,
+                                        Client::DiffSymb,
+                                        Client::DiffNum,
+                                        Client::MatrixDet,
+                                        Client::MatrixT,
+                                        Client::MatrixEigen,
+                                        Client::MatrixRank,
+                                        Client::MatrixNorm,
+                                        Client::MatStatInitMoment,
+                                        Client::MatStatCentralMoment,
+                                        Client::MatStatAsymmetry,
+                                        Client::MatStatExcess,
+                                        Client::MatStatQuantile};
 
 QMap<QString, QVector<QString>> TaskTypesMap = {
-    {"Integrals", {"Mean method","Simpson method","Trapeze method"}},
-    {"Combinatorics", {"Combinations","Rearrangements","Placements","Partition"}},
-    {"Equations", {"Linear","Squared","Polynomial"}},
-    {"Linear Algebraic Equation System", {"Gauss","Gauss with choosing Main element","SLU"}},
+    {"Integrals", {"Mean method", "Simpson method", "Trapeze method"}},
+    {"Combinatorics", {"Combinations", "Rearrangements", "Placements", "Partition"}},
+    {"Equations", {"Linear", "Squared", "Polynomial"}},
+    {"Linear Algebraic Equation System", {"Gauss", "Gauss with choosing Main element", "SLU"}},
     {"Arithmetic", {"Arithmetic"}},
-    {"Differentiation",{"Symbolic", "Numerical"}},
+    {"Differentiation", {"Symbolic", "Numerical"}},
     //{"Logical",{"PDNF", "PCNF"}},
-    {"Matrix", {"Determinant","Transpare","Eigen values","Rank","Norm"}},
-    {"MatStat", {"InitMoment", "CentralMoment","Asymmetry", "Excess","Quantile"}}
-};
+    {"Matrix", {"Determinant", "Transpare", "Eigen values", "Rank", "Norm"}},
+    {"MatStat", {"InitMoment", "CentralMoment", "Asymmetry", "Excess", "Quantile"}}};

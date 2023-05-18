@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "exceptions.hpp"
 #include "DifferentiationTask.hpp"
-#include "taskInfo.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 TEST(DifferentiationTest, BasicCaseSymbolic) {
     ::Tasks::DifferentiationTask task(" 12 * x ^ 2 + sin ( x ) - 6 ) ", ::Tasks::TaskTypes::DiffSymb);
@@ -20,9 +20,7 @@ TEST(DifferentiationTest, BasicCaseNumerical) {
 
     std::string expected = "47.58385";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
-
 }
-
 
 TEST(DifferentiationTest, NoPointProvided) {
     ::Tasks::DifferentiationTask task(" 12 * x ^ 2 + sin ( x ) - 6 ) ; ", ::Tasks::TaskTypes::DiffNum);

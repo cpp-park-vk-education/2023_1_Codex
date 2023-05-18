@@ -1,38 +1,40 @@
 #pragma once
 
-#include <QWidget>
 #include <QApplication>
 #include <QMainWindow>
-#include "ui_problemtypewindow.hpp"
+#include <QWidget>
+
 #include "solutionwindow.hpp"
+#include "ui_problemtypewindow.hpp"
 //#include "problemType.hpp"
 
-#include "taskInfo.hpp"
 #include "client.hpp"
+#include "taskInfo.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui{ class ProblemTypeWindow; }
+namespace Ui {
+class ProblemTypeWindow;
+}
 QT_END_NAMESPACE
 
-class ProblemTypeWindow : public QMainWindow{
+class ProblemTypeWindow : public QMainWindow {
     Q_OBJECT
-public:
+   public:
     ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* parent = nullptr);
-    //ProblemTypeWindow(QWidget* parent = nullptr);
+    // ProblemTypeWindow(QWidget* parent = nullptr);
     ~ProblemTypeWindow();
 
-signals:
+   signals:
     void openMainWindow();
     void typeNameSelected(QString typeName);
     void clientAvailable(const Client::ClientSPtr& client);
 
-
-private slots:
+   private slots:
     void onTypeTriggered(QString value, Client::TaskTypes taskType);
     void onBackButtonClicked();
 
-private:
-         //QString TaskTypesHandlersNames[taskTypesNum];
+   private:
+    // QString TaskTypesHandlersNames[taskTypesNum];
     Ui::ProblemTypeWindow* ui;
     std::shared_ptr<SolutionWindow> solutionWindow;
     QString typeName;
@@ -49,6 +51,6 @@ private:
 
     Client::ClientSPtr m_client;
 
-public slots:
+   public slots:
     void setClient(const Client::ClientSPtr& client);
 };

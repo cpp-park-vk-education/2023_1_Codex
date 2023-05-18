@@ -2,8 +2,8 @@
 #include <iostream>
 #include <memory>
 
-#include "exceptions.hpp"
-#include "server.hpp"
+#include "Exceptions.hpp"
+#include "Server.hpp"
 
 namespace net = boost::asio;  // from <boost/asio.hpp>
 
@@ -21,6 +21,8 @@ int main(int argc, char *argv[]) {
 
     try {
         Server::Server server(address, port, docRoot, threads);
+
+        server.Run();
     } catch (Server::ServerException &ex) {
         std::cerr << ex.what() << std::endl;
     }
