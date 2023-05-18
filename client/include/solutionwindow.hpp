@@ -1,12 +1,19 @@
 #pragma once
 
+#include <QWidget>
+#include <QApplication>
 #include <QMainWindow>
-#include <QtWidgets/QWidget>
-#include <QtCharts/QChartGlobal>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QGridLayout>
-#include <usagewindow.h>
+
+#include <QComboBox>
+#include <QVBoxLayout>
+#include <QStyleFactory>
+#include <QMainWindow>
+#include<QWidget>
+#include <QPushButton>
+#include<QLineEdit>
+#include <QTextEdit>
+#include<QLabel>
+#include "client.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui{ class SolutionWindow; }
@@ -14,29 +21,36 @@ QT_END_NAMESPACE
 
 class SolutionWindow : public QMainWindow{
     Q_OBJECT
-
 public:
-    explicit SolutionWindow(QWidget* parent = nullptr);
+    SolutionWindow(const Client::ClientSPtr& client, QString value = "", QWidget* parent = NULL);
+    //SolutionWindow(QString value = "", QWidget* parent = nullptr);
     ~SolutionWindow();
-    QGridLayout* gridLayout;
 
-private slots:
-    void on_new_problem_button_clicked();
-    void on_back_clicked();
-    void on_aboutButton_clicked();
-    void on_stepsButton_clicked();
-    void on_chartButton_clicked();
+    void insertTypeName(QString value, Client::TaskTypes taskType);
+    Client::TaskInfo Run(const std::string& expression, Client::TaskTypes taskType);
+    void setExpressionSolution();
 
 private:
+    QString typeName;
+    Client::TaskTypes taskType;
     Ui::SolutionWindow* ui;
-    UsageWindow* usageWindow;
-    double* predicted_values;
-    int was_prediction = 0;
+    Client::ClientSPtr m_client;
+    Client::TaskInfo solutionResult;
 
-    std::string solution;
-    std::string expression;
+    std::shared_ptr<QPushButton> backButton;
+    std::shared_ptr<QLabel> titleLabel;
+    std::shared_ptr<QLabel> textExpression;
+    std::shared_ptr<QLabel> textSolution;
+    std::shared_ptr<QLineEdit> inputField;
+    std::shared_ptr<QPushButton> okButton;
 
+signals:
+    void openProblemTypeWindow();
+private slots:
+    void onBackButtonClicked();
+    void onTypeNameSelected(QString typeName);
+    void getAnswer(QString expression);
 
-    QtCharts::QChartView* mChart;
-    QList<QtCharts::QChartView*> m_charts;
+public slots:
+    void setClient(const Client::ClientSPtr& client);
 };

@@ -1,23 +1,36 @@
 #pragma once
 
 #include <QMainWindow>
-#include <usagewindow.h>
-#include <problemtypewindow.h>
+#include <memory>
 
-namespace Ui{
-    class MainWindow;
-}
+#include "problemtypewindow.hpp"
+#include "usagewindow.hpp"
+#include "ui_mainwindow.hpp"
+#include "client.hpp"
+
+QT_BEGIN_NAMESPACE
+namespace Ui{ class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow{
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
+    MainWindow(const Client::ClientSPtr& client, QWidget* parent = NULL);
+    //MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+    void setClient(const Client::ClientSPtr& client);
+private slots:
+    // Слоты от кнопок главного окна
+    void on_usageButton_clicked();
+    void on_startButton_clicked();
+
+signals:
+    void clientAvailable(const Client::ClientSPtr& client);
 
 private:
     Ui::MainWindow* ui;
-    UsageWindow* usageWindow;
-    ProblemTypeWindow* problemTypeWindow;
+    std::shared_ptr<ProblemTypeWindow> problemTypeWindow;
+    std::shared_ptr<UsageWindow> usageWindow;
+    Client::ClientSPtr m_client;
 };
-
