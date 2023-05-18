@@ -19,12 +19,12 @@ int main(int argc, char *argv[]) {
     auto docRoot = std::make_shared<std::string>(argv[3]);
     auto threads = std::max<int>(1, std::atoi(argv[4]));
 
-    //try {
+    try {
         Server::Server server(address, port, docRoot, threads);
 
         server.Run();
-    //} catch (Server::ServerException &ex) {
-    //    std::cerr << ex.what() << std::endl;
-    //}
+    } catch (Server::ServerException &ex) {
+        std::cerr << ex.what() << std::endl;
+    }
     return 0;
 }

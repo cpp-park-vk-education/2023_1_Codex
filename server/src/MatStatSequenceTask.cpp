@@ -1,5 +1,6 @@
 #include "MatStatSequenceTask.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <sstream>
 #include <string>
@@ -22,19 +23,19 @@ std::string MatStatSequenceTask::Solve() {
 
     switch (TaskType) {
         case TaskTypes::MatStatSeqInitMoment: {
-            return std::to_string(InitialMoment(Degree));
+            return DoubleToString(InitialMoment(Degree));
         }
         case TaskTypes::MatStatSeqCentralMoment: {
-            return std::to_string(CentralMoment(Degree));
+            return DoubleToString(CentralMoment(Degree));
         }
         case TaskTypes::MatStatSeqAsymmetry: {
-            return std::to_string(Asymmetry());
+            return DoubleToString(Asymmetry());
         }
         case TaskTypes::MatStatSeqExcess: {
-            return std::to_string(Excess());
+            return DoubleToString(Excess());
         }
         case TaskTypes::MatStatSeqQuantile: {
-            return std::to_string(Quantile());
+            return DoubleToString(Quantile());
         }
         default: {
             throw TaskInvalidData("Wrong task type");
@@ -56,15 +57,11 @@ void MatStatSequenceTask::ParseData() {
             wasDegreeSym = true;
             continue;
         }
-
-        double num = 0.0;
-        try {
-            num = std::stod(var);
-        } catch (...) {
-            // Error if read string isn't double
+        if (var.find_first_not_of("0123456789.") != std::string::npos) {
             throw TaskInvalidData("There are non-numeric symbols in expression");
         }
 
+        double num = std::stod(var);
         // Save read number in vector or as Degree
         if (wasDegreeSym) {
             Degree = num;
@@ -82,7 +79,7 @@ void MatStatSequenceTask::ParseData() {
 
 double MatStatSequenceTask::InitialMoment(double degree) {
     // Degree must be > 0 and be integer number
-    if (degree < 1.0 || degree - static_cast<int>(degree) < EPSILON) {
+    if (degree < 1.0 || degree - static_cast<int>(degree) > EPSILON) {
         throw TaskInvalidData("Wrong degree of initial moment");
     }
     double initMoment = 0.0;
@@ -94,7 +91,7 @@ double MatStatSequenceTask::InitialMoment(double degree) {
 
 double MatStatSequenceTask::CentralMoment(double degree) {
     // Degree must be > 1 and be integer number
-    if (degree < 2.0 || degree - static_cast<int>(degree) < EPSILON) {
+    if (degree < 2.0 || degree - static_cast<int>(degree) > EPSILON) {
         throw TaskInvalidData("Wrong degree of central moment");
     }
     double centralMoment = 0.0;
@@ -107,10 +104,12 @@ double MatStatSequenceTask::CentralMoment(double degree) {
 }
 
 double MatStatSequenceTask::Asymmetry() {
-    double std = std::pow(CentralMoment(2), 0.5);
+    double variety = CentralMoment(2);
     double thirdCM = CentralMoment(3);
 
-    return thirdCM / std::pow(std, 3);
+    return thirdCM;
+
+    return thirdCM / std::pow(variety, 1.5);
 }
 
 double MatStatSequenceTask::Excess() {

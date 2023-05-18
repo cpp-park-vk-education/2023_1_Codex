@@ -30,6 +30,26 @@ add_executable(server /
         src/main.cpp /
         )
 
+add_library(serverLib /
+        src/ArithmeticTask.cpp /
+        src/CombinatoricsTask.cpp /
+        src/DifferentiationTask.cpp /
+        src/EqSystemsTask.cpp /
+        src/EquationsTask.cpp /
+        src/IntegrationTask.cpp /
+        src/MatStatSequenceTask.cpp /
+        src/MatrixTask.cpp /
+
+        src/TaskSearcher.cpp /
+        src/TaskHandler.cpp /
+        src/RequestHandler.cpp /
+
+        src/Session.cpp /
+        src/Listener.cpp /
+        src/Server.cpp /
+        )
+target_include_directories(serverLib PUBLIC include)
+
 if (BUILD_TESTS)
     add_subdirectory(tests)
 endif ()

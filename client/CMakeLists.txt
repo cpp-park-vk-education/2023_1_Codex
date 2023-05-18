@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "-Wall -pthread")
 
 include_directories(/
         include /
-        ${${PADDLE_LIB}} /
+        ${BOOST_LIB} /
         )
 
 add_executable(client /
