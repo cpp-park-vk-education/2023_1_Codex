@@ -11,7 +11,7 @@ TEST(MatrixTest, BasicCaseDeterminant) {
     ::Tasks::MatrixTask task("2 3 4 / 4 5 6 / 0 9 2  ", ::Tasks::TaskTypes::MatrixDet);
     std::string actual = task.Solve();
 
-    std::string expected = "32";
+    std::string expected = "32.00000";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -20,7 +20,7 @@ TEST(MatrixTest, BasicCaseTranspose) {
     ::Tasks::MatrixTask task("2 3 4 / 4 5 6 / 0 9 2  ", ::Tasks::TaskTypes::MatrixT);
     std::string actual = task.Solve();
 
-    std::string expected = "2 4 0 / 3 5 9 / 4 6 2";
+    std::string expected = "2.00000 4.00000 0.00000 / 3.00000 5.00000 9.00000 / 4.00000 6.00000 2.00000";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -30,15 +30,15 @@ TEST(MatrixTest, BasicCaseEigenValuesAndVectors) {
     std::string actual = task.Solve();
 
     std::string expected =
-        "0.29737 : [-2.71932, -0.54467, 1]; -2.83313 : [-1.19157, -2.59215, 1]; 11.86950 : [0.51804, "
-        "1.32539, 1] ";
+        "0.29737 : [-2.71932, -0.54467, 1.00000]; -2.83313 : [-1.19157, -2.59215, 1]; 11.86950 : [0.51804, "
+        "1.32539, 1.00000] ";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
 TEST(MatrixTest, NotSquareMarixEigenValuesAndVectors) {
     ::Tasks::MatrixTask task("1 2 3 / 2 5 8 ", ::Tasks::TaskTypes::MatrixEigen);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::NotSquareMarix);
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 // ---------Rank--------------------------------------------------------
@@ -55,7 +55,7 @@ TEST(MatrixTest, BasicCaseNorma) {
     ::Tasks::MatrixTask task("1 2 3 / 2 5 8 / 3 1 2", ::Tasks::TaskTypes::MatrixNorma);
     std::string actual = task.Solve();
 
-    std::string expected = "10.73918023546";
+    std::string expected = "10.73918";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <boost/beast/core.hpp>
+//#include <boost/beast/core.hpp>
 #include <exception>
 #include <memory>
 #include <string>
-
+/*
 namespace Server {
 
 namespace beast = boost::beast;  // from <boost/beast.hpp>
@@ -78,7 +78,7 @@ class HandlerInvalidFile final : public HandlerException {
 };
 
 }  // namespace Handlers
-
+*/
 namespace Tasks {
 
 class TaskException : public std::exception {
