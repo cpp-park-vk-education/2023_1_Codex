@@ -1,6 +1,6 @@
-#include "usagewindow.hpp"
+#include "UsageWindow.hpp"
 
-#include "ui_usagewindow.hpp"
+#include "UI_UsageWindow.hpp"
 
 UsageWindow::UsageWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::UsageWindow) {
     ui->setupUi(this);

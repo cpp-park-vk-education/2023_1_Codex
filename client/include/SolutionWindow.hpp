@@ -10,9 +10,8 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QWidget>
 
-#include "client.hpp"
+#include "Client.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

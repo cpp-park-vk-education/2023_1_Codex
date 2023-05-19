@@ -1,4 +1,4 @@
-#include "solutionwindow.hpp"
+#include "SolutionWindow.hpp"
 
 #include <string.h>
 
@@ -12,9 +12,9 @@
 #include <QWidget>
 #include <iostream>
 
-#include "client.hpp"
-#include "problemtypewindow.hpp"
-#include "ui_solutionwindow.hpp"
+#include "Client.hpp"
+#include "ProblemTypeWindow.hpp"
+#include "UI_SolutionWindow.hpp"
 using namespace std;
 
 SolutionWindow::SolutionWindow(const Client::ClientSPtr& client, QString value, QWidget* parent)

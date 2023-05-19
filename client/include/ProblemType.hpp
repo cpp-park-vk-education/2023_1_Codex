@@ -4,7 +4,7 @@
 #include <QString>
 #include <QVector>
 
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 QVector<Client::TaskTypes> taskTypes = {Client::NotFound,
                                         Client::IntegNewton,
@@ -28,11 +28,11 @@ QVector<Client::TaskTypes> taskTypes = {Client::NotFound,
                                         Client::MatrixEigen,
                                         Client::MatrixRank,
                                         Client::MatrixNorm,
-                                        Client::MatStatInitMoment,
-                                        Client::MatStatCentralMoment,
-                                        Client::MatStatAsymmetry,
-                                        Client::MatStatExcess,
-                                        Client::MatStatQuantile};
+                                        Client::MatStatSeqInitMoment,
+                                        Client::MatStatSeqCentralMoment,
+                                        Client::MatStatSeqAsymmetry,
+                                        Client::MatStatSeqExcess,
+                                        Client::MatStatSeqQuantile};
 
 QMap<QString, QVector<QString>> TaskTypesMap = {
     {"Integrals", {"Mean method", "Simpson method", "Trapeze method"}},
