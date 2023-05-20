@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "taskInfo.hpp"
+#include "TaskInfo.hpp"
 
 namespace Client {
 
@@ -37,5 +37,7 @@ class Client {
     beast::flat_buffer Buffer;
     http::response<http::string_body> Response;
 };
+
+using ClientSPtr = std::shared_ptr<Client>;
 
 }  // namespace Client
