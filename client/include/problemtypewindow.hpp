@@ -4,12 +4,12 @@
 #include <QMainWindow>
 #include <QWidget>
 
-#include "SolutionWindow.hpp"
-#include "UI_ProblemTypeWindow.hpp"
+#include "solutionwindow.hpp"
+#include "ui_problemtypewindow.hpp"
 //#include "problemType.hpp"
 
-#include "Client.hpp"
-#include "TaskInfo.hpp"
+#include "client.hpp"
+#include "taskInfo.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

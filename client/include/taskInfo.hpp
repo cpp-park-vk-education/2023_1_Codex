@@ -27,13 +27,11 @@ enum TaskTypes {
     MatrixEigen,
     MatrixRank,
     MatrixNorm,
-    LogicalPDNF,
-    LogicalPCNF,
-    MatStatSeqInitMoment,
-    MatStatSeqCentralMoment,
-    MatStatSeqAsymmetry,
-    MatStatSeqExcess,
-    MatStatSeqQuantile
+    MatStatInitMoment,
+    MatStatCentralMoment,
+    MatStatAsymmetry,
+    MatStatExcess,
+    MatStatQuantile
 };
 
 struct TaskInfo {

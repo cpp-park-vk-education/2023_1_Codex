@@ -56,9 +56,9 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
 
     // add NumberSystem
 
-    // if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
-    //     // return std::make_unique<::Tasks::LogicalTask>(info.TaskData, info.TaskType);
-    // }
+    if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
+        // return std::make_unique<::Tasks::LogicalTask>(info.TaskData, info.TaskType);
+    }
     if (info.TaskType <= ::Tasks::TaskTypes::MatStatSeqQuantile) {
         return std::make_unique<::Tasks::MatStatSequenceTask>(info.TaskData, info.TaskType);
     } else {

@@ -3,10 +3,10 @@
 #include <QMainWindow>
 #include <memory>
 
-#include "Client.hpp"
-#include "ProblemTypeWindow.hpp"
-#include "UI_MainWindow.hpp"
-#include "UsageWindow.hpp"
+#include "client.hpp"
+#include "problemtypewindow.hpp"
+#include "ui_mainwindow.hpp"
+#include "usagewindow.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,6 +1,6 @@
-#include "MainWindow.hpp"
+#include "mainwindow.hpp"
 
-#include "UI_MainWindow.hpp"
+#include "ui_mainwindow.hpp"
 
 MainWindow::MainWindow(const Client::ClientSPtr& client, QWidget* parent)
     : m_client(client), QMainWindow(parent), ui(new Ui::MainWindow) {

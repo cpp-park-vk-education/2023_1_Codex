@@ -1,4 +1,4 @@
-#include "ProblemTypeWindow.hpp"
+#include "problemtypewindow.hpp"
 
 #include <QComboBox>
 #include <QMainWindow>
@@ -8,7 +8,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "ProblemType.hpp"
+#include "problemType.hpp"
 
 ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* parent)
     : m_client(client), QMainWindow(parent), ui(new Ui::ProblemTypeWindow) {

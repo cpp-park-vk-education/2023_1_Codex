@@ -10,7 +10,7 @@ TEST(ArithmeticTest, SimpleNumberCase) {
     ::Tasks::ArithmeticTask task("12", ::Tasks::TaskTypes::Arithmetic);
     std::string actual = task.Solve();
 
-    std::string expected = "12.00000";
+    std::string expected = "12";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -18,7 +18,7 @@ TEST(ArithmeticTest, BasicCase) {
     ::Tasks::ArithmeticTask task("12 + ( 2 - 5 * 10 ) / 2", ::Tasks::TaskTypes::Arithmetic);
     std::string actual = task.Solve();
 
-    std::string expected = "36.00000";
+    std::string expected = "36";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -26,38 +26,38 @@ TEST(ArithmeticTest, BasicDoubleCase) {
     ::Tasks::ArithmeticTask task("15 / 6 + 0.126", ::Tasks::TaskTypes::Arithmetic);
     std::string actual = task.Solve();
 
-    std::string expected = "2.626000";
+    std::string expected = "2.626";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
 TEST(ArithmeticTest, DivisionByZeroCase) {
     ::Tasks::ArithmeticTask task("23 / 0", ::Tasks::TaskTypes::Arithmetic);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::DivisionByZero);
 }
 
 TEST(ArithmeticTest, SqrtNotDefined) {
     ::Tasks::ArithmeticTask task("sqrt ( - 20 )", ::Tasks::TaskTypes::Arithmetic);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::SqrtNotDefined);
 }
 
 TEST(ArithmeticTest, LogarifmNotDefined) {
     ::Tasks::ArithmeticTask task("ln ( - 10 )", ::Tasks::TaskTypes::Arithmetic);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::LogarifmNotDefined);
 }
 
 TEST(ArithmeticTest, LogarifmNotDefined) {
     ::Tasks::ArithmeticTask task("2.5 !", ::Tasks::TaskTypes::Arithmetic);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::FactorialOfNotInteger);
 }
 
 TEST(ArithmeticTest, LogarifmNotDefined) {
     ::Tasks::ArithmeticTask task("100 !", ::Tasks::TaskTypes::Arithmetic);
 
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+    EXPECT_THROW(task.Solve(), ::Tasks::TooBigFactorial);
 }
 
 // ---------InvalidData------------------------------------------------------
