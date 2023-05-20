@@ -1,4 +1,4 @@
-#include "client.hpp"
+#include "Client.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/asio/strand.hpp>
@@ -10,8 +10,8 @@
 #include <string>
 #include <thread>
 
-#include "exceptions.hpp"
-#include "taskInfo.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 namespace Client {
 

@@ -129,7 +129,12 @@ double MatStatSequenceTask::Quantile() {
         return Numbers[0] - 0.5;
     }
     // Check case of Numbers[needIndex] is last elem
-    double delta = Numbers.size() == needIndex + 1 ? 1 : Numbers[needIndex + 1] - Numbers[needIndex];
+    double delta = 0.0;
+    if (Numbers.size() == needIndex) {
+        delta = 1;
+    } else {
+        delta = Numbers[needIndex + 1] - Numbers[needIndex];
+    }
 
     return Numbers[needIndex] + delta / 2;
 }
