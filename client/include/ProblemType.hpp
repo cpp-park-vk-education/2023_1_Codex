@@ -1,46 +1,23 @@
 #pragma once
-
-#include <QMap>
+#include <QHash>
 #include <QString>
 #include <QVector>
 
 #include "TaskInfo.hpp"
 
-QVector<Client::TaskTypes> taskTypes = {Client::NotFound,
-                                        Client::IntegNewton,
-                                        Client::IntegSimpson,
-                                        Client::IntegTrapez,
-                                        Client::CombComb,
-                                        Client::CombRe,
-                                        Client::CombPlace,
-                                        Client::CombPart,
-                                        Client::EqLin,
-                                        Client::EqSq,
-                                        Client::EqPoly,
-                                        Client::EqSGauss,
-                                        Client::EqSGaussM,
-                                        Client::EqSLU,
-                                        Client::Arithmetic,
-                                        Client::DiffSymb,
-                                        Client::DiffNum,
-                                        Client::MatrixDet,
-                                        Client::MatrixT,
-                                        Client::MatrixEigen,
-                                        Client::MatrixRank,
-                                        Client::MatrixNorm,
-                                        Client::MatStatSeqInitMoment,
-                                        Client::MatStatSeqCentralMoment,
-                                        Client::MatStatSeqAsymmetry,
-                                        Client::MatStatSeqExcess,
-                                        Client::MatStatSeqQuantile};
+QHash<QString, QVector<QString>> TaskTypesMap = {
+    {"Integrals", QVector<QString>() << "Mean method" << "Simpson method" << "Trapeze method"},
+    {"Combinatorics", QVector<QString>() << "Combinations" << "Rearrangements" << "Placements" << "Partition"},
+    {"Equations", QVector<QString>() << "Linear" << "Squared" << "Polynomial"},
+    {"Linear Algebraic Equation System", QVector<QString>() << "Gauss" << "Gauss with choosing Main element" << "SLU"},
+    {"Arithmetic", QVector<QString>() << "Arithmetic"},
+    {"Differentiation", QVector<QString>() << "Symbolic" << "Numerical"},
+    {"Matrix", QVector<QString>() << "Determinant" << "Transpare" << "Eigen values" << "Rank" << "Norm"},
+    {"Logical", QVector<QString>() << "PDNF" << "PCNF"},
+    {"MatStat", QVector<QString>() << "InitMoment" << "CentralMoment" << "Asymmetry" << "Excess" << "Quantile"}
 
-QMap<QString, QVector<QString>> TaskTypesMap = {
-    {"Integrals", {"Mean method", "Simpson method", "Trapeze method"}},
-    {"Combinatorics", {"Combinations", "Rearrangements", "Placements", "Partition"}},
-    {"Equations", {"Linear", "Squared", "Polynomial"}},
-    {"Linear Algebraic Equation System", {"Gauss", "Gauss with choosing Main element", "SLU"}},
-    {"Arithmetic", {"Arithmetic"}},
-    {"Differentiation", {"Symbolic", "Numerical"}},
-    //{"Logical",{"PDNF", "PCNF"}},
-    {"Matrix", {"Determinant", "Transpare", "Eigen values", "Rank", "Norm"}},
-    {"MatStat", {"InitMoment", "CentralMoment", "Asymmetry", "Excess", "Quantile"}}};
+};
+
+QVector<QString> TaskTypesGlobalNames = {
+    "Integrals", "Combinatorics", "Equations", "Linear Algebraic Equation System", "Arithmetic", "Differentiation", "Matrix", "Logical", "MatStat"
+};
