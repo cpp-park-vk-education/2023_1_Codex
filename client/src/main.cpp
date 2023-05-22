@@ -2,7 +2,6 @@
 #include <iostream>
 #include <memory>
 
-
 #include "Client.hpp"
 #include "MainWindow.hpp"
 
@@ -16,7 +15,7 @@ int main(int argc, char* argv[]) {
       auto const host = argv[1];
       auto const port = argv[2];
   */
-    Client::ClientSPtr client = std::make_shared<Client::Client>("127.0.0.1", "7273");
+    Client::ClientSPtr client = std::make_shared<Client::Client>("127.0.0.2", "7273");
 
     // Client::ClientSPtr client = std::make_shared<Client::Client>(host, port);
 

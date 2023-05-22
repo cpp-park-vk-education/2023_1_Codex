@@ -7,6 +7,7 @@
 
 #include "Exceptions.hpp"
 #include "Session.hpp"
+#include "SessionManager.hpp"
 
 namespace Server {
 
@@ -48,7 +49,7 @@ void Listener::DoAccept() {
     Acceptor.async_accept(net::make_strand(Ioc), [this, self](beast::error_code ec, tcp::socket socket) {
         // If error in accept, we accept other connection and skip this failure
         if (!ec) {
-            std::make_shared<Session>(std::move(socket), DocRoot)->Run();
+            Manager.Run(std::make_shared<Session>(std::move(socket), Manager, DocRoot));
         }
         DoAccept();
     });

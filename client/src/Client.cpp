@@ -5,6 +5,7 @@
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <chrono>
+#include <iostream>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -32,6 +33,9 @@ Client::Client(char const *host, char const *port)
 
 TaskInfo Client::Run(const std::string &expression, TaskTypes taskType) {
     DoConnect();
+
+    std::cout << "Expression: " << expression << std::endl;
+    std::cout << "Type: " << taskType << std::endl;
 
     // mb change if-condition
     if (*expression.begin() == '\\') {
@@ -98,6 +102,9 @@ void Client::DoSendText(const std::string &expression, TaskTypes taskType) {
 
     beast::error_code ec;
     http::write(Stream, sr, ec);
+
+    std::cout << sr.get() << std::endl;
+
     if (ec) {
         unsigned errCount = 1;
         while (ec && errCount < 3) {
@@ -154,6 +161,10 @@ void Client::DoSendImage(const std::string &path, TaskTypes taskType) {
 
 void Client::DoRead() {
     beast::error_code ec;
+
+    Buffer = {};
+    Response = {};
+
     http::read(Stream, Buffer, Response, ec);
     if (ec) {
         unsigned errCount = 1;
@@ -196,6 +207,8 @@ TaskInfo Client::HandleResponse() {
         }
     }
 
+    std::cout << "Answer: " << info.TaskAnswer << std::endl;
+    std::cout << "Error: " << info.TaskError << std::endl;
     return info;
 }
 
