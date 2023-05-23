@@ -40,7 +40,7 @@ set(PROJECT_SOURCES
 
         include/UI_MainWindow.hpp
         include/UI_SolutionWindow.hpp
-        include/UI_ProblemTypeWindow.hpp
+        include/UI_PproblemTypeWindow.hpp
         include/UI_UsageWindow.hpp
 
         include/ProblemType.hpp

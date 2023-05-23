@@ -3,6 +3,7 @@
 #include <boost/asio.hpp>
 #include <boost/beast/http.hpp>
 #include <fstream>
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -83,6 +84,12 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
         for (auto seq : request.body().data()) {
             taskData += std::string(boost::asio::buffer_cast<const char *>(seq));
         }
+        // Clear from garbage
+        unsigned contentLength = std::stoi(request.at(http::field::content_length));
+        if (taskData.size() > contentLength) {
+            taskData = taskData.erase(contentLength, taskData.size() - contentLength);
+        }
+
     } else if (request.at(http::field::content_type) == "image/jpg") {
         // create flexible path
         std::string path = "2.jpg";
@@ -105,7 +112,11 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     // Create TaskInfo struct and fill it
     ::Tasks::TaskInfo info;
     try {
-        taskType = static_cast<::Tasks::TaskTypes>(std::stoi(request.target()));
+        std::string type = request.target().data();
+        // If use "/" in begin
+        // type = type.erase(0,1);
+        // std::cout << type << std::endl;
+        taskType = static_cast<::Tasks::TaskTypes>(std::stoi(type));
     } catch (...) {
         throw ::Handlers::HandlerInvalidRequest("taskType");
     }

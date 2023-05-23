@@ -25,6 +25,7 @@ add_executable(server /
         src/RequestHandler.cpp /
 
         src/Session.cpp /
+        src/SessionManager.cpp /
         src/Listener.cpp /
         src/Server.cpp /
         src/main.cpp /
@@ -45,6 +46,7 @@ add_library(serverLib /
         src/RequestHandler.cpp /
 
         src/Session.cpp /
+        src/SessionManager.cpp /
         src/Listener.cpp /
         src/Server.cpp /
         )

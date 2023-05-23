@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Session.hpp"
+#include "SessionManager.hpp"
 
 namespace Server {
 
@@ -22,6 +23,7 @@ class Listener : public std::enable_shared_from_this<Listener> {
 
     net::io_context &Ioc;
     tcp::acceptor Acceptor;
+    SessionManager Manager;
     std::shared_ptr<std::string const> DocRoot;
 };
 

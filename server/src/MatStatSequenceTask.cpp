@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -45,6 +46,8 @@ std::string MatStatSequenceTask::Solve() {
 
 void MatStatSequenceTask::ParseData() {
     std::istringstream data(Expression);
+    // first flag - we expect Degree
+    // second flag - last was degree, we expect eof
     bool wasDegreeSym = false;
     bool wasDegree = false;
 
@@ -57,17 +60,21 @@ void MatStatSequenceTask::ParseData() {
             wasDegreeSym = true;
             continue;
         }
-        if (var.find_first_not_of("0123456789.") != std::string::npos) {
+        if (var.find_first_not_of("0123456789.-") != std::string::npos) {
             throw TaskInvalidData("There are non-numeric symbols in expression");
         }
 
-        double num = std::stod(var);
+        double num = 0.0;
+        try {
+            num = std::stod(var);
+        } catch (...) {
+            std::cout << var << std::endl;
+            throw TaskInvalidData("There are non-numeric symbols in expression");
+        }
         // Save read number in vector or as Degree
         if (wasDegreeSym) {
             Degree = num;
-            // if (!data.eof()) {
             if (wasDegree) {
-                // Error if Degree isn't only one number
                 throw TaskInvalidData("Degree must be only one number");
             }
             wasDegree = true;
@@ -107,8 +114,6 @@ double MatStatSequenceTask::Asymmetry() {
     double variety = CentralMoment(2);
     double thirdCM = CentralMoment(3);
 
-    return thirdCM;
-
     return thirdCM / std::pow(variety, 1.5);
 }
 
@@ -130,7 +135,7 @@ double MatStatSequenceTask::Quantile() {
     }
     // Check case of Numbers[needIndex] is last elem
     double delta = 0.0;
-    if (Numbers.size() == needIndex) {
+    if (Numbers.size() == static_cast<unsigned>(needIndex)) {
         delta = 1;
     } else {
         delta = Numbers[needIndex + 1] - Numbers[needIndex];

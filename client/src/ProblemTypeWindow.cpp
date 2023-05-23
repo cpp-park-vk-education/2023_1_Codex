@@ -32,18 +32,20 @@ ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* 
 
     QVector<Client::TaskTypes> taskTypes;
 
-    for (QString type : TaskTypesGlobalNames){//TaskTypesMap.keys()){
+    for (QString type : TaskTypesGlobalNames){  // TaskTypesMap.keys()){
         menuArray[counter] = new QMenu(type, nullptr);
         for (QString name : TaskTypesMap[type]){ // конкретные типы задач
             QAction* anotherAction = new QAction(name, nullptr);
             actions[counter] << anotherAction;
-            //taskTypes.push_back(static_cast<Client::TaskTypes>(taskTypes.size())); // добавляем очередной элемент TaskTypes
+            // taskTypes.push_back(static_cast<Client::TaskTypes>(taskTypes.size())); // добавляем очередной
+            // элемент TaskTypes
             taskTypes.push_back(static_cast<Client::TaskTypes>(taskTypes.size() + 1));
-            //connect(actions[counter].last(), &QAction::triggered, this, &ProblemTypeWindow::onTypeTriggered);
+            // connect(actions[counter].last(), &QAction::triggered, this,
+            // &ProblemTypeWindow::onTypeTriggered);
             connect(actions[counter].last(), &QAction::triggered, this, [=](){
-                onTypeTriggered(name, static_cast<Client::TaskTypes>(taskTypes.size()));//taskTypes[counter]);
+                onTypeTriggered(name,
+                static_cast<Client::TaskTypes>(taskTypes.size()));  // taskTypes[counter]);
                 });
-
 
             menuArray[counter]->addAction(actions[counter].last());
         }
@@ -59,7 +61,8 @@ ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* 
     centralWidget()->setLayout(typesChoosingLayout);
 
     backButton = new QPushButton("Back", this);
-    backButton->setStyleSheet("color: white;\nborder: 2px solid white;\nfont: 900 10pt \"Arial Black\";\nborder-radius:9px;\n");
+    backButton->setStyleSheet(
+        "color: white;\nborder: 2px solid white;\nfont: 900 10pt \"Arial Black\";\nborder-radius:9px;\n");
     connect(backButton, &QPushButton::clicked, this, &ProblemTypeWindow::onBackButtonClicked);
 }
 

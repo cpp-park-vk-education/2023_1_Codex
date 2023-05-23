@@ -5,7 +5,7 @@
 #include <QWidget>
 
 #include "SolutionWindow.hpp"
-#include "UI_ProblemTypeWindow.hpp"
+#include "UI_PproblemTypeWindow.hpp"
 //#include "problemType.hpp"
 
 #include "Client.hpp"
