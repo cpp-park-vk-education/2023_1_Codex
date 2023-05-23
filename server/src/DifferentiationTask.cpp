@@ -44,6 +44,9 @@ std::string DifferentiationTask::Solve() {
                 "Sorry, we are not able to solve this problem yet. Task type will be available soon...");
             // return DoubleToString(Symbolic());
         }
+        default: {
+                throw TaskInvalidData("No such task type");
+            }
     }
 }
 
@@ -55,6 +58,11 @@ double DifferentiationTask::Numerical() {
     }
     std::string function = Expression.substr(0, end_pos);
     std::string point = Expression.substr(end_pos + 1, Expression.size() - end_pos - 1);
+    
+    std::regex digit("^[ ]*[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)[ ]*$");
+    if (point.empty() || !(std::regex_match(point, digit))) { 
+        throw TaskInvalidData("No point provided");
+    }
 
     double x_1 = std::stod(point);
     double x_0 = x_1 - step;

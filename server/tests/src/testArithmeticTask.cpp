@@ -18,7 +18,7 @@ TEST(ArithmeticTest, BasicCase) {
     ::Tasks::ArithmeticTask task("12 + ( 2 - 5 * 10 ) / 2", ::Tasks::TaskTypes::Arithmetic);
     std::string actual = task.Solve();
 
-    std::string expected = "36.00000";
+    std::string expected = "-12.00000";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -26,7 +26,7 @@ TEST(ArithmeticTest, BasicDoubleCase) {
     ::Tasks::ArithmeticTask task("15 / 6 + 0.126", ::Tasks::TaskTypes::Arithmetic);
     std::string actual = task.Solve();
 
-    std::string expected = "2.626000";
+    std::string expected = "2.62600";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -42,23 +42,31 @@ TEST(ArithmeticTest, SqrtNotDefined) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
+TEST(ArithmeticTest, DegreeNotDefined) {
+    ::Tasks::ArithmeticTask task(" ( - 20 ) ^ ( 3 / 4 ) ", ::Tasks::TaskTypes::Arithmetic);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+//Логарифмы и факториалы еще не добавлены
+/*
 TEST(ArithmeticTest, LogarifmNotDefined) {
     ::Tasks::ArithmeticTask task("ln ( - 10 )", ::Tasks::TaskTypes::Arithmetic);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(ArithmeticTest, LogarifmNotDefined) {
+TEST(ArithmeticTest, FactorialNotDefined) {
     ::Tasks::ArithmeticTask task("2.5 !", ::Tasks::TaskTypes::Arithmetic);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(ArithmeticTest, LogarifmNotDefined) {
+TEST(ArithmeticTest, FactorialIsTooBig) {
     ::Tasks::ArithmeticTask task("100 !", ::Tasks::TaskTypes::Arithmetic);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
-}
+}*/
 
 // ---------InvalidData------------------------------------------------------
 

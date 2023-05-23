@@ -12,7 +12,7 @@
 #include "TaskInfo.hpp"
 
 static bool is_number(const std::string &str) {
-    std::regex digit("^([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+    std::regex digit("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
     return !str.empty() && (std::regex_match(str, digit) || str == "pi");
 }
 
@@ -21,7 +21,7 @@ static bool is_operator(const std::string &str) {
 }
 
 static bool is_binary(const std::string &op) {
-    return (op == "+" || op == "-" || op == "/" || op == "^");
+    return (op == "+" || op == "-" || op == "/" || op == "^" || op == "*");
 }
 
 static unsigned priority(const std::string &op) {
