@@ -10,7 +10,11 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QFileDialog>
+#include <QPixmap>
+#include <QImage>
 #include <iostream>
+
 
 #include "Client.hpp"
 #include "ProblemTypeWindow.hpp"
@@ -22,8 +26,13 @@ SolutionWindow::SolutionWindow(const Client::ClientSPtr& client, QString value, 
     // SolutionWindow::SolutionWindow(QString value, QWidget* parent) : typeName(value), QMainWindow(parent),
     // ui(new Ui::SolutionWindow){
     ui->setupUi(this);
-    //getAnswer("");
-    //connect(solutionWindow, &ProblemTypeWindow::typeNameSelected, this, &SolutionWindow::onTypeNameSelected);
+
+    // Создание кнопки загрузки фото
+    uploadImageButton = std::make_shared<QPushButton>("Upload image", this);
+    uploadImageButton->setGeometry(10, 80, 91, 91);
+    uploadImageButton->setStyleSheet(
+        "background-color: rgb(70, 224, 130);color: white;\nborder: 2px solid white;\nfont: 900 10pt \"Arial Black\";\nborder-radius:9px;\n");
+    connect(uploadImageButton.get(), &QPushButton::clicked, [=](){ getImagePath(); });
 
     // Создание кнопки "Back"
     backButton = std::make_shared<QPushButton>("Back", this);
@@ -42,12 +51,15 @@ SolutionWindow::SolutionWindow(const Client::ClientSPtr& client, QString value, 
 
     // Создание текстовых полей
     textExpression = std::make_shared<QLabel>(this);
-    textExpression->setGeometry(110, 10, 651, 41);//(10, 60, this->width() - 20, (this->height() - 150) / 2);
+    textExpression->setGeometry(110, 10, 651,
+        41);  //(10, 60, this->width() - 20, (this->height() - 150) / 2);
     textExpression->setStyleSheet("color: white; font-size: 14px; font: \"Arial Black\"");
     textExpression->setText("");
 
     textSolution = std::make_shared<QLabel>(this);
-    textSolution->setGeometry(120, 60, 651, 41);//(10, 70 + (this->height() - 150) / 2, this->width() - 20, (this->height() - 150) / 2);
+    textSolution->setGeometry(
+        120, 60, 651,
+        41);  //(10, 70 + (this->height() - 150) / 2, this->width() - 20, (this->height() - 150) / 2);
     textSolution->setStyleSheet("color: white; font-size: 14px; font: \"Arial Black\"");
     textSolution->setText("");
 
@@ -62,8 +74,6 @@ SolutionWindow::SolutionWindow(const Client::ClientSPtr& client, QString value, 
     okButton->setStyleSheet(
         "background-color: rgb(70, 224, 130);\ncolor: rgb(255, 255, 255);\nfont: 900 12pt \"Arial "
         "Black\";\nborder-radius:9px;\n");
-    // std::cout << title.toStdString() << std::endl;
-    // std::cout << typeName.toStdString() << std::endl;
     connect(okButton.get(), &QPushButton::clicked, [=](){ getAnswer(inputField->text()); });
 }
 
@@ -80,13 +90,17 @@ void SolutionWindow::setClient(const Client::ClientSPtr& client){
     m_client = client;
 }
 
+void SolutionWindow::getImagePath(){
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Choose"), "", tr("Images (*.png *.jpg)"), nullptr, QFileDialog::Options(QFileDialog::DontUseNativeDialog | QFileDialog::ReadOnly));
+    imgPath = fileName;
+    cout << imgPath.toStdString() << endl;
+    getAnswer(imgPath);
+}
+
 void SolutionWindow::getAnswer(QString expression){
     QString text = expression;
-    // cout<<m_client.Run(text.toStdString(), taskType).TaskData<<endl;
     solutionResult = m_client.get()->Run(expression.toStdString(), taskType);
-    // solutionResult = this->Run(expression.toStdString(), taskType);
     setExpressionSolution();
-    // taskType = solutionResult.TaskType;
 }
 
 void SolutionWindow::setExpressionSolution(){

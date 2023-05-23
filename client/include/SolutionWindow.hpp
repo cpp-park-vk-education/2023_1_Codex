@@ -14,14 +14,14 @@
 #include "Client.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class SolutionWindow;
+namespace Ui{
+    class SolutionWindow;
 }
 QT_END_NAMESPACE
 
-class SolutionWindow : public QMainWindow {
+class SolutionWindow : public QMainWindow{
     Q_OBJECT
-   public:
+public:
     SolutionWindow(const Client::ClientSPtr& client, QString value = "", QWidget* parent = NULL);
     // SolutionWindow(QString value = "", QWidget* parent = nullptr);
     ~SolutionWindow();
@@ -30,27 +30,32 @@ class SolutionWindow : public QMainWindow {
     Client::TaskInfo Run(const std::string& expression, Client::TaskTypes taskType);
     void setExpressionSolution();
 
-   private:
+private:
     QString typeName;
     Client::TaskTypes taskType;
     Ui::SolutionWindow* ui;
     Client::ClientSPtr m_client;
     Client::TaskInfo solutionResult;
+    QString imgPath;
 
     std::shared_ptr<QPushButton> backButton;
+    std::shared_ptr<QLabel> imageLabel;
     std::shared_ptr<QLabel> titleLabel;
     std::shared_ptr<QLabel> textExpression;
     std::shared_ptr<QLabel> textSolution;
     std::shared_ptr<QLineEdit> inputField;
     std::shared_ptr<QPushButton> okButton;
+    std::shared_ptr<QPushButton> uploadImageButton;
 
-   signals:
+signals:
     void openProblemTypeWindow();
-   private slots:
+
+private slots:
     void onBackButtonClicked();
     void onTypeNameSelected(QString typeName);
     void getAnswer(QString expression);
+    void getImagePath();
 
-   public slots:
+public slots:
     void setClient(const Client::ClientSPtr& client);
 };
