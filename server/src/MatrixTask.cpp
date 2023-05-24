@@ -88,6 +88,9 @@ std::string MatrixTask::Solve() {
         case TaskTypes::MatrixEigen: {
             EigenValuesAndVectors();
             std::string result;
+            if (rows != cols){
+                throw TaskInvalidData("Wrong matrix shape");
+            }
             for (int i = 0; i < eigenvalues.size(); i++) {
                 result.append(DoubleToString(eigenvalues[i]) + " : [");
                 for (int j = 0; j < eigenvectors[i].size(); j++) {

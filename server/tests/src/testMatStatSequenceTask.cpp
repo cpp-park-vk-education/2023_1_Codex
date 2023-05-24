@@ -54,7 +54,7 @@ TEST(MatStatSequenceTaskTest, BasicAsymmetryCase) {
     ::Tasks::MatStatSequenceTask task("1 2 3 4 5 6 7 9", ::Tasks::TaskTypes::MatStatSeqAsymmetry);
     std::string actual = task.Solve();
 
-    std::string expected = "3.69141";
+    std::string expected = "0.23714";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 

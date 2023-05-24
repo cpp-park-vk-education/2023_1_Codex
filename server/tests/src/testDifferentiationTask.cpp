@@ -57,7 +57,7 @@ TEST(DifferentiationTest, InvalidDataCase13) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(DifferentiationTest, InvalidDataCase13) {
+TEST(DifferentiationTest, InvalidDataCase14) {
     ::Tasks::DifferentiationTask task("1 + 23 * v ; 85 ", ::Tasks::TaskTypes::DiffNum);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);

@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -52,7 +53,7 @@ std::string DifferentiationTask::Solve() {
 
 double DifferentiationTask::Numerical() {
     double step = 0.01;
-    size_t end_pos = Expression.find(':');
+    size_t end_pos = Expression.find(';');
     if (end_pos == std::string::npos) {
         throw TaskInvalidData("Wrong format");
     }

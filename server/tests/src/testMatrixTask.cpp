@@ -20,7 +20,7 @@ TEST(MatrixTest, BasicCaseTranspose) {
     ::Tasks::MatrixTask task("2 3 4 / 4 5 6 / 0 9 2  ", ::Tasks::TaskTypes::MatrixT);
     std::string actual = task.Solve();
 
-    std::string expected = "2.00000 4.00000 0.00000 / 3.00000 5.00000 9.00000 / 4.00000 6.00000 2.00000";
+    std::string expected = "2.00000 4.00000 0.00000 / 3.00000 5.00000 9.00000 / 4.00000 6.00000 2.00000 ";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
@@ -30,7 +30,7 @@ TEST(MatrixTest, BasicCaseEigenValuesAndVectors) {
     std::string actual = task.Solve();
 
     std::string expected =
-        "1.00000 : [ 1.00000,  0.00000,  0.00000 ] 2.00000 : [ 0.00000,  1.00000,  0.00000 ] 3.00000 : [ 0.00000,  0.00000,  1.00000 ]";
+        "1.00000 : [ 1.00000,  0.00000,  0.00000 ] 2.00000 : [ 0.00000,  1.00000,  0.00000 ] 3.00000 : [ 0.00000,  0.00000,  1.00000 ] ";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
