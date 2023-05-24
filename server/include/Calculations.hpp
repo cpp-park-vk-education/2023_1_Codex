@@ -88,7 +88,11 @@ class Degree : public ICalculatable {
         : left(std::move(left_)), right(std::move(right_)) {}
     double Calculate() const override {
         try {
-            return pow(left->Calculate(), right->Calculate());
+            double result = pow(left->Calculate(), right->Calculate());
+            if (std::isnan(result)) {
+                throw Tasks::TaskInvalidData("Even root of negative number is not defined ");
+            }
+            return result;
         } catch (const std::exception& ex) {
             throw Tasks::TaskInvalidData("Even root of negative number is not defined ");
         }

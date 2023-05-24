@@ -5,9 +5,15 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <regex>
 
 #include "Exceptions.hpp"
 #include "TaskInfo.hpp"
+
+static bool is_number(const std::string& str) {
+    std::regex digit("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+    return !str.empty() && (std::regex_match(str, digit) || str == "pi");
+}
 
 // Функция для умножения матрицы на вектор
 std::vector<double> matrixVectorMultiply(const std::vector<std::vector<double>>& matrix,
@@ -64,7 +70,9 @@ std::string MatrixTask::Solve() {
                 for (size_t i = 0; i < rows; ++i) {
                     result.append(DoubleToString(data[i][j]) + ' ');
                 }
-                result.append("/ ");
+                if (j != cols - 1) {
+                    result.append("/ ");
+                }
             }
             return result;
         }
@@ -80,6 +88,9 @@ std::string MatrixTask::Solve() {
         case TaskTypes::MatrixEigen: {
             EigenValuesAndVectors();
             std::string result;
+            if (rows != cols){
+                throw TaskInvalidData("Wrong matrix shape");
+            }
             for (int i = 0; i < eigenvalues.size(); i++) {
                 result.append(DoubleToString(eigenvalues[i]) + " : [");
                 for (int j = 0; j < eigenvectors[i].size(); j++) {
@@ -121,8 +132,12 @@ void MatrixTask::ParseData() {
             line.clear();
 
             i++;
-        } else {
-            line.push_back(std::stod(lexem));
+        } 
+        else if (is_number(lexem)){      
+            line.push_back(std::stod(lexem));   
+        }
+        else {
+            throw TaskInvalidData("Invalid lexem");
         }
     }
 
