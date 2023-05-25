@@ -2,8 +2,9 @@
 
 #include <string>
 
+#include "CombinatoricsTask.hpp"
 #include "Exceptions.hpp"
-#include "IntegrationsTask.hpp"
+#include "IntegrationTask.hpp"
 #include "TaskInfo.hpp"
 
 //--------------------------- Сочетания -------------------------------------------
@@ -18,7 +19,7 @@ TEST(CombinatoricsTest, BasicCombCase) {
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
-TEST(CombinatoricsTest, InvalidKValueCombCase) {
+TEST(CombinatoricsTest, InvalidValueCombCaseKLargerN) {
     ::Tasks::CombinatoricsTask task("8 2", ::Tasks::TaskTypes::CombComb);  // k не может быть больше n
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
@@ -38,27 +39,32 @@ TEST(CombinatoricsTest, DecimalValuesCombCase) {
 
 TEST(CombinatoricsTest, LargeValuesCombCase) {
     ::Tasks::CombinatoricsTask task(
-        "400 600", ::Tasks::TaskTypes::CombComb);  // при n/n-k > 14 число комбинаций становится
-                                                   // трудновычислимым и требует больших затрат памяти и
-                                                   // вычислительных ресурсов
+        "400 600", ::Tasks::TaskTypes::CombComb);  // при слишком больших значениях вычисление комбинаций
+                                                   // становится ресурсозатратным и времязатратным
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataCombCase1) {
-    ::Tasks::CombinatoricsTask task("40sd 3", ::Tasks::TaskTypes::CombComb);
+TEST(CombinatoricsTest, InvalidDataCombCasePartNotNums) {
+    ::Tasks::CombinatoricsTask task("4sd 12", ::Tasks::TaskTypes::CombComb);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataCombCase2) {
+TEST(CombinatoricsTest, InvalidDataCombCaseNotNums) {
     ::Tasks::CombinatoricsTask task("4 а", ::Tasks::TaskTypes::CombComb);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataCombCase3) {
+TEST(CombinatoricsTest, InvalidDataCombCaseWrongAmount) {
     ::Tasks::CombinatoricsTask task("4 5 6", ::Tasks::TaskTypes::CombComb);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataCombCaseEmptyStr) {
+    ::Tasks::CombinatoricsTask task("", ::Tasks::TaskTypes::CombComb);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -90,21 +96,25 @@ TEST(CombinatoricsTest, DecimalValuesReCase) {
 TEST(CombinatoricsTest, LargeValuesReCase) {
     ::Tasks::CombinatoricsTask task(
         "50",
-        ::Tasks::TaskTypes::CombRe);  // большие значения n (>14) являются трудновычислимыми:
-                                      // 50! =
-                                      // 30414093201713378043612608166064768844377641568960512000000000000
+        ::Tasks::TaskTypes::CombRe);  // большие значения n являются трудновычислимыми
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataReCase1) {
-    ::Tasks::CombinatoricsTask task("40sd", ::Tasks::TaskTypes::CombRe);
+TEST(CombinatoricsTest, InvalidDataReCaseNotNums) {
+    ::Tasks::CombinatoricsTask task("4sd", ::Tasks::TaskTypes::CombRe);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataReCase2) {
+TEST(CombinatoricsTest, InvalidDataReCaseWrongAmount) {
     ::Tasks::CombinatoricsTask task("4 5", ::Tasks::TaskTypes::CombRe);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataReCaseEmptyStr) {
+    ::Tasks::CombinatoricsTask task("", ::Tasks::TaskTypes::CombRe);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -112,9 +122,9 @@ TEST(CombinatoricsTest, InvalidDataReCase2) {
 //--------------------------- Размещения -------------------------------------------
 
 TEST(CombinatoricsTest, BasicPlaceCase) {
-    ::Tasks::CombinatoricsTask task(
-        "2 4" ::Tasks::TaskTypes::CombPlace);  // A^k_n, в данном кейсе пытаемся посчитать число размещений из
-                                               // 4 по 2
+    ::Tasks::CombinatoricsTask task("2 4",
+                                    ::Tasks::TaskTypes::CombPlace);  // A^k_n, в данном кейсе пытаемся
+                                                                     // посчитать число размещений из 4 по 2
     std::string actual = task.Solve();
 
     std::string expected = "12";
@@ -133,41 +143,33 @@ TEST(CombinatoricsTest, NegativeValuesPlaceCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, DecimalValuesPlaceCase1) {
+TEST(CombinatoricsTest, DecimalValuesPlaceCase) {
     ::Tasks::CombinatoricsTask task("5.71 6", ::Tasks::TaskTypes::CombPlace);  // целые числа
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, DecimalValuesPlaceCase2) {
-    ::Tasks::CombinatoricsTask task("5 6.6", ::Tasks::TaskTypes::CombPlace);  // целые числа
-
-    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
-}
-
 TEST(CombinatoricsTest, LargeValuesPlaceCase) {
-    ::Tasks::CombinatoricsTask task(
-        "50 30",
-        ::Tasks::TaskTypes::CombPlace);  //при n/n-k > 14 число комбинаций становится трудновычислимым и
-                                         //требует больших затрат памяти и вычислительных ресурсов
+    ::Tasks::CombinatoricsTask task("70 60",
+                                    ::Tasks::TaskTypes::CombPlace);  // большие значения
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPlaceCase1) {
+TEST(CombinatoricsTest, InvalidDataPlaceCaseNotNums) {
     ::Tasks::CombinatoricsTask task("40sd 4", ::Tasks::TaskTypes::CombPlace);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPlaceCase2) {
-    ::Tasks::CombinatoricsTask task("4 4d", ::Tasks::TaskTypes::CombPlace);
+TEST(CombinatoricsTest, InvalidDataPlaceCaseWrongAmount) {
+    ::Tasks::CombinatoricsTask task("4 6 8", ::Tasks::TaskTypes::CombPlace);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPlaceCase3) {
-    ::Tasks::CombinatoricsTask task("4 6 8", ::Tasks::TaskTypes::CombPlace);
+TEST(CombinatoricsTest, InvalidDataPlaceCaseEmptyString) {
+    ::Tasks::CombinatoricsTask task("", ::Tasks::TaskTypes::CombPlace);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -203,14 +205,26 @@ TEST(CombinatoricsTest, LargeValuesPartCase) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPartCase1) {
+TEST(CombinatoricsTest, InvalidDataPartCasePartlyNotNums) {
     ::Tasks::CombinatoricsTask task("40sd", ::Tasks::TaskTypes::CombPart);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(CombinatoricsTest, InvalidDataPartCase2) {
+TEST(CombinatoricsTest, InvalidDataPartCaseNotNums) {
+    ::Tasks::CombinatoricsTask task("a", ::Tasks::TaskTypes::CombPart);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataPartCaseWrongAmount) {
     ::Tasks::CombinatoricsTask task("4 5", ::Tasks::TaskTypes::CombPart);
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(CombinatoricsTest, InvalidDataPartCaseEmptyString) {
+    ::Tasks::CombinatoricsTask task("", ::Tasks::TaskTypes::CombPart);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }

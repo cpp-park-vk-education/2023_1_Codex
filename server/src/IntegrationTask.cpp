@@ -6,7 +6,6 @@
 
 #include "ArithmeticTask.hpp"
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -112,10 +111,30 @@ void IntegrationTask::ParseData() {
 
     expr = part1;
 
-    std::istringstream bounds_ss(part2 + " " + part3);
+    if ((part2.find_first_not_of("0123456789.- ") != std::string::npos) || (part3.find_first_not_of("0123456789.- ") != std::string::npos)) {
+        throw TaskInvalidData("Invalid Data");
+    }
 
-    if (!(bounds_ss >> a) || !(bounds_ss >> b) || !(bounds_ss >> n)) {
-        throw TaskInvalidData("Error: Incorrect values for boundaries or number of nodes.");
+    std::istringstream part3s(part3);
+
+    int node_count;
+
+    if (!(part3s >> n)) {
+        throw TaskInvalidData("Expected a positive integer");
+    }
+
+    if (part3s >> node_count) {
+        throw TaskInvalidData("Expected only one positive integer");
+    }
+
+    std::istringstream part2s(part2);
+
+    if (!(part2s >> a) || !(part2s >> b)) {
+        throw TaskInvalidData("Expected a positive integer");
+    }
+
+    if (part2s >> node_count) {
+        throw TaskInvalidData("Expected only one positive integer");
     }
 
     // Проверка корректности границ интегрирования и количества узлов

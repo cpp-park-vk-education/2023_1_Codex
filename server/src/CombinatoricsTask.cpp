@@ -1,11 +1,11 @@
 #include "CombinatoricsTask.hpp"
 
+#include <cmath>
 #include <sstream>
 #include <string>
 #include <vector>
 
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -101,7 +101,7 @@ int CombinatoricsTask::Combinations() {
         throw TaskInvalidData("k and n must be k <= n");
     }
 
-    if (n / (n - k) > 14) {
+    if (n > 50 || k > 50) {
         throw TaskInvalidData("Values of n and k are too high");
     }
 
@@ -122,28 +122,32 @@ int CombinatoricsTask::Combinations() {
 
 void CombinatoricsTask::ParseData() {
     if (TaskType == TaskTypes::CombComb || TaskType == TaskTypes::CombPlace) {
+
+        if (Expression.find_first_not_of("0123456789 ") != std::string::npos) {
+            throw TaskInvalidData("Invalid Data");
+        }
+
         std::istringstream iss(Expression);
         int num;
 
         while (iss >> num) {
-            if (num <= 0) {
-                throw TaskInvalidData("Expected positive integers separated by a space");
-            }
             Numbers.push_back(num);
         }
 
         if (Numbers.size() != 2) {
             throw TaskInvalidData("Expected two positive integers separated by a space");
         }
+
     } else if (TaskType == TaskTypes::CombRe || TaskType == TaskTypes::CombPart) {
+
+        if (Expression.find_first_not_of("0123456789 ") != std::string::npos) {
+            throw TaskInvalidData("Invalid Data");
+        }
+
         std::istringstream iss(Expression);
         int num;
 
         if (!(iss >> num)) {
-            throw TaskInvalidData("Expected a positive integer");
-        }
-
-        if (num <= 0) {
             throw TaskInvalidData("Expected a positive integer");
         }
 
@@ -152,6 +156,7 @@ void CombinatoricsTask::ParseData() {
         if (iss >> num) {
             throw TaskInvalidData("Expected only one positive integer");
         }
+
     } else {
         throw TaskInvalidData("Invalid task type");
     }
