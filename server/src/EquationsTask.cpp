@@ -1,14 +1,11 @@
 #include "EquationsTask.hpp"
 
 #include <cmath>
-#include <iomanip>
-#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
 
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -22,19 +19,15 @@ std::string EquationsTask::Solve() {
 
     switch (TaskType) {
         case TaskTypes::EqLin: {
-            return DoubleToString(SimpleLinear());
+            return "x = " + DoubleToString(SimpleLinear());
         }
         case TaskTypes::EqSq: {
             std::vector<double> nums = Square();
 
             if (nums.size() == 2) {
-                std::stringstream ss;
-                ss << "x_1 = " << DoubleToString(nums[0]) << ", x_2 = " << DoubleToString(nums[1]);
-                return ss.str();
+                return "x_1 = " + DoubleToString(nums[0]) + ", x_2 = " + DoubleToString(nums[1]);
             } else {
-                std::stringstream ss;
-                ss << "x = " << DoubleToString(nums[0]);
-                return ss.str();
+                return "x = " + DoubleToString(nums[0]);
             }
         }
         case TaskTypes::EqPoly: {
@@ -57,7 +50,7 @@ double EquationsTask::SimpleLinear() {
             throw TaskInvalidData("The equation has no solutions");
         }
     } else {
-        return -b / a;
+        return - b / a;
     }
 }
 
@@ -65,6 +58,10 @@ std::vector<double> EquationsTask::Square() {
     double a = Numbers[0];
     double b = Numbers[1];
     double c = Numbers[2];
+
+    if (a == 0) {
+        throw TaskInvalidData("Divide by zero");
+    }
 
     double discriminant = b * b - 4 * a * c;
 

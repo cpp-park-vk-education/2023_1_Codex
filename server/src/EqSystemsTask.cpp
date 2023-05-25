@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Tasks {
 
@@ -38,8 +37,11 @@ std::string EqSystemTask::VectorToString(const std::vector<double>& nums) {
 }
 
 void EqSystemTask::ParseData() {
-    std::istringstream is(Expression);
+    if (Expression.find_first_not_of("0123456789./,- ") != std::string::npos) {
+        throw TaskInvalidData("Invalid Data");
+    }
 
+    std::istringstream is(Expression);
     std::string part1, part2;
 
     if (!std::getline(is, part1, ',') || !std::getline(is, part2)) {
@@ -49,20 +51,16 @@ void EqSystemTask::ParseData() {
     std::istringstream prt1(part1);
     std::string line;
 
-    // Parse each line separated by '/'
     while (std::getline(prt1, line, '/')) {
         std::vector<double> row;
         std::istringstream line_stream(line);
         std::string num_str;
 
-        // Parse each number in the line
         while (line_stream >> num_str) {
             try {
-                // Convert the number string to double
                 double num = std::stod(num_str);
                 row.push_back(num);
             } catch (const std::exception& e) {
-                // Handle parsing error (e.g., invalid number format)
                 throw TaskInvalidData("Error parsing number");
             }
         }
@@ -110,6 +108,12 @@ std::string EqSystemTask::Solve() {
 
 std::vector<double> EqSystemTask::LU() {
     size_t n = A.size();
+
+    for (size_t i = 0; i < n; ++i) {
+        if (A[i][i] == 0.0) {
+            throw TaskInvalidData("Singular matrix");
+        }
+    }
 
     std::vector<std::vector<double>> L(n, std::vector<double>(n, 0.0));
     std::vector<std::vector<double>> U(n, std::vector<double>(n, 0.0));
@@ -182,6 +186,9 @@ std::vector<double> EqSystemTask::GaussianMainEl() {
 
         // Нормализуем текущую строку j
         double pivot = augmentedMatrix[j][j];
+        if (pivot == 0) {
+            throw TaskInvalidData("Matrix A is singular");
+        }
         for (int k = j; k < n; ++k) {
             augmentedMatrix[j][k] /= pivot;
         }
