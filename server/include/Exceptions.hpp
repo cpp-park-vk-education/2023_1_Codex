@@ -77,6 +77,11 @@ class HandlerInvalidFile final : public HandlerException {
     explicit HandlerInvalidFile(const std::string &msg) : HandlerException("Don't open file for " + msg) {}
 };
 
+class HandlerUnsupportedTask final : public HandlerException {
+   public:
+    explicit HandlerUnsupportedTask() : HandlerException("This task isn't implemented") {}
+};
+
 }  // namespace Handlers
 
 namespace Tasks {

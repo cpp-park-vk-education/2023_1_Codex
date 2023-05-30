@@ -17,7 +17,9 @@
 #include "IntegrationTask.hpp"
 #include "MatStatSequenceTask.hpp"
 #include "MatrixTask.hpp"
+#include "PredictionConverter.hpp"
 #include "TaskInfo.hpp"
+#include "TextRecognizer.hpp"
 
 namespace Handlers {
 
@@ -30,9 +32,6 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     ::Tasks::TaskInfo info = DoTaskSearch(request);
 
     // Create ITaskUPtr using TaskInfo and return it
-    if (info.TaskType == ::Tasks::TaskTypes::NotFound) {
-        throw ::Handlers::HandlerInvalidRequest("taskType");
-    }
     if (info.TaskType <= ::Tasks::TaskTypes::IntegTrapez) {
         return std::make_unique<::Tasks::IntegrationTask>(info.TaskData, info.TaskType);
     }
@@ -54,12 +53,11 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     if (info.TaskType <= ::Tasks::TaskTypes::MatrixNorm) {
         return std::make_unique<::Tasks::MatrixTask>(info.TaskData, info.TaskType);
     }
-
     // add NumberSystem
 
-    // if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
-    //     // return std::make_unique<::Tasks::LogicalTask>(info.TaskData, info.TaskType);
-    // }
+    if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
+        throw ::Handlers::HandlerUnsupportedTask();
+    }
     if (info.TaskType <= ::Tasks::TaskTypes::MatStatSeqQuantile) {
         return std::make_unique<::Tasks::MatStatSequenceTask>(info.TaskData, info.TaskType);
     } else {
@@ -77,53 +75,66 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     }
 
     ::Tasks::TaskTypes taskType = ::Tasks::TaskTypes::NotFound;
-    std::string taskData;
+    try {
+        std::string type = request.target().data();
+        // If use "/" in begin
+        // type = type.erase(0,1);
+        taskType = static_cast<::Tasks::TaskTypes>(std::stoi(type));
+    } catch (...) {
+        throw ::Handlers::HandlerInvalidRequest("taskType");
+    }
+    if (taskType == ::Tasks::TaskTypes::NotFound) {
+        throw ::Handlers::HandlerInvalidRequest("taskType");
+    }
 
+    std::string taskData;
     // Using Content-Type define type of data and parse it
+
+    unsigned contentLength = std::stoi(request.at(http::field::content_length));
     if (request.at(http::field::content_type) == "text/plain") {
         for (auto seq : request.body().data()) {
             taskData += std::string(boost::asio::buffer_cast<const char *>(seq));
         }
         // Clear from garbage
-        unsigned contentLength = std::stoi(request.at(http::field::content_length));
         if (taskData.size() > contentLength) {
             taskData = taskData.erase(contentLength, taskData.size() - contentLength);
         }
 
-    } else if (request.at(http::field::content_type) == "image/jpg") {
+    } else if (request.at(http::field::content_type) == "image/png") {
+        // TO DO
         // create flexible path
-        std::string path = "2.jpg";
+        std::string path = "temp.png";
         std::ofstream outImage(path, std::ios::binary);
         if (!outImage.is_open()) {
-            throw HandlerInvalidFile("writing");
+            throw HandlerInvalidFile("writing into file on the server");
         }
 
+        unsigned nW = contentLength;
         for (auto seq : request.body().data()) {
             auto *cbuf = boost::asio::buffer_cast<const char *>(seq);
-            outImage.write(cbuf, boost::asio::buffer_size(seq));
+
+            // Clear from garbage
+            unsigned bufSize;
+            if (boost::asio::buffer_size(seq) > nW) {
+                bufSize = boost::asio::buffer_size(seq) - nW;
+            } else {
+                bufSize = boost::asio::buffer_size(seq);
+            }
+
+            outImage.write(cbuf, bufSize);
+            nW -= bufSize;
         }
 
-        // TextRecognizer recognizer(DocRoot);
-        // taskData = recognizer.RecognizeText(path);
+        // now we don't use angle classifier
+        TextRecognizer recognizer(false, DocRoot);
+        std::string recognizerPrediction = recognizer.RecognizeText(path);
+        taskData = PredictionConverter::ConvertRecognizerPrediction(recognizerPrediction, taskType);
+        // askData = recognizerPrediction;
     } else {
         throw ::Handlers::HandlerInvalidRequest("type of data");
     }
 
-    // Create TaskInfo struct and fill it
-    ::Tasks::TaskInfo info;
-    try {
-        std::string type = request.target().data();
-        // If use "/" in begin
-        // type = type.erase(0,1);
-        // std::cout << type << std::endl;
-        taskType = static_cast<::Tasks::TaskTypes>(std::stoi(type));
-    } catch (...) {
-        throw ::Handlers::HandlerInvalidRequest("taskType");
-    }
-
-    info.TaskData = taskData;
-    info.TaskType = taskType;
-    return info;
+    return {taskData, taskType};
 }
 
 }  // namespace Handlers
