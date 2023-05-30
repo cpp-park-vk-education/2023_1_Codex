@@ -138,7 +138,7 @@ void Client::DoSendImage(const std::string &path, TaskTypes taskType) {
     request.body() = std::move(body);
 
     request.set(http::field::content_length, std::to_string(request.body().size()));
-    request.set(http::field::content_type, "image/jpg");
+    request.set(http::field::content_type, "image/png");
 
     http::request_serializer<http::file_body, http::fields> sr{request};
 

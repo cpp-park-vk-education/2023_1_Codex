@@ -2,14 +2,15 @@
 
 #include <string>
 
-#include "Exceptions.hpp"
 #include "EquationsTask.hpp"
+#include "Exceptions.hpp"
 #include "TaskInfo.hpp"
 
 // ------------------------- Линейные уравнения -------------------------------
 
 TEST(EquationsTest, BasicLinearEquationsCase) {
-    ::Tasks::EquationsTask task("4 -3", ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x + b = 0
+    ::Tasks::EquationsTask task("4 -3",
+                                ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x + b = 0
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.75000";
@@ -115,7 +116,7 @@ TEST(EquationsTest, EmptyStringSqEquationsCase) {
 
 // Пока не реализованы - будут реализованы в ближайшее время
 
-//TEST(EquationsTest, BasicPolyEquationsCase) {
+// TEST(EquationsTest, BasicPolyEquationsCase) {
 //    ::Tasks::EquationsTask task("x ^ 4 - 3 * x ^ 3 - 13 * x ^ 2 + 27 * x + 90", ::Tasks::TaskTypes::EqPoly);
 //    std::string actual = task.Solve();
 //

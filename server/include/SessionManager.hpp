@@ -1,12 +1,11 @@
 #pragma once
 
-#include <set>
 #include <memory>
+#include <set>
 
 #include "Session.hpp"
 
 namespace Server {
-
 
 class SessionManager {
    public:

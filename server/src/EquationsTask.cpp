@@ -50,7 +50,7 @@ double EquationsTask::SimpleLinear() {
             throw TaskInvalidData("The equation has no solutions");
         }
     } else {
-        return - b / a;
+        return -b / a;
     }
 }
 

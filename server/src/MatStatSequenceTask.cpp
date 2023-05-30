@@ -22,6 +22,10 @@ MatStatSequenceTask::MatStatSequenceTask(std::string expression, TaskTypes taskT
 std::string MatStatSequenceTask::Solve() {
     ParseData();
 
+    if (Numbers.size() == 0) {
+        throw TaskInvalidData("Sequence mustn't be empty");
+    }
+
     switch (TaskType) {
         case TaskTypes::MatStatSeqInitMoment: {
             return DoubleToString(InitialMoment(Degree));
@@ -129,19 +133,17 @@ double MatStatSequenceTask::Quantile() {
         throw TaskInvalidData("Wrong quantile");
     }
 
-    int needIndex = static_cast<int>(Numbers.size() * Degree) - 1;
-    if (needIndex == -1) {
-        return Numbers[0] - 0.5;
-    }
-    // Check case of Numbers[needIndex] is last elem
-    double delta = 0.0;
-    if (Numbers.size() == static_cast<unsigned>(needIndex)) {
-        delta = 1;
-    } else {
-        delta = Numbers[needIndex + 1] - Numbers[needIndex];
+    std::sort(Numbers.begin(), Numbers.end());
+
+    double index = static_cast<int>(Numbers.size() - 1) * Degree;
+    int intIndex = static_cast<int>(index);
+    double fracIndex = index - intIndex;
+
+    if (intIndex == Numbers.size() - 1) {
+        return Numbers[intIndex];
     }
 
-    return Numbers[needIndex] + delta / 2;
+    return Numbers[intIndex] + (Numbers[intIndex + 1] - Numbers[intIndex]) * fracIndex;
 }
 
 }  // namespace Tasks

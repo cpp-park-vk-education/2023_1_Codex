@@ -2,17 +2,17 @@
 
 #include <string>
 
+#include "ArithmeticTask.hpp"
 #include "Exceptions.hpp"
 #include "IntegrationTask.hpp"
 #include "TaskInfo.hpp"
-#include "ArithmeticTask.hpp"
 
 // ------------------------- Ньютон-Котес -------------------------------
 
 TEST(IntegrationTest, BasicIntegralNewtonCase) {
     ::Tasks::IntegrationTask task("x ^ 2 , 0 1 , 1000",
-                                   ::Tasks::TaskTypes::IntegNewton);  // "Подынтегральное выражение , границы
-                                                                      // интегрирования , число узлов"
+                                  ::Tasks::TaskTypes::IntegNewton);  // "Подынтегральное выражение , границы
+                                                                     // интегрирования , число узлов"
     std::string actual = task.Solve();
 
     std::string expected = "0.33333";
@@ -21,21 +21,21 @@ TEST(IntegrationTest, BasicIntegralNewtonCase) {
 
 TEST(IntegrationTest, InvalidDataIntegralNewtonCaseFuncWithNums) {
     ::Tasks::IntegrationTask task("x 3 ^ 2 * f, 0 1 , 33",
-                                   ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
+                                  ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidDataIntegralNewtonCaseFuncWithoutSpace) {
     ::Tasks::IntegrationTask task("x^2 , 0 1",
-                                   ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
+                                  ::Tasks::TaskTypes::IntegNewton);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(IntegrationTest, InvalidNodesIntegralNewtonCaseNegativeNodes) {
     ::Tasks::IntegrationTask task("x ^ 2 , 0 1 , -3",
-                                   ::Tasks::TaskTypes::IntegNewton);  // Отрицательное количество узлов
+                                  ::Tasks::TaskTypes::IntegNewton);  // Отрицательное количество узлов
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -98,13 +98,13 @@ TEST(IntegrationTest, InvalidNodesIntegralNewtonCaseWrongLessNode) {
 
 // ------------------------- Симпсон -------------------------------
 
-// В других методах интегрирования используется тот же парсер данных, поэтому не имеет смысла повторно тестировать корректность введенных данных.
-// Гораздно важнее совпадение с правильным ответом
+// В других методах интегрирования используется тот же парсер данных, поэтому не имеет смысла повторно
+// тестировать корректность введенных данных. Гораздно важнее совпадение с правильным ответом
 
 TEST(IntegrationTest, BasicIntegralSimpsonCase) {
     ::Tasks::IntegrationTask task("x ^ 2 , 0 1 , 1000",
-                                   ::Tasks::TaskTypes::IntegSimpson);  // "Подынтегральное выражение , границы
-                                                                       // интегрирования , число узлов"
+                                  ::Tasks::TaskTypes::IntegSimpson);  // "Подынтегральное выражение , границы
+                                                                      // интегрирования , число узлов"
     std::string actual = task.Solve();
 
     std::string expected = "0.33333";
@@ -112,7 +112,7 @@ TEST(IntegrationTest, BasicIntegralSimpsonCase) {
 }
 
 TEST(IntegrationTest, NegativeNodesIntegralSimpsonCase) {
-    ::Tasks::IntegrationTask task("1 / 0 , 0 1 , 3", ::Tasks::TaskTypes::IntegSimpson); // деление на ноль
+    ::Tasks::IntegrationTask task("1 / 0 , 0 1 , 3", ::Tasks::TaskTypes::IntegSimpson);  // деление на ноль
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -121,8 +121,8 @@ TEST(IntegrationTest, NegativeNodesIntegralSimpsonCase) {
 
 TEST(IntegrationTest, BasicIntegralTrapezoidCase) {
     ::Tasks::IntegrationTask task("x ^ 2 , 0 1 , 1000",
-                                   ::Tasks::TaskTypes::IntegTrapez);  // "Подынтегральное выражение , границы
-                                                                      // интегрирования , число узлов"
+                                  ::Tasks::TaskTypes::IntegTrapez);  // "Подынтегральное выражение , границы
+                                                                     // интегрирования , число узлов"
     std::string actual = task.Solve();
 
     std::string expected = "0.33333";

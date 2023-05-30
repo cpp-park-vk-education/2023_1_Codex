@@ -2,10 +2,10 @@
 
 #include <cmath>
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <regex>
 
 #include "Exceptions.hpp"
 #include "TaskInfo.hpp"
@@ -88,7 +88,7 @@ std::string MatrixTask::Solve() {
         case TaskTypes::MatrixEigen: {
             EigenValuesAndVectors();
             std::string result;
-            if (rows != cols){
+            if (rows != cols) {
                 throw TaskInvalidData("Wrong matrix shape");
             }
             for (int i = 0; i < eigenvalues.size(); i++) {
@@ -132,11 +132,9 @@ void MatrixTask::ParseData() {
             line.clear();
 
             i++;
-        } 
-        else if (is_number(lexem)){      
-            line.push_back(std::stod(lexem));   
-        }
-        else {
+        } else if (is_number(lexem)) {
+            line.push_back(std::stod(lexem));
+        } else {
             throw TaskInvalidData("Invalid lexem");
         }
     }

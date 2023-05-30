@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "Exceptions.hpp"
 #include "EqSystemsTask.hpp"
+#include "Exceptions.hpp"
 #include "TaskInfo.hpp"
 
 // ------------------------- Метод Гаусса -------------------------------
@@ -38,7 +38,7 @@ TEST(EqSystemTest, InvalidDataGaussEqSystemsCaseWrongVector) {
 
 TEST(EqSystemTest, ZeroDetGaussEqSystemsCase) {
     ::Tasks::EqSystemTask task("0 0 0 / 0 0 0 / 0 0 0 , 12 9 3",
-                                ::Tasks::TaskTypes::EqSGauss);  // вырожденная матрица
+                               ::Tasks::TaskTypes::EqSGauss);  // вырожденная матрица
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -58,24 +58,21 @@ TEST(EqSystemTest, ZerosGaussEqSystemsCase) {
 }
 
 TEST(EqSystemTest, NotSquareMatrixGaussEqSystemsCase) {
-    ::Tasks::EqSystemTask task(
-        "4 2 1 6 / 3 3 3 8 / 1 1 2 9 , 12 9 3",
-        ::Tasks::TaskTypes::EqSGauss);
+    ::Tasks::EqSystemTask task("4 2 1 6 / 3 3 3 8 / 1 1 2 9 , 12 9 3", ::Tasks::TaskTypes::EqSGauss);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EqSystemTest, WrongVectorShapeGaussEqSystemsCase) {
-    ::Tasks::EqSystemTask task(
-        "4 2 1 / 3 3 3 / 1 1 2 , 12 9 3 7",
-        ::Tasks::TaskTypes::EqSGauss);
+    ::Tasks::EqSystemTask task("4 2 1 / 3 3 3 / 1 1 2 , 12 9 3 7", ::Tasks::TaskTypes::EqSGauss);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 // ------------------------- Метод Гаусса с выбором главного элемента -------------------------------
 
-// Для всех методов используется единый парсер, поэтому в других методах имеет смысл проверять только правильность решений
+// Для всех методов используется единый парсер, поэтому в других методах имеет смысл проверять только
+// правильность решений
 
 TEST(EqSystemTest, BasicGaussMEqSystemsCase) {
     ::Tasks::EqSystemTask task(

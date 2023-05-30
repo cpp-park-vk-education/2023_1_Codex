@@ -6,7 +6,6 @@
 #include "Exceptions.hpp"
 #include "TaskInfo.hpp"
 
-
 // Символьное дифференцирование еще не реализовано
 /*
 TEST(DifferentiationTest, BasicCaseSymbolic) {
@@ -16,7 +15,6 @@ TEST(DifferentiationTest, BasicCaseSymbolic) {
     std::string expected = "24 * x + cos ( x )";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }*/
-
 
 TEST(DifferentiationTest, BasicCaseNumerical) {
     ::Tasks::DifferentiationTask task(" 12 * x ^ 2 + sin ( x ) - 6  ; 2", ::Tasks::TaskTypes::DiffNum);

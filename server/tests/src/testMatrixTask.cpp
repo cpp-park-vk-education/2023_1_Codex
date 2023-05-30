@@ -30,7 +30,8 @@ TEST(MatrixTest, BasicCaseEigenValuesAndVectors) {
     std::string actual = task.Solve();
 
     std::string expected =
-        "1.00000 : [ 1.00000,  0.00000,  0.00000 ] 2.00000 : [ 0.00000,  1.00000,  0.00000 ] 3.00000 : [ 0.00000,  0.00000,  1.00000 ] ";
+        "1.00000 : [ 1.00000,  0.00000,  0.00000 ] 2.00000 : [ 0.00000,  1.00000,  0.00000 ] 3.00000 : [ "
+        "0.00000,  0.00000,  1.00000 ] ";
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 
