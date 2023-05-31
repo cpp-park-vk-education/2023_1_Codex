@@ -235,3 +235,62 @@ class SquareRoot : public ICalculatable {
    private:
     std::unique_ptr<ICalculatable> left;
 };
+
+class Logarithm : public ICalculatable {
+public:
+    Logarithm(std::unique_ptr<ICalculatable> left_, double base_) : left(std::move(left_)), base(base_) {}
+    double Calculate() const override {
+        double num = left->Calculate();
+        if (num <= 0 || base <= 0 || base == 1) {
+            throw Tasks::TaskInvalidData("Logarithm is not defined");
+        }
+        if (base == 10) {
+            return log10(num);
+        }
+        return log(num)/log(base);
+    }
+
+private:
+    std::unique_ptr<ICalculatable> left;
+    double base;
+};
+
+class LogarithmNatural : public ICalculatable {
+public:
+    LogarithmNatural(std::unique_ptr<ICalculatable> left_) : left(std::move(left_)) {}
+    double Calculate() const override {
+        double num = left->Calculate();
+        if (num <= 0) {
+            throw Tasks::TaskInvalidData("Logarithm is not defined");
+        }
+        return log(num);
+    }
+
+private:
+    std::unique_ptr<ICalculatable> left;
+};
+
+class Factorial : public ICalculatable {
+public:
+    Factorial(std::unique_ptr<ICalculatable> left_) : left(std::move(left_)) {}
+    double Calculate() const override {
+        double num = left->Calculate();
+        if (num > 12) {
+            throw Tasks::TaskInvalidData("Factorial is too big");
+        }
+        if (std::fmod(num, 1) != 0){
+            throw Tasks::TaskInvalidData("Factorial shoul be integer");
+        }
+        if (num == 0) {
+            return 1;
+        }
+        double res = 1;
+        for (int i = 1; i <= num; i++) {
+            res *= i;
+        }
+        return res;
+    }
+
+private:
+    std::unique_ptr<ICalculatable> left;
+};
