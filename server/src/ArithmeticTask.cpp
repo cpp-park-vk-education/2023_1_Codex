@@ -30,7 +30,7 @@ static bool is_binary(const std::string& op) {
 }
 
 static unsigned priority(const std::string& op) {
-    if (op == "^") return 4;
+    if (op == "^" || op == "!") return 4;
     if (op == "/" || op == "*") return 3;
     if (op == "sin" || op == "asin" || op == "cos" || op == "acos" || op == "tg" || op == "atg" ||
         op == "ctg" || op == "actg" || op == "exp" || op == "abs" || op == "sqrt" || is_logarithm(op))
@@ -128,6 +128,11 @@ namespace Tasks {
                 std::unique_ptr<ICalculatable> result = std::make_unique<Absolute>(std::move(left));
                 output.push(std::move(result));
             }
+            else if (op == "!") {
+                std::unique_ptr<ICalculatable> result = std::make_unique<Factorial>(std::move(left));
+                output.push(std::move(result));
+            }
+
             else if (op == "exp") {
                 std::unique_ptr<ICalculatable> result = std::make_unique<Exponenta>(std::move(left));
                 output.push(std::move(result));

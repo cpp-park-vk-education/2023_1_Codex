@@ -11,7 +11,7 @@
 #include "TaskInfo.hpp"
 
 const std::unordered_set<std::string> operators_set{"+",  "-",   "*",   "/",    "sin", "asin", "cos", "acos",
-                                                    "tg", "atg", "ctg", "actg", "exp", "abs",  "^",   "sqrt"};
+                                                    "tg", "atg", "ctg", "actg", "exp", "abs",  "^",   "sqrt", "!"};
 
 namespace Tasks {
 

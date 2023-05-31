@@ -269,3 +269,28 @@ public:
 private:
     std::unique_ptr<ICalculatable> left;
 };
+
+class Factorial : public ICalculatable {
+public:
+    Factorial(std::unique_ptr<ICalculatable> left_) : left(std::move(left_)) {}
+    double Calculate() const override {
+        double num = left->Calculate();
+        if (num > 12) {
+            throw Tasks::TaskInvalidData("Factorial is too big");
+        }
+        if (std::fmod(num, 1) != 0){
+            throw Tasks::TaskInvalidData("Factorial shoul be integer");
+        }
+        if (num == 0) {
+            return 1;
+        }
+        double res = 1;
+        for (int i = 1; i <= num; i++) {
+            res *= i;
+        }
+        return res;
+    }
+
+private:
+    std::unique_ptr<ICalculatable> left;
+};

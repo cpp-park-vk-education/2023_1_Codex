@@ -49,9 +49,9 @@ TEST(ArithmeticTest, DegreeNotDefined) {
 }
 
 //Логарифмы и факториалы еще не добавлены
-/*
+
 TEST(ArithmeticTest, LogarifmNotDefined) {
-    ::Tasks::ArithmeticTask task("ln ( - 10 )", ::Tasks::TaskTypes::Arithmetic);
+    ::Tasks::ArithmeticTask task("ln ( -10 )", ::Tasks::TaskTypes::Arithmetic);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
@@ -66,7 +66,7 @@ TEST(ArithmeticTest, FactorialIsTooBig) {
     ::Tasks::ArithmeticTask task("100 !", ::Tasks::TaskTypes::Arithmetic);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
-}*/
+}
 
 // ---------InvalidData------------------------------------------------------
 
