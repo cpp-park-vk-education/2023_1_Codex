@@ -23,25 +23,25 @@ class ServerException : public std::exception {
 
 class InvalidAcceptorOpen final : public ServerException {
    public:
-    explicit InvalidAcceptorOpen(beast::error_code &ec)
+    explicit InvalidAcceptorOpen(const beast::error_code &ec)
         : ServerException("Don't open the acceptor " + ec.message()) {}
 };
 
 class InvalidAcceptorSetOption final : public ServerException {
    public:
-    explicit InvalidAcceptorSetOption(beast::error_code &ec)
+    explicit InvalidAcceptorSetOption(const beast::error_code &ec)
         : ServerException("Don't set acceptor's reuse option " + ec.message()) {}
 };
 
 class InvalidAcceptorBind final : public ServerException {
    public:
-    explicit InvalidAcceptorBind(beast::error_code &ec)
+    explicit InvalidAcceptorBind(const beast::error_code &ec)
         : ServerException("Don't bind to the server address " + ec.message()) {}
 };
 
 class InvalidAcceptorListen final : public ServerException {
    public:
-    explicit InvalidAcceptorListen(beast::error_code &ec)
+    explicit InvalidAcceptorListen(const beast::error_code &ec)
         : ServerException("Acceptor don't start listening for connections " + ec.message()) {}
 };
 

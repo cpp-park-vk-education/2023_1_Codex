@@ -23,30 +23,30 @@ class ClientException : public std::exception {
 
 class InvalidResolve final : public ClientException {
    public:
-    explicit InvalidResolve(beast::error_code ec)
+    explicit InvalidResolve(const beast::error_code &ec)
         : ClientException("Don't resolve IP address " + ec.message()) {}
 };
 
 class InvalidConnect final : public ClientException {
    public:
-    explicit InvalidConnect(beast::error_code ec)
+    explicit InvalidConnect(const beast::error_code &ec)
         : ClientException("Don't connect to IP address " + ec.message()) {}
 };
 
 class InvalidWrite final : public ClientException {
    public:
-    explicit InvalidWrite(beast::error_code ec) : ClientException("Don't write to stream " + ec.message()) {}
+    explicit InvalidWrite(const beast::error_code &ec) : ClientException("Don't write to stream " + ec.message()) {}
 };
 
 class InvalidImageFile final : public ClientException {
    public:
-    explicit InvalidImageFile(beast::error_code ec)
+    explicit InvalidImageFile(const beast::error_code &ec)
         : ClientException("Don't open file with image " + ec.message()) {}
 };
 
 class InvalidRead final : public ClientException {
    public:
-    explicit InvalidRead(beast::error_code ec) : ClientException("Don't read from stream " + ec.message()) {}
+    explicit InvalidRead(const beast::error_code &ec) : ClientException("Don't read from stream " + ec.message()) {}
 };
 
 }  // namespace Client

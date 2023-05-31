@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         Server::Server server(address, port, docRoot, threads);
 
         server.Run();
-    } catch (Server::ServerException &ex) {
+    } catch (const Server::ServerException &ex) {
         std::cerr << ex.what() << std::endl;
     }
     return 0;

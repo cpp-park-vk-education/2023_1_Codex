@@ -1,15 +1,9 @@
 #include "RequestHandler.hpp"
 
-#include <boost/beast/http.hpp>
-#include <memory>
-#include <string>
-
 #include "TaskHandler.hpp"
 #include "TaskSearcher.hpp"
 
 namespace Server {
-
-namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 
 RequestHandler::RequestHandler(std::shared_ptr<std::string const> docRoot) : DocRoot(std::move(docRoot)) {}
 

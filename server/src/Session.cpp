@@ -1,23 +1,13 @@
 #include "Session.hpp"
 
 #include <boost/asio/dispatch.hpp>
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
 #include <chrono>
-#include <memory>
-#include <string>
-#include <thread>
 
-#include "Exceptions.hpp"
-#include "RequestHandler.hpp"
 #include "SessionManager.hpp"
 
 namespace Server {
 
-namespace beast = boost::beast;       // from <boost/beast.hpp>
-namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 namespace net = boost::asio;          // from <boost/asio.hpp>
-using tcp = boost::asio::ip::tcp;     // from <boost/asio/ip/tcp.hpp>
 
 constexpr int MS_FOR_REPEAT = 1000;
 

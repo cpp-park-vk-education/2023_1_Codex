@@ -2,24 +2,14 @@
 
 #include <boost/asio.hpp>
 #include <boost/asio/strand.hpp>
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
 #include <chrono>
 #include <iostream>
-#include <memory>
 #include <sstream>
-#include <string>
 #include <thread>
 
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Client {
-
-namespace beast = boost::beast;    // from <boost/beast.hpp>
-namespace http = beast::http;      // from <boost/beast/http.hpp>
-namespace net = boost::asio;       // from <boost/asio.hpp>
-using tcp = boost::asio::ip::tcp;  // from <boost/asio/ip/tcp.hpp>
 
 constexpr int HTTP_VERSION = 10;
 constexpr int MS_FOR_REPEAT = 1000;
@@ -34,10 +24,6 @@ Client::Client(char const *host, char const *port)
 TaskInfo Client::Run(const std::string &expression, TaskTypes taskType) {
     DoConnect();
 
-    std::cout << "Expression: " << expression << std::endl;
-    std::cout << "Type: " << taskType << std::endl;
-
-    // mb change if-condition
     if (*expression.begin() == '\\') {
         DoSendImage(expression, taskType);
     } else {

@@ -1,11 +1,7 @@
 #include "TaskSearcher.hpp"
 
 #include <boost/asio.hpp>
-#include <boost/beast/http.hpp>
 #include <fstream>
-#include <iostream>
-#include <memory>
-#include <string>
 
 #include "ArithmeticTask.hpp"
 #include "CombinatoricsTask.hpp"
@@ -13,12 +9,10 @@
 #include "EqSystemsTask.hpp"
 #include "EquationsTask.hpp"
 #include "Exceptions.hpp"
-#include "ITask.hpp"
 #include "IntegrationTask.hpp"
 #include "MatStatSequenceTask.hpp"
 #include "MatrixTask.hpp"
 #include "PredictionConverter.hpp"
-#include "TaskInfo.hpp"
 #include "TextRecognizer.hpp"
 
 namespace Handlers {
@@ -77,8 +71,6 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     ::Tasks::TaskTypes taskType = ::Tasks::TaskTypes::NotFound;
     try {
         std::string type = request.target().data();
-        // If use "/" in begin
-        // type = type.erase(0,1);
         taskType = static_cast<::Tasks::TaskTypes>(std::stoi(type));
     } catch (...) {
         throw ::Handlers::HandlerInvalidRequest("taskType");
@@ -101,9 +93,7 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
         }
 
     } else if (request.at(http::field::content_type) == "image/png") {
-        // TO DO
-        // create flexible path
-        std::string path = "temp.png";
+        std::string path = "./build/server_img/temp";
         std::ofstream outImage(path, std::ios::binary);
         if (!outImage.is_open()) {
             throw HandlerInvalidFile("writing into file on the server");
@@ -129,7 +119,6 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
         TextRecognizer recognizer(false, DocRoot);
         std::string recognizerPrediction = recognizer.RecognizeText(path);
         taskData = PredictionConverter::ConvertRecognizerPrediction(recognizerPrediction, taskType);
-        // askData = recognizerPrediction;
     } else {
         throw ::Handlers::HandlerInvalidRequest("type of data");
     }

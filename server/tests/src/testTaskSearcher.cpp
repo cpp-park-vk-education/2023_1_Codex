@@ -75,7 +75,7 @@ TEST(TaskSearcherTest, BasicPngCase) {
     ::Handlers::TaskSearcher taskSearcher(DOC_ROOT);
     ::Tasks::ITaskUPtr actual = taskSearcher.Run(req);
 
-    ::Tasks::ArithmeticTask expected("15.37 ^ 2 + 11", ::Tasks::TaskTypes::Arithmetic);
+    ::Tasks::ArithmeticTask expected("15,37 ^ 2 + 11", ::Tasks::TaskTypes::Arithmetic);
     EXPECT_STREQ(expected.GetExpression().c_str(), actual.get()->GetExpression().c_str());
     EXPECT_EQ(expected.GetTaskType(), actual.get()->GetTaskType());
 }

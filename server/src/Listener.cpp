@@ -1,18 +1,11 @@
 #include "Listener.hpp"
 
 #include <boost/asio/strand.hpp>
-#include <boost/beast/core.hpp>
-#include <memory>
-#include <string>
 
 #include "Exceptions.hpp"
-#include "Session.hpp"
-#include "SessionManager.hpp"
 
 namespace Server {
 
-namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
-namespace net = boost::asio;          // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;     // from <boost/asio/ip/tcp.hpp>
 
 Listener::Listener(net::io_context &ioc, tcp::endpoint endpoint, std::shared_ptr<std::string const> docRoot)

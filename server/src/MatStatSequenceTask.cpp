@@ -4,11 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
-#include <string>
-#include <vector>
 
 #include "Exceptions.hpp"
-#include "TaskInfo.hpp"
 
 namespace Tasks {
 

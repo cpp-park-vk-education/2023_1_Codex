@@ -1,8 +1,6 @@
 #include "TextRecognizer.hpp"
 
-#include <memory>
 #include <ocr.hpp>
-#include <string>
 
 namespace Handlers {
 

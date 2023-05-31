@@ -41,7 +41,7 @@ find_package(ppocrLib REQUIRED CONFIG PATHS ${ppocrLib_DIR})
 
 target_link_libraries(server PUBLIC ppocrLib::ppocrLib)
 
-#if (BUILD_TESTS)
+if (BUILD_TESTS)
     add_library(serverLib /
             src/ArithmeticTask.cpp /
             src/CombinatoricsTask.cpp /
@@ -68,4 +68,4 @@ target_link_libraries(server PUBLIC ppocrLib::ppocrLib)
     target_link_libraries(serverLib PUBLIC ppocrLib::ppocrLib)
 
     add_subdirectory(tests)
-#endif ()
+endif ()

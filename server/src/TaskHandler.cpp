@@ -1,17 +1,10 @@
 #include "TaskHandler.hpp"
 
-#include <boost/beast/http.hpp>
-#include <memory>
-#include <string>
-
 #include "Exceptions.hpp"
-#include "ITask.hpp"
-#include "ITaskSearcher.hpp"
 
 namespace Handlers {
 
 namespace beast = boost::beast;       // from <boost/beast.hpp>
-namespace http = boost::beast::http;  // from <boost/beast/http.hpp>
 
 TaskHandler::TaskHandler(ITaskSearcherUPtr &&taskSearcher, std::shared_ptr<std::string const> docRoot)
     : TaskSearcher(std::move(taskSearcher)), DocRoot(std::move(docRoot)) {}
@@ -22,16 +15,15 @@ http::message_generator TaskHandler::Run(http::request<http::dynamic_body> &requ
     // Search task from request
     try {
         task = TaskSearcher.get()->Run(request);
-    } catch (HandlerEmptyRequestBody &ex) {
+    } catch (const HandlerEmptyRequestBody &ex) {
         using namespace std::string_literals;
         return CreateErrorResponse(request, "Error="s + ex.what());
-    } catch (HandlerInvalidRequest &ex) {
+    } catch (const HandlerInvalidRequest &ex) {
         using namespace std::string_literals;
         return CreateErrorResponse(request, "Error="s + ex.what());
-    } catch (HandlerInvalidFile &ex) {
+    } catch (const HandlerInvalidFile &ex) {
         return CreateErrorResponse(request, "Error=Don't handle your request because of server error");
     }
-    // mb catch system exceptions
 
     // Send response with solved task
     return CreateResponse(task, request);
@@ -43,7 +35,7 @@ http::message_generator TaskHandler::CreateResponse(::Tasks::ITaskUPtr &task,
     std::string answer;
     try {
         answer = task.get()->Solve();
-    } catch (::Tasks::TaskException &ex) {
+    } catch (const ::Tasks::TaskException &ex) {
         using namespace std::string_literals;
         std::string msg = "Type="s + std::to_string(task->GetTaskType()) + "\n"s + "Expression="s +
                           task->GetExpression() + "\n"s + "Error="s + ex.what();
