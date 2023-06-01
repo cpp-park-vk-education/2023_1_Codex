@@ -126,7 +126,7 @@ TEST(EquationsTest, BasicPolyEquationsCase) {
 }
 
 TEST(EquationsTest, BasicPolyEquationsCase1) {
-    ::Tasks::EquationsTask task("x ^ 4 - 6 * x + 3 , 2 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+    ::Tasks::EquationsTask task("x ^ 4 - 6 * x + 3 , -1 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.51140"; // находит ближайший к начальному приближению корень

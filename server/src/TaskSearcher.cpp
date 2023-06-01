@@ -93,7 +93,7 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
         }
 
     } else if (request.at(http::field::content_type) == "image/png") {
-        std::string path = "./build/server_img/temp";
+        std::string path = "./temp.png";
         std::ofstream outImage(path, std::ios::binary);
         if (!outImage.is_open()) {
             throw HandlerInvalidFile("writing into file on the server");
