@@ -37,6 +37,13 @@ std::string EqSystemTask::VectorToString(const std::vector<double>& nums) {
 }
 
 void EqSystemTask::ParseData() {
+    for (auto& innerVector : A) {
+        innerVector.clear();
+    }
+    A.clear();
+
+    B.clear();
+
     if (Expression.find_first_not_of("0123456789./,- ") != std::string::npos) {
         throw TaskInvalidData("Invalid Data");
     }

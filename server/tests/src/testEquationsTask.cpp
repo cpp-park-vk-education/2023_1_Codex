@@ -4,7 +4,11 @@
 
 #include "Exceptions.hpp"
 #include "EquationsTask.hpp"
+
 #include "TaskInfo.hpp"
+#include "ArithmeticTask.hpp"
+#include "DifferentiationTask.hpp"
+
 
 // ------------------------- Линейные уравнения -------------------------------
 
@@ -113,15 +117,21 @@ TEST(EquationsTest, EmptyStringSqEquationsCase) {
 
 // ------------------------- Полиномиальные уравнения -------------------------------
 
-// Пока не реализованы - будут реализованы в ближайшее время
+TEST(EquationsTest, BasicPolyEquationsCase) {
+    ::Tasks::EquationsTask task("x - 1 , -4 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+    std::string actual = task.Solve();
 
-//TEST(EquationsTest, BasicPolyEquationsCase) {
-//    ::Tasks::EquationsTask task("x ^ 4 - 3 * x ^ 3 - 13 * x ^ 2 + 27 * x + 90", ::Tasks::TaskTypes::EqPoly);
-//    std::string actual = task.Solve();
-//
-//    std::string expected = "x = -1.31607";
-//    EXPECT_STREQ(expected.c_str(), actual.c_str());
-//}
+    std::string expected = "x = 1.00000";
+    EXPECT_STREQ(expected.c_str(), actual.c_str());
+}
+
+TEST(EquationsTest, BasicPolyEquationsCase1) {
+    ::Tasks::EquationsTask task("x ^ 4 - 6 * x + 3 , 2 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+    std::string actual = task.Solve();
+
+    std::string expected = "x = 0.51140"; // находит ближайший к начальному приближению корень
+    EXPECT_STREQ(expected.c_str(), actual.c_str());
+}
 
 TEST(EquationsTest, EmptyPolyEquationsCase) {
     ::Tasks::EquationsTask task("", ::Tasks::TaskTypes::EqPoly);
@@ -130,21 +140,49 @@ TEST(EquationsTest, EmptyPolyEquationsCase) {
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCase1) {
-    ::Tasks::EquationsTask task("d4 * sdx ^ 2 - 6 * dx = 0",
+    ::Tasks::EquationsTask task("x-1 , 2 , 100",
                                 ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(EquationsTest, InvalidDataPolyEquationsCase2) {
-    ::Tasks::EquationsTask task("4 * x ^ 6 - 6 * x =0",
+TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongAlphas) {
+    ::Tasks::EquationsTask task("x + a , 2 , 100",
                                 ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-TEST(EquationsTest, InvalidDataPolyEquationsCase3) {
-    ::Tasks::EquationsTask task("4 * x ^ 2 - 6 * x",
+TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongX_0) {
+    ::Tasks::EquationsTask task("x - 1 , a , 100",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongDoubleX_0) {
+    ::Tasks::EquationsTask task("x - 1 , 1.2.fg , 100",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCaseDoubleIters) {
+    ::Tasks::EquationsTask task("x - 1 , 1 , 100.45",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCaseAlphasIters) {
+    ::Tasks::EquationsTask task("x - 1 , 1 , 100s45a",
+                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+
+    EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
+}
+
+TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongArgumentsNum) {
+    ::Tasks::EquationsTask task("x - 1 , 1 , 100 , ",
                                 ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
