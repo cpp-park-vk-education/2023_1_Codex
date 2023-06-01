@@ -2,16 +2,24 @@
 
 #include "UI_MainWindow.hpp"
 
+#include <QFontDatabase>
+#include <QFont>
+
 MainWindow::MainWindow(const Client::ClientSPtr& client, QWidget* parent)
     : m_client(client), QMainWindow(parent), ui(new Ui::MainWindow) {
-    // MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    setFixedSize(800, 600);
+
     problemTypeWindow = std::make_shared<ProblemTypeWindow>(client);
-    // problemTypeWindow = std::make_shared<ProblemTypeWindow>();
     connect(this, &MainWindow::clientAvailable, problemTypeWindow.get(), &ProblemTypeWindow::setClient);
     usageWindow = std::make_shared<UsageWindow>();
+
     // подключаем к слоту запуска главного окна по кнопке во втором окне
     connect(problemTypeWindow.get(), &ProblemTypeWindow::openMainWindow, this, &MainWindow::show);
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
 }
 
 MainWindow::~MainWindow() {

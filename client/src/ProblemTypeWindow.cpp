@@ -7,21 +7,24 @@
 #include <QStyleFactory>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QRect>
 
 #include "ProblemType.hpp"
+#include "SolutionWindow.hpp"
+
+#include <iostream>
+
 
 ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* parent)
     : m_client(client), QMainWindow(parent), ui(new Ui::ProblemTypeWindow) {
-    // ProblemTypeWindow::ProblemTypeWindow(QWidget* parent) : QMainWindow(parent), ui(new
-    // Ui::ProblemTypeWindow){
     ui->setupUi(this);
+    setFixedSize(800, 600);
 
-    solutionWindow = std::make_shared<SolutionWindow>(client, typeName, this);
-    // solutionWindow = std::make_shared<SolutionWindow>(typeName, this);
-    connect(solutionWindow.get(), &SolutionWindow::openProblemTypeWindow, this, &ProblemTypeWindow::show);
-    connect(this, &ProblemTypeWindow::clientAvailable, solutionWindow.get(), &SolutionWindow::setClient);
-
-    typesChoosingLayout = new QVBoxLayout(centralWidget());
+    // chooseTypeLabel
+    chooseTypeLabel = std::make_shared<QLabel>("Choose a task type", this);
+    chooseTypeLabel->setStyleSheet("color: white; padding: 10px; font: 500 20pt\"Century Gothic\"");
+    chooseTypeLabel->setGeometry(0, 0, this->width(), 50);
+    chooseTypeLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     // Создаем выпадающий список
     int counter = 0;
@@ -30,10 +33,34 @@ ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* 
     QVector<QAction*> actions[TaskTypesMap.size()];  // конкретные типы задач
     QPushButton* buttons[TaskTypesMap.size()];       // кнопки выпадающих меню
 
-    QVector<Client::TaskTypes> taskTypes;
+    QString menuStyle = "QMenu {"
+        "    background-color: #F0F0F0;"
+        "}"
+        "QMenu::item {"
+        "    padding: 8px 20px;  /* размеры элементов меню */"
+        "    background-color: #15E099;"
+        "    text-align: center;"
+        "    color: white;"
+        "    font: 500 14pt \"Century Gothic\";"
+        "}"
+        "QMenu::item:selected {"
+        "    background-color: #3F3D42;"
+        "    color: white;"
+        "}";
 
+    QVector<Client::TaskTypes> taskTypes;
+    size_t buttonWidth = this->width(), buttonHeight=50, buttonSpace=2, buttonTopMargin = 60;
     for (QString type : TaskTypesGlobalNames) {  // TaskTypesMap.keys()){
+        buttons[counter] = new QPushButton(type, this);
+        buttons[counter]->setStyleSheet(
+            "background-color: #17956A;\ncolor: rgb(255, 255, 255);\nfont: 500 16pt \"Century Gothic\";");
+        buttons[counter]->setGeometry(buttonSpace, buttonTopMargin + counter*(buttonHeight+buttonSpace), buttonWidth-buttonSpace, buttonHeight);
+
+
         menuArray[counter] = new QMenu(type, nullptr);
+        menuArray[counter]->setStyleSheet(menuStyle);
+        menuArray[counter]->setFixedWidth(buttons[counter]->width());
+        //menuArray[counter]->exec(buttons[counter]->mapToGlobal(QPoint(0, buttons[counter]->height()))); // Отображение выпадающего меню по центру виджета
         for (QString name : TaskTypesMap[type]) {  // конкретные типы задач
             QAction* anotherAction = new QAction(name, nullptr);
             actions[counter] << anotherAction;
@@ -44,27 +71,23 @@ ProblemTypeWindow::ProblemTypeWindow(const Client::ClientSPtr& client, QWidget* 
             // &ProblemTypeWindow::onTypeTriggered);
             connect(actions[counter].last(), &QAction::triggered, this, [=]() {
                 onTypeTriggered(name,
-                                static_cast<Client::TaskTypes>(taskTypes.size()));  // taskTypes[counter]);
+                                static_cast<Client::TaskTypes>(taskTypes.size()));
             });
 
             menuArray[counter]->addAction(actions[counter].last());
         }
-        buttons[counter] = new QPushButton(type, this);
-        buttons[counter]->setMenu(menuArray[counter]);
-        buttons[counter]->setStyleSheet(
-            "background-color: rgb(58, 139, 91);;\ncolor: rgb(255, 255, 255);\nfont: 900 12pt \"Arial "
-            "Black\";\nborder-radius:20px;\n");
-        buttons[counter]->setGeometry(30, 20, 691, 61);
 
-        typesChoosingLayout->addWidget(buttons[counter]);
+        buttons[counter]->setMenu(menuArray[counter]);
+
+        //typesChoosingLayout->addWidget(buttons[counter]);
         counter++;
     }
 
-    centralWidget()->setLayout(typesChoosingLayout);
 
     backButton = new QPushButton("Back", this);
     backButton->setStyleSheet(
-        "color: white;\nborder: 2px solid white;\nfont: 900 10pt \"Arial Black\";\nborder-radius:9px;\n");
+        "background-color: #3F3D42; color: white;\nfont: 500 12pt \"Century Gothic\"; border-radius: 10");
+    backButton->setGeometry(20,10,120,40);
     connect(backButton, &QPushButton::clicked, this, &ProblemTypeWindow::onBackButtonClicked);
 }
 
@@ -74,10 +97,14 @@ ProblemTypeWindow::~ProblemTypeWindow() {
 }
 
 void ProblemTypeWindow::onTypeTriggered(QString value, Client::TaskTypes taskType) {
+    solutionWindow = std::make_shared<SolutionWindow>(m_client, taskType, value, this);
+    connect(solutionWindow.get(), &SolutionWindow::openProblemTypeWindow, this, &ProblemTypeWindow::show);
     this->close();
-    emit clientAvailable(m_client);
-    solutionWindow->show();
+    std::cout<< "taskType origin "<<taskType<<std::endl;
+    std::cout<< "taskName origin "<<value.toStdString()<<std::endl;
     solutionWindow->insertTypeName(value, taskType);
+    solutionWindow->show();
+
 }
 
 void ProblemTypeWindow::onBackButtonClicked() {

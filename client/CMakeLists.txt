@@ -24,19 +24,22 @@ set(PROJECT_SOURCES
 
         src/MainWindow.cpp
         include/MainWindow.hpp
-        ui/mainwindow.ui
+        ui/MainWindow.ui
 
         src/ProblemTypeWindow.cpp
         include/ProblemTypeWindow.hpp
-        ui/problemtypewindow.ui
+        ui/ProblemTypeWindow.ui
 
         src/UsageWindow.cpp
         include/UsageWindow.hpp
-        ui/usagewindow.ui
+        ui/UsageWindow.ui
 
         src/SolutionWindow.cpp
         include/SolutionWindow.hpp
-        ui/solutionwindow.ui
+        ui/SolutionWindow.ui
+
+	src/MatrixInputForm.cpp
+        include/MatrixInputForm.hpp
 
         include/UI_MainWindow.hpp
         include/UI_SolutionWindow.hpp

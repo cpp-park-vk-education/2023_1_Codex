@@ -4,6 +4,7 @@
 
 UsageWindow::UsageWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::UsageWindow) {
     ui->setupUi(this);
+    setFixedSize(800, 600);
 }
 
 UsageWindow::~UsageWindow() {
