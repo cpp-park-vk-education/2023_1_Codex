@@ -1,42 +1,42 @@
 #pragma once
 
-#include <QObject>
-#include <QMainWindow>
-#include <QWidget>
 #include <QGridLayout>
-#include <QSpinBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QMainWindow>
+#include <QObject>
+#include <QSpinBox>
+#include <QWidget>
 #include <iostream>
+#include <memory>
 
 class MatrixInputForm : public QWidget {
    public:
-    MatrixInputForm(bool isEQ=false, QWidget *parent = nullptr) : makeEq(isEQ), QWidget(parent) {
-        std::cout<<"makeEq = "<<makeEq<<std::endl;
+    MatrixInputForm(bool isEQ = false, QWidget *parent = nullptr) : makeEq(isEQ), QWidget(parent) {
+        std::cout << "makeEq = " << makeEq << std::endl;
         createLayout();
         connectSignals();
         updateMatrixSize();
     }
 
-    int getRows(){
+    int getRows() {
         return rowsSpinBox->value();
     }
-    int getCols(){
+    int getCols() {
         return colsSpinBox->value();
     }
 
-    QVector<QVector<QLineEdit *>> getMatrixInputs(){
+    QVector<QVector<QLineEdit *>> getMatrixInputs() {
         return matrixInputs;
     }
 
-    QVector<QLineEdit *> getEqualsInputs(){
+    QVector<QLineEdit *> getEqualsInputs() {
         return equalsInputs;
     }
 
-    std::shared_ptr<QGridLayout> getGridLayout(){
+    std::shared_ptr<QGridLayout> getGridLayout() {
         return gridLayout;
     }
-
 
    private:
     std::shared_ptr<QGridLayout> gridLayout;
@@ -46,7 +46,7 @@ class MatrixInputForm : public QWidget {
     std::shared_ptr<QLabel> colsLabel;
     QVector<QVector<QLineEdit *>> matrixInputs;
     QVector<QLineEdit *> equalsInputs;
-    QLabel* additionalLabel;
+    QLabel *additionalLabel;
     bool makeEq;
 
     void createLayout();

@@ -66,11 +66,9 @@ std::string PredictionConverter::ConvertArithmeticTask(const std::string &predic
             result += " ";
             result += prediction[i];
             result += " ";
-        }
-
-        else if (i + 3 < prediction.length() &&
-                 (prediction.substr(i, 4) == "actg" || prediction.substr(i, 4) == "sqrt" ||
-                  prediction.substr(i, 4) == "asin" || prediction.substr(i, 4) == "acos")) {
+        } else if (i + 3 < prediction.length() &&
+                   (prediction.substr(i, 4) == "actg" || prediction.substr(i, 4) == "sqrt" ||
+                    prediction.substr(i, 4) == "asin" || prediction.substr(i, 4) == "acos")) {
             result += " ";
             result += prediction.substr(i, 4);
             result += " ";
@@ -83,11 +81,9 @@ std::string PredictionConverter::ConvertArithmeticTask(const std::string &predic
             result += prediction.substr(i, 3);
             result += " ";
             i += 2;
-        }
-
-        else if (i < prediction.length() &&
-                 (prediction.substr(i, 2) == "ln" || prediction.substr(i, 2) == "lg" ||
-                  prediction.substr(i, 2) == "tg")) {
+        } else if (i < prediction.length() &&
+                   (prediction.substr(i, 2) == "ln" || prediction.substr(i, 2) == "lg" ||
+                    prediction.substr(i, 2) == "tg")) {
             result += " ";
             result += prediction.substr(i, 2);
             result += " ";

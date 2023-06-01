@@ -35,7 +35,8 @@ class InvalidConnect final : public ClientException {
 
 class InvalidWrite final : public ClientException {
    public:
-    explicit InvalidWrite(const beast::error_code &ec) : ClientException("Don't write to stream " + ec.message()) {}
+    explicit InvalidWrite(const beast::error_code &ec)
+        : ClientException("Don't write to stream " + ec.message()) {}
 };
 
 class InvalidImageFile final : public ClientException {
@@ -46,7 +47,8 @@ class InvalidImageFile final : public ClientException {
 
 class InvalidRead final : public ClientException {
    public:
-    explicit InvalidRead(const beast::error_code &ec) : ClientException("Don't read from stream " + ec.message()) {}
+    explicit InvalidRead(const beast::error_code &ec)
+        : ClientException("Don't read from stream " + ec.message()) {}
 };
 
 }  // namespace Client

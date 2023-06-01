@@ -25,7 +25,7 @@ class EquationsTask final : public ITask {
 
     double SimpleLinear();
     std::vector<double> Square();
-    double Polynomial(); // приближенное нахождение корня
+    double Polynomial();  // приближенное нахождение корня
 };
 
 }  // namespace Tasks

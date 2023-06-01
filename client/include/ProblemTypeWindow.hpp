@@ -40,7 +40,7 @@ class ProblemTypeWindow : public QMainWindow {
     std::shared_ptr<SolutionWindow> solutionWindow;
     QString typeName;
     Client::TaskTypes taskType;
-    //QVBoxLayout* typesChoosingLayout;
+    // QVBoxLayout* typesChoosingLayout;
     QPushButton* backButton;
     std::shared_ptr<QLabel> chooseTypeLabel;
     /*QMenu* menuArray[TaskTypesMap.size()]; // глобальные типы задач

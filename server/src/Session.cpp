@@ -7,7 +7,7 @@
 
 namespace Server {
 
-namespace net = boost::asio;          // from <boost/asio.hpp>
+namespace net = boost::asio;  // from <boost/asio.hpp>
 
 constexpr int MS_FOR_REPEAT = 1000;
 

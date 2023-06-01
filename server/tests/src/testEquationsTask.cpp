@@ -2,18 +2,17 @@
 
 #include <string>
 
-#include "Exceptions.hpp"
-#include "EquationsTask.hpp"
-
-#include "TaskInfo.hpp"
 #include "ArithmeticTask.hpp"
 #include "DifferentiationTask.hpp"
-
+#include "EquationsTask.hpp"
+#include "Exceptions.hpp"
+#include "TaskInfo.hpp"
 
 // ------------------------- Линейные уравнения -------------------------------
 
 TEST(EquationsTest, BasicLinearEquationsCase) {
-    ::Tasks::EquationsTask task("4 -3", ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x + b = 0
+    ::Tasks::EquationsTask task("4 -3",
+                                ::Tasks::TaskTypes::EqLin);  // линейное уравнение имеет вид a * x + b = 0
     std::string actual = task.Solve();
 
     std::string expected = "x = 0.75000";
@@ -118,7 +117,9 @@ TEST(EquationsTest, EmptyStringSqEquationsCase) {
 // ------------------------- Полиномиальные уравнения -------------------------------
 
 TEST(EquationsTest, BasicPolyEquationsCase) {
-    ::Tasks::EquationsTask task("x - 1 , -4 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+    ::Tasks::EquationsTask task(
+        "x - 1 , -4 , 100",
+        ::Tasks::TaskTypes::EqPoly);  // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
     std::string actual = task.Solve();
 
     std::string expected = "x = 1.00000";
@@ -126,10 +127,12 @@ TEST(EquationsTest, BasicPolyEquationsCase) {
 }
 
 TEST(EquationsTest, BasicPolyEquationsCase1) {
-    ::Tasks::EquationsTask task("x ^ 4 - 6 * x + 3 , -1 , 100", ::Tasks::TaskTypes::EqPoly); // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+    ::Tasks::EquationsTask task(
+        "x ^ 4 - 6 * x + 3 , -1 , 100",
+        ::Tasks::TaskTypes::EqPoly);  // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
     std::string actual = task.Solve();
 
-    std::string expected = "x = 0.51140"; // находит ближайший к начальному приближению корень
+    std::string expected = "x = 0.51140";  // находит ближайший к начальному приближению корень
     EXPECT_STREQ(expected.c_str(), actual.c_str());
 }
 

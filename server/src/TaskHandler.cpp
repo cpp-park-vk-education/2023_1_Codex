@@ -4,7 +4,7 @@
 
 namespace Handlers {
 
-namespace beast = boost::beast;       // from <boost/beast.hpp>
+namespace beast = boost::beast;  // from <boost/beast.hpp>
 
 TaskHandler::TaskHandler(ITaskSearcherUPtr &&taskSearcher, std::shared_ptr<std::string const> docRoot)
     : TaskSearcher(std::move(taskSearcher)), DocRoot(std::move(docRoot)) {}

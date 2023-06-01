@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 
-#include "Exceptions.hpp"
 #include "ArithmeticTask.hpp"
 #include "DifferentiationTask.hpp"
+#include "Exceptions.hpp"
 
 namespace Tasks {
 
@@ -52,7 +52,7 @@ double EquationsTask::SimpleLinear() {
             throw TaskInvalidData("The equation has no solutions");
         }
     } else {
-        return - b / a;
+        return -b / a;
     }
 }
 
@@ -88,7 +88,7 @@ std::vector<double> EquationsTask::Square() {
     return result;
 }
 
-double EquationsTask::Polynomial() { // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
+double EquationsTask::Polynomial() {  // " x ^ 4 - 1 , 1 , 100" функция, начальное приближение, итерации
     double x_0 = Numbers[0];
     double max_iter = Numbers[1];
 
@@ -112,7 +112,8 @@ double EquationsTask::Polynomial() { // " x ^ 4 - 1 , 1 , 100" функция, �
     }
 
     if (iter_count == max_iter) {
-        throw TaskInvalidData("The maximum number of iterations has been reached. No solution has been found.");
+        throw TaskInvalidData(
+            "The maximum number of iterations has been reached. No solution has been found.");
     }
 
     return x_0;
@@ -136,7 +137,7 @@ double EquationsTask::get_f_x(std::string expr, double x) {
     return result;
 }
 
-double EquationsTask::get_f_derivative(std::string expr, double x) { // 12 * x ^ 2 + sin ( x ) - 6  ; 2
+double EquationsTask::get_f_derivative(std::string expr, double x) {  // 12 * x ^ 2 + sin ( x ) - 6  ; 2
     std::string modifiedExpr = expr + " ; " + std::to_string(x);
 
     // Находим производную
@@ -186,7 +187,8 @@ void EquationsTask::ParseData() {
 
         expr = part1;
 
-        if ((part2.find_first_not_of("0123456789.- ") != std::string::npos) || (part3.find_first_not_of("0123456789.- ") != std::string::npos)) {
+        if ((part2.find_first_not_of("0123456789.- ") != std::string::npos) ||
+            (part3.find_first_not_of("0123456789.- ") != std::string::npos)) {
             throw TaskInvalidData("Invalid Data");
         }
 

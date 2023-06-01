@@ -3,6 +3,7 @@
 #include <boost/asio.hpp>
 #include <boost/asio/strand.hpp>
 #include <chrono>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <thread>
@@ -24,7 +25,7 @@ Client::Client(char const *host, char const *port)
 TaskInfo Client::Run(const std::string &expression, TaskTypes taskType) {
     DoConnect();
 
-    if (*expression.begin() == '\\') {
+    if (*expression.begin() == 'C') {
         DoSendImage(expression, taskType);
     } else {
         DoSendText(expression, taskType);
@@ -108,6 +109,7 @@ void Client::DoSendText(const std::string &expression, TaskTypes taskType) {
 }
 
 void Client::DoSendImage(const std::string &path, TaskTypes taskType) {
+    std::cout << path << std::endl;
     http::request<http::file_body> request;
     request.method(http::verb::post);
     request.target(std::to_string(static_cast<unsigned>(taskType)));

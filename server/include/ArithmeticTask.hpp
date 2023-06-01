@@ -10,8 +10,9 @@
 #include "ITask.hpp"
 #include "TaskInfo.hpp"
 
-const std::unordered_set<std::string> operators_set{"+",  "-",   "*",   "/",    "sin", "asin", "cos", "acos",
-                                                    "tg", "atg", "ctg", "actg", "exp", "abs",  "^",   "sqrt", "!"};
+const std::unordered_set<std::string> operators_set{"+",   "-",    "*",  "/",    "sin", "asin",
+                                                    "cos", "acos", "tg", "atg",  "ctg", "actg",
+                                                    "exp", "abs",  "^",  "sqrt", "!"};
 
 namespace Tasks {
 

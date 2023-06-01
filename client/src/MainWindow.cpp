@@ -1,9 +1,9 @@
 #include "MainWindow.hpp"
 
-#include "UI_MainWindow.hpp"
-
-#include <QFontDatabase>
 #include <QFont>
+#include <QFontDatabase>
+
+#include "UI_MainWindow.hpp"
 
 MainWindow::MainWindow(const Client::ClientSPtr& client, QWidget* parent)
     : m_client(client), QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -16,10 +16,6 @@ MainWindow::MainWindow(const Client::ClientSPtr& client, QWidget* parent)
 
     // подключаем к слоту запуска главного окна по кнопке во втором окне
     connect(problemTypeWindow.get(), &ProblemTypeWindow::openMainWindow, this, &MainWindow::show);
-}
-
-void MainWindow::resizeEvent(QResizeEvent* event)
-{
 }
 
 MainWindow::~MainWindow() {

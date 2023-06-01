@@ -15,15 +15,16 @@
 #include "MatrixInputForm.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui{
-    class SolutionWindow;
+namespace Ui {
+class SolutionWindow;
 }
 QT_END_NAMESPACE
 
-class SolutionWindow : public QMainWindow{
+class SolutionWindow : public QMainWindow {
     Q_OBJECT
-public:
-    SolutionWindow(const Client::ClientSPtr& client, Client::TaskTypes taskTypeInp, QString value = "", QWidget* parent = NULL);
+   public:
+    SolutionWindow(const Client::ClientSPtr& client, Client::TaskTypes taskTypeInp, QString value = "",
+                   QWidget* parent = NULL);
     ~SolutionWindow();
 
     void insertTypeName(QString value, Client::TaskTypes taskType);
@@ -31,7 +32,7 @@ public:
     void setExpressionSolution();
     void updateTaskType(Client::TaskTypes taskType);
 
-private:
+   private:
     QString typeName;
     Client::TaskTypes taskType;
     Ui::SolutionWindow* ui;
@@ -74,8 +75,9 @@ private:
     std::shared_ptr<QLabel> xEquationsLabel;
     std::shared_ptr<QLabel> constEquationsLabel;
     std::shared_ptr<QLabel> x2EquationsLabel;
-
-
+    std::shared_ptr<QLabel> polinomialLabel;
+    std::shared_ptr<QLabel> iterationsEquationsLabel;
+    std::shared_ptr<QLineEdit> iterationsEquationsinputField;
 
     std::shared_ptr<QVBoxLayout> mainLayout;
 
@@ -86,17 +88,18 @@ private:
     QString parseEqLin();
     QString parseEqSq();
     QString parseLAES();
+    QString parsePoly();
 
-signals:
+   signals:
     void openProblemTypeWindow();
 
-private slots:
+   private slots:
     void onBackButtonClicked();
     void onTypeNameSelected(QString typeName);
     void getAnswer(QString expression);
     void getAnswer();
     void getImagePath();
 
-public slots:
+   public slots:
     void setClient(const Client::ClientSPtr& client, const Client::TaskTypes taskType_m);
 };

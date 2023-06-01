@@ -36,5 +36,4 @@ QHash<QString, QVector<QString>> TaskTypesMap = {
 
 QVector<QString> TaskTypesGlobalNames = {
     "Integrals",  "Combinatorics",   "Equations", "Linear Algebraic Equation System",
-    "Arithmetic", "Differentiation", "Matrix",
-    "MatStat"};
+    "Arithmetic", "Differentiation", "Matrix",    "MatStat"};

@@ -237,7 +237,7 @@ class SquareRoot : public ICalculatable {
 };
 
 class Logarithm : public ICalculatable {
-public:
+   public:
     Logarithm(std::unique_ptr<ICalculatable> left_, double base_) : left(std::move(left_)), base(base_) {}
     double Calculate() const override {
         double num = left->Calculate();
@@ -247,16 +247,16 @@ public:
         if (base == 10) {
             return log10(num);
         }
-        return log(num)/log(base);
+        return log(num) / log(base);
     }
 
-private:
+   private:
     std::unique_ptr<ICalculatable> left;
     double base;
 };
 
 class LogarithmNatural : public ICalculatable {
-public:
+   public:
     LogarithmNatural(std::unique_ptr<ICalculatable> left_) : left(std::move(left_)) {}
     double Calculate() const override {
         double num = left->Calculate();
@@ -266,19 +266,19 @@ public:
         return log(num);
     }
 
-private:
+   private:
     std::unique_ptr<ICalculatable> left;
 };
 
 class Factorial : public ICalculatable {
-public:
+   public:
     Factorial(std::unique_ptr<ICalculatable> left_) : left(std::move(left_)) {}
     double Calculate() const override {
         double num = left->Calculate();
         if (num > 12) {
             throw Tasks::TaskInvalidData("Factorial is too big");
         }
-        if (std::fmod(num, 1) != 0){
+        if (std::fmod(num, 1) != 0) {
             throw Tasks::TaskInvalidData("Factorial shoul be integer");
         }
         if (num == 0) {
@@ -291,6 +291,6 @@ public:
         return res;
     }
 
-private:
+   private:
     std::unique_ptr<ICalculatable> left;
 };
