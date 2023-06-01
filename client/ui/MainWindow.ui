@@ -17,6 +17,9 @@
    <string notr="true">background-color:rgb(31, 34, 41);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(42, 37, 47)</string>
+   </property>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
@@ -44,10 +47,10 @@ border-radius:10px;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(70, 224, 130);
+      <string notr="true">background-color: #17956A;
 color: rgb(255, 255, 255);
-font: 900 12pt &quot;Arial Black&quot;;
-border-radius:9px;
+font: 14pt &quot;Century Gothic&quot;;
+border-radius:20px;
 </string>
      </property>
      <property name="text">
@@ -64,10 +67,10 @@ border-radius:9px;
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(70, 224, 130);
+      <string notr="true">background-color: #17956A;
 color: rgb(255, 255, 255);
-font: 900 12pt &quot;Arial Black&quot;;
-border-radius:9px;
+font: 14pt &quot;Century Gothic&quot;;
+border-radius:20px;
 </string>
      </property>
      <property name="text">
@@ -77,22 +80,22 @@ border-radius:9px;
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>200</x>
        <y>10</y>
-       <width>321</width>
+       <width>261</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Arial Black</family>
+       <family>Century Gothic</family>
        <pointsize>20</pointsize>
        <italic>false</italic>
-       <bold>true</bold>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:white;font-family:'Arial Black'; font-size:20pt; font-weight:700; font-style:normal;</string>
+      <string notr="true">color:white;font-family:'Century Gothic'; font-size:20pt; font-weight:500; font-style:normal;</string>
      </property>
      <property name="text">
       <string>Let's get started!</string>
@@ -141,8 +144,9 @@ border-radius:9px;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(106, 108, 114);
-font: 12pt &quot;Arial Narrow&quot;;</string>
+     <string notr="true">color: rgb(201, 173, 214);
+
+font: 10pt &quot;Century Gothic&quot;;</string>
     </property>
     <property name="text">
      <string>By: Codex team</string>
@@ -151,22 +155,22 @@ font: 12pt &quot;Arial Narrow&quot;;</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>250</x>
       <y>60</y>
-      <width>331</width>
+      <width>291</width>
       <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
+      <family>Century Gothic</family>
       <pointsize>32</pointsize>
       <italic>false</italic>
       <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:white;font-family:'Arial Black'; font-size:32pt; font-weight:700; font-style:normal;</string>
+     <string notr="true">color:white;font-family:'Century Gothic'; font-size:32pt; font-weight:700; font-style:normal;</string>
     </property>
     <property name="text">
      <string>MathVision</string>
@@ -178,27 +182,29 @@ font: 12pt &quot;Arial Narrow&quot;;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>230</x>
       <y>150</y>
-      <width>381</width>
+      <width>311</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial Narrow</family>
-      <pointsize>16</pointsize>
+      <family>Century Gothic</family>
+      <pointsize>12</pointsize>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(106, 108, 114);
+     <string notr="true">color:rgb(201, 173, 214);
 
-font: 16pt &quot;Arial Narrow&quot;;</string>
+font: 12pt &quot;Century Gothic&quot;;
+align-text: center;
+</string>
     </property>
     <property name="text">
-     <string>Умный математический калькулятор</string>
+     <string>Smart mathematical calculator</string>
     </property>
    </widget>
   </widget>
@@ -213,6 +219,17 @@ font: 16pt &quot;Arial Narrow&quot;;</string>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
  </widget>
  <resources/>
  <connections/>

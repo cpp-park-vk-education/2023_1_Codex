@@ -20,15 +20,12 @@ QHash<QString, QVector<QString>> TaskTypesMap = {
                                                             << "Gauss with choosing Main element"
                                                             << "SLU"},
     {"Arithmetic", QVector<QString>() << "Arithmetic"},
-    {"Differentiation", QVector<QString>() << "Symbolic"
-                                           << "Numerical"},
+    {"Differentiation", QVector<QString>() << "Numerical"},
     {"Matrix", QVector<QString>() << "Determinant"
                                   << "Transpare"
                                   << "Eigen values"
                                   << "Rank"
                                   << "Norm"},
-    {"Logical", QVector<QString>() << "PDNF"
-                                   << "PCNF"},
     {"MatStat", QVector<QString>() << "InitMoment"
                                    << "CentralMoment"
                                    << "Asymmetry"
@@ -39,5 +36,5 @@ QHash<QString, QVector<QString>> TaskTypesMap = {
 
 QVector<QString> TaskTypesGlobalNames = {
     "Integrals",  "Combinatorics",   "Equations", "Linear Algebraic Equation System",
-    "Arithmetic", "Differentiation", "Matrix",    "Logical",
+    "Arithmetic", "Differentiation", "Matrix",
     "MatStat"};
