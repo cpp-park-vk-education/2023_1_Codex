@@ -9,8 +9,6 @@ namespace Server {
 
 namespace net = boost::asio;  // from <boost/asio.hpp>
 
-constexpr int MS_FOR_REPEAT = 1000;
-
 Session::Session(tcp::socket&& socket, SessionManager& manager, std::shared_ptr<std::string const> docRoot)
     : Stream(std::move(socket)), Handler({docRoot}), Manager(manager), DocRoot(std::move(docRoot)) {}
 

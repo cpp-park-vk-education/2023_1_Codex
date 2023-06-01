@@ -6,8 +6,6 @@
 
 namespace Server {
 
-using tcp = boost::asio::ip::tcp;  // from <boost/asio/ip/tcp.hpp>
-
 Listener::Listener(net::io_context &ioc, tcp::endpoint endpoint, std::shared_ptr<std::string const> docRoot)
     : Ioc(ioc), Acceptor(net::make_strand(ioc)), DocRoot(std::move(docRoot)) {
     beast::error_code ec;

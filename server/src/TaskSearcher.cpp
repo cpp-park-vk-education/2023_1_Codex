@@ -47,11 +47,6 @@ TaskSearcher::TaskSearcher(std::shared_ptr<std::string const> docRoot) : DocRoot
     if (info.TaskType <= ::Tasks::TaskTypes::MatrixNorm) {
         return std::make_unique<::Tasks::MatrixTask>(info.TaskData, info.TaskType);
     }
-    // add NumberSystem
-
-    if (info.TaskType <= ::Tasks::TaskTypes::LogicalPCNF) {
-        throw ::Handlers::HandlerUnsupportedTask();
-    }
     if (info.TaskType <= ::Tasks::TaskTypes::MatStatSeqQuantile) {
         return std::make_unique<::Tasks::MatStatSequenceTask>(info.TaskData, info.TaskType);
     } else {

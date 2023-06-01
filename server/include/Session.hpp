@@ -32,7 +32,6 @@ class Session : public std::enable_shared_from_this<Session> {
     beast::tcp_stream Stream;
     beast::flat_buffer Buffer;
     http::request<http::dynamic_body> Request;
-    // mb UPtr
     RequestHandler Handler;
     SessionManager &Manager;
     std::shared_ptr<std::string const> DocRoot;

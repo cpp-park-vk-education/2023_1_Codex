@@ -13,8 +13,6 @@ class SessionManager {
 
     void DoClose(SessionSPtr session);
 
-    void DoCloseAll();
-
    private:
     std::set<SessionSPtr> Sessions;
 };

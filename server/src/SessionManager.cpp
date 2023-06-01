@@ -12,9 +12,4 @@ void SessionManager::DoClose(SessionSPtr session) {
     session->DoClose();
 }
 
-void SessionManager::DoCloseAll() {
-    for (auto& session : Sessions) session->DoClose();
-    Sessions.clear();
-}
-
 }  // namespace Server

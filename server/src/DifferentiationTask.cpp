@@ -40,11 +40,6 @@ std::string DifferentiationTask::Solve() {
         case TaskTypes::DiffNum: {
             return DoubleToString(Numerical());
         }
-        case TaskTypes::DiffSymb: {
-            throw TaskInvalidData(
-                "Sorry, we are not able to solve this problem yet. Task type will be available soon...");
-            // return DoubleToString(Symbolic());
-        }
         default: {
             throw TaskInvalidData("No such task type");
         }

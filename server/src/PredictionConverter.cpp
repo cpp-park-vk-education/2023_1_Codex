@@ -28,12 +28,6 @@ std::string PredictionConverter::ConvertRecognizerPrediction(const std::string &
     if (taskType <= ::Tasks::TaskTypes::MatrixNorm) {
         throw ::Handlers::HandlerUnsupportedTask();
     }
-
-    // NumberSystemTask
-
-    if (taskType <= ::Tasks::TaskTypes::LogicalPCNF) {
-        throw ::Handlers::HandlerUnsupportedTask();
-    }
     if (taskType <= ::Tasks::TaskTypes::MatStatSeqQuantile) {
         return ConvertMatStatTask(prediction);
     } else {

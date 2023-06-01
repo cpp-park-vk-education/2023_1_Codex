@@ -17,7 +17,6 @@ class DifferentiationTask final : public ITask {
     void ParseData() override;
 
     double Numerical();
-    double Symbolic();
 };
 
 }  // namespace Tasks
