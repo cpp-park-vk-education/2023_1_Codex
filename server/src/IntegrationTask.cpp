@@ -111,8 +111,7 @@ void IntegrationTask::ParseData() {
 
     expr = part1;
 
-    if ((part2.find_first_not_of("0123456789.- ") != std::string::npos) ||
-        (part3.find_first_not_of("0123456789.- ") != std::string::npos)) {
+    if ((part2.find_first_not_of("0123456789.- ") != std::string::npos) || (part3.find_first_not_of("0123456789.- ") != std::string::npos)) {
         throw TaskInvalidData("Invalid Data");
     }
 

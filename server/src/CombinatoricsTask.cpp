@@ -1,6 +1,5 @@
 #include "CombinatoricsTask.hpp"
 
-#include <cmath>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -121,7 +120,9 @@ int CombinatoricsTask::Combinations() {
 }
 
 void CombinatoricsTask::ParseData() {
+    Numbers.clear();
     if (TaskType == TaskTypes::CombComb || TaskType == TaskTypes::CombPlace) {
+
         if (Expression.find_first_not_of("0123456789 ") != std::string::npos) {
             throw TaskInvalidData("Invalid Data");
         }
@@ -138,6 +139,7 @@ void CombinatoricsTask::ParseData() {
         }
 
     } else if (TaskType == TaskTypes::CombRe || TaskType == TaskTypes::CombPart) {
+
         if (Expression.find_first_not_of("0123456789 ") != std::string::npos) {
             throw TaskInvalidData("Invalid Data");
         }
