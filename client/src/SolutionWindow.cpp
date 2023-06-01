@@ -364,15 +364,13 @@ void SolutionWindow::getAnswer() {
     }
     cout<<"TEXT: "<<text.toStdString()<<endl;
 
-    //solutionResult = m_client.get()->Run(text.toStdString(), taskType);/////////////////////////////////
-    solutionResult = Run(text.toStdString(), taskType);
+    solutionResult = m_client.get()->Run(text.toStdString(), taskType);
     setExpressionSolution();
 }
 
 void SolutionWindow::getAnswer(QString expression) {
     QString text = expression;
-    //solutionResult = m_client.get()->Run(text.toStdString(), taskType);/////////////////////////////////
-    solutionResult = Run(text.toStdString(), taskType);
+    solutionResult = m_client.get()->Run(text.toStdString(), taskType);
     setExpressionSolution();
 }
 
