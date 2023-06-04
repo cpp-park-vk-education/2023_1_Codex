@@ -71,8 +71,9 @@ server/src/MatStatSequenceTask.cpp,
 Мною были реализованы следующие типы задач: 
 - Арифметика (файлы ArithmeticTask.hpp, ArithmeticTask.cpp, Calculations.hpp )
 - Дифференцирование (файлы DifferentiationTask.hpp, DifferentiationTask.cpp)
-- Матричные задачи, а именно нахождение детерминанта, транспонирование, нахождение нормы, ранга матрицы и нахождение собственных векторов и значений матрицы (файлы MatrixTask.hpp, MatrixTask.cpp) 
-\\
+- Матричные задачи, а именно нахождение детерминанта, транспонирование, нахождение нормы, ранга матрицы и нахождение собственных векторов и значений матрицы (файлы MatrixTask.hpp, MatrixTask.cpp)    
+
+
 Для всех реализованных задач были написаны тесты:
 - server/tests/src/testArithmeticTask.cpp
 - server/tests/src/testDifferentiationTask.cpp
