@@ -48,7 +48,7 @@ TEST(ArithmeticTest, DegreeNotDefined) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-//Логарифмы и факториалы еще не добавлены
+//Логарифмы и факториалы 
 
 TEST(ArithmeticTest, LogarifmNotDefined) {
     ::Tasks::ArithmeticTask task("ln ( -10 )", ::Tasks::TaskTypes::Arithmetic);

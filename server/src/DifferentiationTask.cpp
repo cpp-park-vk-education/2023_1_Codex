@@ -16,7 +16,6 @@ std::string replace_x_num(std::string func, const std::string& point) {
         func.replace(pos, 1, point);
         pos = func.find("x");
     }
-
     return func;
 }
 
@@ -27,15 +26,8 @@ DifferentiationTask::DifferentiationTask(std::string expression, TaskTypes taskT
     TaskType = taskType;
 }
 
-void DifferentiationTask::ParseData() {
-    ;
-    //для символьного и численного дифференцирования будут различные парсеры,
-    //пока что один реализован внутри функции Numerical
-}
-
 std::string DifferentiationTask::Solve() {
-    // ParseData();
-
+    ParseData();
     switch (TaskType) {
         case TaskTypes::DiffNum: {
             return DoubleToString(Numerical());
@@ -46,19 +38,22 @@ std::string DifferentiationTask::Solve() {
     }
 }
 
-double DifferentiationTask::Numerical() {
-    double step = 0.01;
+void DifferentiationTask::ParseData() {
     size_t end_pos = Expression.find(';');
     if (end_pos == std::string::npos) {
         throw TaskInvalidData("Wrong format");
     }
-    std::string function = Expression.substr(0, end_pos);
-    std::string point = Expression.substr(end_pos + 1, Expression.size() - end_pos - 1);
+    function = Expression.substr(0, end_pos);
+    point = Expression.substr(end_pos + 1, Expression.size() - end_pos - 1);
 
     std::regex digit("^[ ]*[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)[ ]*$");
     if (point.empty() || !(std::regex_match(point, digit))) {
         throw TaskInvalidData("No point provided");
     }
+}
+
+double DifferentiationTask::Numerical() {
+    double step = 0.01;
 
     double x_1 = std::stod(point);
     double x_0 = x_1 - step;

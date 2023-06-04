@@ -17,6 +17,9 @@ class DifferentiationTask final : public ITask {
     void ParseData() override;
 
     double Numerical();
+
+    std::string function;
+    std::string point;
 };
 
 }  // namespace Tasks

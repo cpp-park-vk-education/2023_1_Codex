@@ -19,11 +19,12 @@ class MatrixTask final : public ITask {
 
    private:
     void ParseData() override;
-    double Determinant();
+    double Determinant() const;
     std::vector<std::vector<double>> Transpose() const;
-    void EigenValuesAndVectors();
+    void EigenValuesAndVectors() ;
     int Rank();
-    double Norma();
+    double Norma() const;
+
     std::vector<std::vector<double>> data;
     unsigned cols;
     unsigned rows;

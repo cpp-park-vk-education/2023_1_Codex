@@ -64,3 +64,37 @@ server/src/MatStatSequenceTask.cpp,
 - server/include/TaskInfo.hpp;
 - server/include/TaskSearcher.hpp, server/src/TaskSearcher.cpp;
 - server/include/TextRecognizer.hpp, server/src/TextRecognizer.cpp.
+
+
+### Новичкова Мария
+#### Реализация математических модулей
+Мною были реализованы следующие типы задач: 
+Арифметика (файлы ArithmeticTask.hpp, ArithmeticTask.cpp, Calculations.hpp )
+Дифференцирование (файлы DifferentiationTask.hpp, DifferentiationTask.cpp)
+Матричные задачи, а именно нахождение детерминанта, транспонирование, нахождение нормы, ранга матрицы и нахождение собственных векторов и значений матрицы (файлы MatrixTask.hpp, MatrixTask.cpp) 
+
+Для всех реализованных задач были написаны тесты:
+server/tests/src/testArithmeticTask.cpp
+server/tests/src/testDifferentiationTask.cpp
+server/tests/src/testMatrixTask.cpp
+
+#### Взаимодействие сервера с проектом PaddleOCR
+Для обучения нейросети составила основную часть датасета из математических выражений, написанных разными шрифтами как вручную, так и в текстовых редакторах.
+Написала функцию для конвертации строки, полученной из нейросети, в корректный формат для передачи решающему модулю для задач арифметики. (файл server/src/PredictionConverter.cpp )
+
+#### Другие задачи
+Продумывала итоговый дизайн приложения, составляла макеты для интерфейса.
+
+#### Общий список моих файлов:
+
+- server/include/ArithmeticTask.hpp;
+- server/src/ArithmeticTask.cpp;
+- server/include/Calculations.hpp;
+
+- server/include/DifferentiationTask.hpp;
+- server/src/DifferentiationTask.cpp;
+
+- server/include/MatrixTask.hpp;
+- server/src/MatrixTask.cpp;
+
+- server/src/PredictionConverter.cpp

@@ -50,12 +50,14 @@ std::string PredictionConverter::ConvertMatStatTask(const std::string &predictio
     return result;
 }
 
-// method has been implemented by Masha
+// method has been implemented by Maria
 std::string PredictionConverter::ConvertArithmeticTask(const std::string &prediction) {
     std::string result;
     int i = 0;
     while (i < prediction.length()) {
-        if (prediction[i] == '+' || prediction[i] == '-' || prediction[i] == '*' || prediction[i] == '/' ||
+        if (prediction[i] == ',') {
+            result += ".";
+        } else if (prediction[i] == '+' || prediction[i] == '-' || prediction[i] == '*' || prediction[i] == '/' ||
             prediction[i] == '^' || prediction[i] == ')' || prediction[i] == '(') {
             result += " ";
             result += prediction[i];
@@ -83,7 +85,6 @@ std::string PredictionConverter::ConvertArithmeticTask(const std::string &predic
             result += " ";
             i += 1;
         }
-
         else {
             result += prediction[i];
         }

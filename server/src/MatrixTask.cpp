@@ -15,6 +15,7 @@ static bool is_number(const std::string& str) {
     return !str.empty() && (std::regex_match(str, digit) || str == "pi");
 }
 
+
 // Функция для умножения матрицы на вектор
 std::vector<double> matrixVectorMultiply(const std::vector<std::vector<double>>& matrix,
                                          const std::vector<double>& vector) {
@@ -86,11 +87,12 @@ std::string MatrixTask::Solve() {
         }
 
         case TaskTypes::MatrixEigen: {
-            EigenValuesAndVectors();
             std::string result;
             if (rows != cols) {
                 throw TaskInvalidData("Wrong matrix shape");
             }
+            EigenValuesAndVectors();
+
             for (int i = 0; i < eigenvalues.size(); i++) {
                 result.append(DoubleToString(eigenvalues[i]) + " : [");
                 for (int j = 0; j < eigenvectors[i].size(); j++) {
@@ -155,7 +157,7 @@ void MatrixTask::ParseData() {
     rows = data.size();
 }
 
-double MatrixTask::Determinant() {
+double MatrixTask::Determinant() const {
     if (rows != cols) {
         throw TaskInvalidData("DimenssionMismatch");
     }
@@ -239,7 +241,6 @@ int MatrixTask::Rank() {
             // Перемещаем строку с ненулевым элементом вверх
             std::swap(data[i], data[rank]);
 
-            // Выполняем элементарные преобразования над матрицей
             performElementaryRowOperations(rank, col);
 
             // Увеличиваем ранг
@@ -249,7 +250,7 @@ int MatrixTask::Rank() {
     return rank;
 }
 
-// Функция для выполнения элементарных преобразований над матрицей
+
 void MatrixTask::performElementaryRowOperations(int row, int col) {
     double leadCoefficient = data[row][col];
     int rows = data.size();
@@ -271,7 +272,7 @@ void MatrixTask::performElementaryRowOperations(int row, int col) {
     }
 }
 
-double MatrixTask::Norma() {
+double MatrixTask::Norma() const{
     double result = 0;
     for (size_t j = 0; j < cols; j++) {
         for (size_t i = 0; i < rows; ++i) {
@@ -330,3 +331,4 @@ void MatrixTask::EigenValuesAndVectors() {
 }
 
 }  // namespace Tasks
+

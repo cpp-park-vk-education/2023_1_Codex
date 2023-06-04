@@ -6,7 +6,7 @@
 #include "Exceptions.hpp"
 #include "TaskInfo.hpp"
 
-// Символьное дифференцирование еще не реализовано
+// Символьное дифференцирование не реализовано
 /*
 TEST(DifferentiationTest, BasicCaseSymbolic) {
     ::Tasks::DifferentiationTask task(" 12 * x ^ 2 + sin ( x ) - 6 ) ", ::Tasks::TaskTypes::DiffSymb);
@@ -61,7 +61,7 @@ TEST(DifferentiationTest, InvalidDataCase14) {
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
-//Тесты для символьного дифференцирования, оно пока не реализованно
+//Тесты для символьного дифференцирования, оно не реализованно
 /*
 TEST(DifferentiationTest, InvalidDataCase1) {
     ::Tasks::DifferentiationTask task("abc + 23s", ::Tasks::TaskTypes::DiffSymb);
