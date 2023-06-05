@@ -19,7 +19,6 @@ class MainWindow : public QMainWindow {
 
    public:
     MainWindow(const Client::ClientSPtr& client, QWidget* parent = NULL);
-    // MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
     void setClient(const Client::ClientSPtr& client);
    private slots:
