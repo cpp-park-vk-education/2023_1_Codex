@@ -129,5 +129,54 @@ server/src/MatStatSequenceTask.cpp,
 - server/include/EquationsTask.hpp;
 - server/src/EquationsTask.cpp;
 
-- server/include/IntegrationTask.hpp;
-- server/src/IntegrationTask.cpp;
+
+### Завадская Людмила
+#### Интерфейс
+Реализовала задачи, связанные с UI. Приложение состояло из нескольких окон:
+- Главное окно с функционалом кнопок начала взаимодействия с приложением и кнопкой открытия правил использования (client/include/MainWindow.hpp, client/src/MainWindow.cpp)
+- Окно выбора типа задачи (client/include/ProblemTypeWindow.hpp, client/src/ProblemTypeWindow.cpp)
+  - Окно содержит список глобальных задач, по нажатию на 1 из которых появляется список соответствующих подзадач - которые мы непосредственно решаем
+  - Каждая подзадача соответствует одному математическому модулю
+- Окно вывода решения (client/include/SolutionWindow.hpp, client/src/SolutionWindow.cpp). Для разных задач был необходим ввод условий задачи в различном формате, поэтому практически все задачи имеют свой шаблон окна SolutionWindow. В зависимости от задачи в окно подгружается нужный набор виджетов для ввода данных. 
+  - Нестандартные наборы виджетов ввода и их лейблов имеют: задачи с матрицами, интегралы, задачи комбинаторики, дифференцирования в точке, линейные и квадратные уравнения, полиномиальные уравнения, задачи решения Систем Линейных Алгебраических Уравнений
+  - Для задач, связанных с матрицами и СЛАУ, был реализован отдельный класс отображения матрицы динамического размера MatrixInputForm (rows и cols задаются пользователем в интерефейсе, и размеры матрицы меняются)
+  - Также реализован набор виджетов для "стандартного" ввода - ввода задачи вручную
+  - Для задач арифметики также была создана возможность загрузки задачи на фото. Было настроено взаимодействие с клиентом для случая ввода таким способом. В том числе, для данного типа задач при вводе условия задачи картинкой предусмотрена возможность редактировать распознанный текст - он помещается также в поле мануального ввода, и пользователь может подредактировать неточности, которые могли произойти при распознавании 
+
+#### Другие задачи
+- Реализовала обработку введенных данных в поля ввода для каждого набора виджетов и отправку их на клиент. Затем получение решения и отображение его в окне
+- Реализовала вспомогательный файл client/include/ProblemType.hpp с соответствием TaskType задачи и ее названием
+- Написала скелет классов задач перевода чисел из одной системы счисления в другую и написала для них тесты. В итоговом проекте от данных типов задач решили отказаться.
+
+#### Общий список моих файлов:
+
+- client/include/MainWindow.hpp;
+- client/include/UI_MainWindow.hpp;
+- client/src/MainWindow.cpp;
+- client/ui/MainWindow.ui;
+
+
+- client/include/MatrixInputForm.hpp;
+- client/src/MatrixInputForm.cpp;
+- client/ui/MatrixInputForm.ui;
+
+
+- client/include/ProblemTypeWindow.hpp;
+- client/include/UI_ProblemTypeWindow.hpp;
+- client/src/ProblemTypeWindow.cpp;
+- client/ui/ProblemTypeWindow.ui;
+
+
+- client/include/SolutionWindow.hpp;
+- client/include/UI_SolutionWindow.hpp;
+- client/src/SolutionWindow.cpp;
+- client/ui/SolutionWindow.ui;
+
+
+- client/include/UsageWindow.hpp;
+- client/include/UI_UsageWindow.hpp;
+- client/src/UsageWindow.cpp;
+- client/ui/UsageWindow.ui;
+
+
+- client/include/ProblemType.hpp.
