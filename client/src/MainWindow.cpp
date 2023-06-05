@@ -28,7 +28,6 @@ void MainWindow::setClient(const Client::ClientSPtr& client) {
 
 void MainWindow::on_usageButton_clicked() {
     usageWindow->show();  // Показываем второе окно
-    // this->close();    // Закрываем основное окно
 }
 
 void MainWindow::on_startButton_clicked() {
