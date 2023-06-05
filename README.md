@@ -99,3 +99,35 @@ server/src/MatStatSequenceTask.cpp,
 - server/src/MatrixTask.cpp;
 
 - server/src/PredictionConverter.cpp
+
+
+### Ангелова Анастасия
+#### Реализация математических модулей
+Реализованы следующие типы задач: 
+- Комбинаторика - сочетания, разбиения, размещения, перестановки (файлы CombinatoricsTask.hpp, CombinatoricsTask.cpp)
+- Системы уравнений - решение методом Гаусса, методом Гаусса с выбором главного элемента, LU-разложение (файлы EqSystemsTask.hpp, EqSystemsTask.cpp)
+- Различные типы уравнений - линейные, квадратные, полиномиальные (метод Ньютона) (файлы EquationsTask.hpp, EquationsTask.cpp)    
+- Вычисление интегралов - реализован метод средних, метод Симпсона, метод трапеций (файлы IntegrationTask.hpp, IntegrationTask.cpp)
+
+Тесты для математических модулей:
+- server/tests/src/testCombinatoricsTask.cpp
+- server/tests/src/testEqSystemsTask.cpp
+- server/tests/src/testEquationsTask.cpp
+- server/tests/src/testIntegrationsTask.cpp
+
+#### Взаимодействие сервера с проектом PaddleOCR
+Помогала с написанием датасета
+
+#### Общий список реализованных файлов:
+
+- server/include/CombinatoricsTask.hpp;
+- server/src/CombinatoricsTask.cpp;
+
+- server/include/EqSystemsTask.hpp;
+- server/src/EqSystemsTask.cpp;
+
+- server/include/EquationsTask.hpp;
+- server/src/EquationsTask.cpp;
+
+- server/include/IntegrationTask.hpp;
+- server/src/IntegrationTask.cpp;

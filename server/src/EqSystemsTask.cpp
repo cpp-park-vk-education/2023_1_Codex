@@ -74,7 +74,7 @@ void EqSystemTask::ParseData() {
         A.push_back(row);
     }
 
-    // Check if the matrix is square
+    // Проверка на то, что матрица квадратная
     if (!A.empty() && A.size() != A[0].size()) {
         throw TaskInvalidData("Error: Matrix is not square");
     }

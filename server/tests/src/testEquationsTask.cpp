@@ -144,49 +144,49 @@ TEST(EquationsTest, EmptyPolyEquationsCase) {
 
 TEST(EquationsTest, InvalidDataPolyEquationsCase1) {
     ::Tasks::EquationsTask task("x-1 , 2 , 100",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly);  
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongAlphas) {
     ::Tasks::EquationsTask task("x + a , 2 , 100",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly);  
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongX_0) {
     ::Tasks::EquationsTask task("x - 1 , a , 100",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly); 
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongDoubleX_0) {
     ::Tasks::EquationsTask task("x - 1 , 1.2.fg , 100",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly);
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseDoubleIters) {
     ::Tasks::EquationsTask task("x - 1 , 1 , 100.45",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly); 
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseAlphasIters) {
     ::Tasks::EquationsTask task("x - 1 , 1 , 100s45a",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly); 
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
 
 TEST(EquationsTest, InvalidDataPolyEquationsCaseWrongArgumentsNum) {
     ::Tasks::EquationsTask task("x - 1 , 1 , 100 , ",
-                                ::Tasks::TaskTypes::EqPoly);  // Неверное выражение
+                                ::Tasks::TaskTypes::EqPoly); 
 
     EXPECT_THROW(task.Solve(), ::Tasks::TaskInvalidData);
 }
