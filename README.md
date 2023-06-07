@@ -47,6 +47,7 @@ server/src/MatStatSequenceTask.cpp,
 - client/include/Exceptions.hpp;
 - client/include/TaskInfo.hpp;
 
+
 - server/include/Exceptions.hpp;
 - server/include/IHandler.hpp;
 - server/include/IMatStatTask.hpp;
@@ -65,19 +66,16 @@ server/src/MatStatSequenceTask.cpp,
 - server/include/TaskSearcher.hpp, server/src/TaskSearcher.cpp;
 - server/include/TextRecognizer.hpp, server/src/TextRecognizer.cpp.
 
+#### Общий список моих тестов в алфавитном порядке:
+- server/tests/src/testMatStatSequenceTask.cpp;
+- server/tests/src/testTaskSearcher.cpp.
 
 ### Новичкова Мария
 #### Реализация математических модулей
 Мною были реализованы следующие типы задач: 
 - Арифметика (файлы ArithmeticTask.hpp, ArithmeticTask.cpp, Calculations.hpp )
 - Дифференцирование (файлы DifferentiationTask.hpp, DifferentiationTask.cpp)
-- Матричные задачи, а именно нахождение детерминанта, транспонирование, нахождение нормы, ранга матрицы и нахождение собственных векторов и значений матрицы (файлы MatrixTask.hpp, MatrixTask.cpp)    
-
-
-Для всех реализованных задач были написаны тесты:
-- server/tests/src/testArithmeticTask.cpp
-- server/tests/src/testDifferentiationTask.cpp
-- server/tests/src/testMatrixTask.cpp
+- Матричные задачи, а именно нахождение детерминанта, транспонирование, нахождение нормы, ранга матрицы и нахождение собственных векторов и значений матрицы (файлы MatrixTask.hpp, MatrixTask.cpp)
 
 #### Взаимодействие сервера с проектом PaddleOCR
 - Для обучения нейросети составила основную часть датасета из математических выражений, написанных разными шрифтами как вручную, так и в текстовых редакторах.
@@ -100,6 +98,11 @@ server/src/MatStatSequenceTask.cpp,
 
 - server/src/PredictionConverter.cpp
 
+#### Общий список моих тестов в алфавитном порядке:
+- server/tests/src/testArithmeticTask.cpp;
+- server/tests/src/testDifferentiationTask.cpp;
+- server/tests/src/testMatrixTask.cpp.
+
 
 ### Ангелова Анастасия
 #### Реализация математических модулей
@@ -108,12 +111,6 @@ server/src/MatStatSequenceTask.cpp,
 - Системы уравнений - решение методом Гаусса, методом Гаусса с выбором главного элемента, LU-разложение (файлы EqSystemsTask.hpp, EqSystemsTask.cpp)
 - Различные типы уравнений - линейные, квадратные, полиномиальные (метод Ньютона) (файлы EquationsTask.hpp, EquationsTask.cpp)    
 - Вычисление интегралов - реализован метод средних, метод Симпсона, метод трапеций (файлы IntegrationTask.hpp, IntegrationTask.cpp)
-
-Тесты для математических модулей:
-- server/tests/src/testCombinatoricsTask.cpp
-- server/tests/src/testEqSystemsTask.cpp
-- server/tests/src/testEquationsTask.cpp
-- server/tests/src/testIntegrationsTask.cpp
 
 #### Взаимодействие сервера с проектом PaddleOCR
 Помогала с написанием датасета
@@ -129,6 +126,14 @@ server/src/MatStatSequenceTask.cpp,
 - server/include/EquationsTask.hpp;
 - server/src/EquationsTask.cpp;
 
+- server/include/IntegrationsTask.hpp;
+- server/src/IntegrationsTask.cpp;
+
+#### Общий список моих тестов в алфавитном порядке:
+- server/tests/src/testCombinatoricsTask.cpp;
+- server/tests/src/testEqSystemsTask.cpp;
+- server/tests/src/testEquationsTask.cpp;
+- server/tests/src/testIntegrationsTask.cpp.
 
 ### Завадская Людмила
 #### Интерфейс
@@ -180,3 +185,7 @@ server/src/MatStatSequenceTask.cpp,
 
 
 - client/include/ProblemType.hpp.
+
+#### Общий список моих тестов в алфавитном порядке:
+- server/tests/src/testLogicalExpressionTask.cpp;
+- server/tests/src/testNumberSystemsTask.cpp.
