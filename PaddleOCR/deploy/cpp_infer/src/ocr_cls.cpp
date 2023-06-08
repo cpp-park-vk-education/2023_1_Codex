@@ -1,0 +1,79 @@
+#include <ocr_cls.h>
+
+namespace PaddleOCR {
+
+void Classifier::Run(std::vector<cv::Mat> img_list, std::vector<int> &cls_labels,
+                     std::vector<float> &cls_scores) {
+    int img_num = img_list.size();
+    std::vector<int> cls_image_shape = {3, 48, 192};
+    for (int beg_img_no = 0; beg_img_no < img_num; beg_img_no += this->cls_batch_num_) {
+        int end_img_no = std::min(img_num, beg_img_no + this->cls_batch_num_);
+        int batch_num = end_img_no - beg_img_no;
+        // preprocess
+        std::vector<cv::Mat> norm_img_batch;
+        for (int ino = beg_img_no; ino < end_img_no; ino++) {
+            cv::Mat srcimg;
+            img_list[ino].copyTo(srcimg);
+            cv::Mat resize_img;
+            this->resize_op_.Run(srcimg, resize_img, this->use_tensorrt_, cls_image_shape);
+
+            this->normalize_op_.Run(&resize_img, this->mean_, this->scale_, this->is_scale_);
+            if (resize_img.cols < cls_image_shape[2]) {
+                cv::copyMakeBorder(resize_img, resize_img, 0, 0, 0, cls_image_shape[2] - resize_img.cols,
+                                   cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0));
+            }
+            norm_img_batch.push_back(resize_img);
+        }
+        std::vector<float> input(batch_num * cls_image_shape[0] * cls_image_shape[1] * cls_image_shape[2],
+                                 0.0f);
+        this->permute_op_.Run(norm_img_batch, input.data());
+
+        // inference.
+        auto input_names = this->predictor_->GetInputNames();
+        auto input_t = this->predictor_->GetInputHandle(input_names[0]);
+        input_t->Reshape({batch_num, cls_image_shape[0], cls_image_shape[1], cls_image_shape[2]});
+        input_t->CopyFromCpu(input.data());
+        this->predictor_->Run();
+
+        std::vector<float> predict_batch;
+        auto output_names = this->predictor_->GetOutputNames();
+        auto output_t = this->predictor_->GetOutputHandle(output_names[0]);
+        auto predict_shape = output_t->shape();
+
+        int out_num = std::accumulate(predict_shape.begin(), predict_shape.end(), 1, std::multiplies<int>());
+        predict_batch.resize(out_num);
+
+        output_t->CopyToCpu(predict_batch.data());
+
+        // postprocess
+        for (int batch_idx = 0; batch_idx < predict_shape[0]; batch_idx++) {
+            int label = int(Utility::argmax(&predict_batch[batch_idx * predict_shape[1]],
+                                            &predict_batch[(batch_idx + 1) * predict_shape[1]]));
+            float score = float(*std::max_element(&predict_batch[batch_idx * predict_shape[1]],
+                                                  &predict_batch[(batch_idx + 1) * predict_shape[1]]));
+            cls_labels[beg_img_no + batch_idx] = label;
+            cls_scores[beg_img_no + batch_idx] = score;
+        }
+    }
+}
+
+void Classifier::LoadModel(const std::string &model_dir) {
+    paddle_infer::Config config;
+    config.SetModel(model_dir + "/classifier.pdmodel", model_dir + "/classifier.pdiparams");
+
+    config.DisableGpu();
+    config.SetCpuMathLibraryNumThreads(this->cpu_math_library_num_threads_);
+
+    // false for zero copy tensor
+    config.SwitchUseFeedFetchOps(false);
+    // true for multiple input
+    config.SwitchSpecifyInputNames(true);
+
+    config.SwitchIrOptim(true);
+
+    config.EnableMemoryOptim();
+    config.DisableGlogInfo();
+
+    this->predictor_ = paddle_infer::CreatePredictor(config);
+}
+}  // namespace PaddleOCR
